@@ -52,4 +52,4 @@ alias ls="eza --color=always --long --git --no-filesize --icons=always --no-time
 
 # thefuck alias
 eval $(thefuck --alias)
-eval $(thefuck --alias fj)
+eval $(thefuck --alias fk)

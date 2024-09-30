@@ -1,0 +1,22 @@
+;; Tutorial https://github.com/yqrashawn/GokuRakuJoudo/blob/master/tutorial.md#command-a-to-control-1
+{
+	:devices {
+		:macbook-keyboard [{:vendor_id 1452 :product_id 835}]
+		:keychron-q3 [{:vendor_id 13364 :product_id 289}]
+	}
+	:main, [
+        {:des "Swap caps lock to backspace on macbook keyboard and Keychron Q3" :rules [
+			[:##caps_lock :delete_or_backspace :macbook-keyboard]
+			[:##caps_lock :delete_or_backspace :keychron-q3]
+
+		]}
+
+		{:des "Arrow keys on MacBook keyboard" :rules [
+			;; right option + wasd -> arrow keys
+			[:!E##w :up_arrow :macbook-keyboard]
+			[:!E##a :left_arrow :macbook-keyboard]
+			[:!E##s :down_arrow :macbook-keyboard]
+			[:!E##d :right_arrow :macbook-keyboard]
+		]}
+	]
+}

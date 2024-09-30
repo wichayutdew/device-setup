@@ -1,12 +1,19 @@
-*
+# ignore everything
+/*
+
+# except these directories
+!/.config
+/.config/configstore
+/.config/github-copilot
+/.config/jgit
+/.config/karabiner
+/.config/op
+/.config/raycast
+/.config/thefuck
+
+# except these files
 !.asdfrc
 !.zshrc
 !.gitignore
 !.gitconfig
 !.ideavimrc
-!.config/karabiner.edn
-!.config/starship.toml
-!.config/nvim
-
-
-
