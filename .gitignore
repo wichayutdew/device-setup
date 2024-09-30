@@ -1,0 +1,12 @@
+*
+!.asdfrc
+!.zshrc
+!.gitignore
+!.gitconfig
+!.ideavimrc
+!.config/karabiner.edn
+!.config/starship.toml
+!.config/nvim
+
+
+
