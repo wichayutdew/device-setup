@@ -24,6 +24,8 @@ brew install --cask betterdisplay
 brew install --cask karabiner-elemets
 brew install --cask keycastr
 brew install goku
+brew install koekeishiya/formulae/yabai
+brew install koekeishiya/formulae/skhd
 ```
 
 # Development tools
