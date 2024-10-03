@@ -17,8 +17,16 @@ let mapleader = " "
 
 imap jk <Esc>
 
+map <C-d> <C-d>zz
+map <C-u> <C-u>zz
+map n nzzzv
+map N Nzzzv
+
+
 "" -- Map IDE actions to IdeaVim -- https://jb.gg/abva4t
 map <leader>rf <Action>(ReformatCode)
 map <leader>oi <Action>(OptimizeImports)
-map <leader>db <Action>(Debug)
-map <leader>bp <Action>(ToggleLineBreakpoint)
+map <leader>dd <Action>(Debug)
+map <leader>rr <Action>(Run)
+map <leader>bb <Action>(ToggleLineBreakpoint)
+map <leader>rn <Action>(RenameElement)

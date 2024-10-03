@@ -22,6 +22,7 @@ brew install --cask betterdisplay
 # Keyboard biding
 ```zsh
 brew install --cask karabiner-elemets
+brew install --cask keycastr
 brew install goku
 ```
 
