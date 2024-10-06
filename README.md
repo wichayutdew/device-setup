@@ -54,6 +54,9 @@ brew install zoxide
 brew install bat
 brew install eza
 brew install neovim
+brew install luarocks
+brew install fd
+brew install rg
 brew install thefuck
 brew install git
 ```
