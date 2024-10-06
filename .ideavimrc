@@ -5,12 +5,17 @@
 set scrolloff=5
 set incsearch
 set relativenumber
+set quickscope
 
 " --- Enable IdeaVim plugins https://jb.gg/ideavim-plugins
 " Highlight copied text
 Plug 'machakann/vim-highlightedyank'
 " Commentary plugin
 Plug 'tpope/vim-commentary'
+" Sneak (search by 2 letters)
+Plug 'justinmk/vim-sneak'
+" Surround (edited " { [ ( easily)
+Plug 'tpope/vim-surround'
 
 " set <leader> to <space>
 let mapleader = " "

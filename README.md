@@ -36,7 +36,6 @@ brew install --cask warp
 
 # Editor
 ```zsh
-brew install --cask postman
 brew install --cask intellij-idea
 brew install --cask pycharm
 brew install --cask datagrip
@@ -54,11 +53,7 @@ brew install starship
 brew install zoxide
 brew install bat
 brew install eza
-brew install fd
-brew install fzf
 brew install neovim
-brew install git-delta
 brew install thefuck
 brew install git
-git clone https://github.com/junegunn/fzf-git.sh.git
 ```
