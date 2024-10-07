@@ -1,1 +1,2 @@
-require("config.lazy")
+require("wichayut.core")
+require("wichayut.lazy")
