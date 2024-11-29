@@ -1,12 +1,9 @@
-# You can use it to add commands that run after login to macOS user session.
-# 'start-at-login' needs to be 'true' for 'after-login-command' to work
-# Available commands: https://nikitabobko.github.io/AeroSpace/commands
-after-login-command = []
-
 # You can use it to add commands that run after AeroSpace startup.
 # 'after-startup-command' is run after 'after-login-command'
 # Available commands : https://nikitabobko.github.io/AeroSpace/commands
-after-startup-command = []
+after-startup-command = [
+  'exec-and-forget borders active_color=0xfff5a97f inactive_color=0xff494d64 width=5.0'
+]
 
 # Start AeroSpace at login
 start-at-login = true
@@ -44,6 +41,16 @@ automatically-unhide-macos-hidden-apps = false
 if.app-name-regex-substring = 'finder'
 run = 'layout floating'
 
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'Slack'
+run = 'layout floating'
+
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'Things'
+run = 'layout floating'
+
 # Possible values: (qwerty|dvorak)
 # See https://nikitabobko.github.io/AeroSpace/guide#key-mapping
 [key-mapping]
@@ -62,7 +69,7 @@ inner.vertical =   10
 outer.left =       10
 outer.bottom =     10
 outer.top =        10
-outer.right =      40
+outer.right =      10
 
 # 'main' binding mode declaration
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
@@ -153,3 +160,5 @@ backspace = ['close-all-windows-but-current', 'mode main']
 
 [mode.apps.binding]
 esc = ['mode main']
+s = ['exec-and-forget open -a /Applications/Slack.app', 'mode main']
+w = ['exec-and-forget open -a /Applications/Warp.app', 'mode main']

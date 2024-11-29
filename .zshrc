@@ -1,4 +1,4 @@
-# Set PATH, MANPATH, etc., for Homebrew.
+# fet PATH, MANPATH, etc., for Homebrew.
 source <(/opt/homebrew/bin/brew shellenv)
 
 # Added by Toolbox App
@@ -23,3 +23,7 @@ source <(thefuck --alias fk)
 # ---- fzf ----
 source <(fzf --zsh)
 
+# ---- Aerospace ----
+ff () {
+    aerospace list-windows --all | fzf --bind 'enter:execute(bash -c "aerospace focus --window-id {1}")+abort'
+}
