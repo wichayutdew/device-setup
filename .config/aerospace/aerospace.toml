@@ -125,14 +125,12 @@ alt-1 = 'workspace 1'
 alt-2 = 'workspace 2'
 alt-3 = 'workspace 3'
 alt-4 = 'workspace 4'
-alt-5 = 'workspace 5'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
 alt-shift-1 = 'move-node-to-workspace 1 --focus-follows-window'
 alt-shift-2 = 'move-node-to-workspace 2 --focus-follows-window'
 alt-shift-3 = 'move-node-to-workspace 3 --focus-follows-window'
 alt-shift-4 = 'move-node-to-workspace 4 --focus-follows-window'
-alt-shift-5 = 'move-node-to-workspace 5 --focus-follows-window'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
 alt-tab = 'workspace-back-and-forth'
@@ -155,3 +153,5 @@ backspace = ['close-all-windows-but-current', 'mode main']
 esc = ['mode main']
 s = ['exec-and-forget open -a /Applications/Slack.app', 'mode main']
 w = ['exec-and-forget open -a /Applications/Warp.app', 'mode main']
+b = ['exec-and-forget open -a /Applications/Google\ Chrome.app', 'mode main']
+a = ['exec-and-forget open -a /Applications/IntelliJ\ IDEA.app', 'mode main']

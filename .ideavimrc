@@ -35,6 +35,7 @@ vnoremap p "_dP
 
 "" -- Map IDE actions to IdeaVim -- https://jb.gg/abva4t
 nmap <leader>rf <Action>(ReformatCode)
+nmap <leader>sp <Action>(com.github.lipiridi.spotless.applier.actions.ReformatFileAction)
 nmap <leader>rn <Action>(RenameElement)
 nmap <leader>oi <Action>(OptimizeImports)
 nmap <leader>R  <Action>(Refactorings.QuickListPopupAction)

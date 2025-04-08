@@ -10,9 +10,6 @@ source <(zoxide init --cmd cd zsh)
 # Direct usage to asdf location
 . /opt/homebrew/opt/asdf/libexec/asdf.sh
 
-# Runstarship
-source <(starship init zsh)
-
 # ---- Eza (better ls) -----
 alias ls="eza --color=always --long --git --no-filesize --icons=always --no-time --no-user --no-permissions"
 
@@ -27,3 +24,6 @@ source <(fzf --zsh)
 ff () {
     aerospace list-windows --all | fzf --bind 'enter:execute(bash -c "aerospace focus --window-id {1}")+abort'
 }
+
+alias soy-health-check="watch -n 2 curl -m 1 -sS 127.0.0.1:2501/version"
+alias start-dragonfly="docker run -p 6379:6379 --ulimit memlock=-1 docker.dragonflydb.io/dragonflydb/dragonfly"
