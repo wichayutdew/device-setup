@@ -27,3 +27,4 @@ ff () {
 
 alias soy-health-check="watch -n 2 curl -m 1 -sS 127.0.0.1:2501/version"
 alias start-dragonfly="docker run -p 6379:6379 --ulimit memlock=-1 docker.dragonflydb.io/dragonflydb/dragonfly"
+alias repo="cd IdeaProjects"
