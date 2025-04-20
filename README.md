@@ -17,6 +17,14 @@ brew install --cask hiddenbar
 brew install --cask spotify
 brew install --cask appcleaner
 brew install --cask betterdisplay
+brew install --cask raindropio
+```
+
+# Screen customization
+```zsh
+brew tap FelixKratz/formulae
+brew install borders
+brew install --cask aerospace
 ```
 
 # Keyboard biding
@@ -32,6 +40,7 @@ brew install koekeishiya/formulae/skhd
 ```zsh
 brew install --cask postman
 brew install --cask warp
+brew install lazygit
 ```
 
 # Editor
@@ -49,7 +58,6 @@ brew install asdf
 
 # Terminal essential
 ```zsh
-brew install starship
 brew install zoxide
 brew install bat
 brew install eza
