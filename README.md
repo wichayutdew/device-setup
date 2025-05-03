@@ -62,3 +62,10 @@ brew install fd
 brew install rg
 brew install git
 ```
+
+
+## Commands
+`touch ..` --> Create file
+`mkdir ..` --> Create folder
+`rm ...` --> delete file
+`rm -r ..` --> delete folder
