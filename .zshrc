@@ -13,10 +13,6 @@ source <(zoxide init --cmd cd zsh)
 # ---- Eza (better ls) -----
 alias ls="eza --color=always --long --git --no-filesize --icons=always --no-time --no-user --no-permissions"
 
-# ---- TheFuck -----
-source <(thefuck --alias)
-source <(thefuck --alias fk)
-
 # ---- fzf ----
 source <(fzf --zsh)
 
