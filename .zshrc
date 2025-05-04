@@ -22,8 +22,6 @@ ff () {
 }
 
 alias soy-health-check="watch -n 2 curl -m 1 -sS 127.0.0.1:2501/version"
-alias idea="cd IdeaProjects"
-alias pycharm="cd PycharmProjects"
 alias local-search="""
   cd PycharmProjects/activities-local-vault
   docker-compose -f local-vault.yml up -d
