@@ -38,7 +38,7 @@ map n nzzzv
 map N Nzzzv
 vnoremap p "_dP
 
-"" -- Map IDE actions to IdeaVim -- https://jb.gg/abva4t
+" -- Map IDE actions to IdeaVim -- https://jb.gg/abva4t
 nmap cf <Action>(ReformatCode)
 nmap cF <Action>(com.github.lipiridi.spotless.applier.actions.ReformatFileAction)
 nmap cr <Action>(RenameElement)
@@ -50,8 +50,15 @@ nmap <leader>bb <Action>(ToggleLineBreakpoint)
 nmap <leader>ff <Action>(GotoFile)
 nmap <leader>fs <Action>(FindInPath)
 nmap <leader>gg <Action>(Git.Menu)
+
 nmap ge <Action>(ShowErrorDescription)
 nmap gI <Action>(GotoImplementation)
 nmap gD <Action>(GotoDeclaration)
 nmap gt <Action>(Scala.TypeInfo)
-nmap gT :action GotoTest<CR>
+nmap gT <Action>(GotoTest)
+
+nma <leader>wq <Action>(CloseContent)
+nmap <leader>ws <Action>(SplitHorizontally)
+nmap <leader>wv <Action>(SplitVertically)
+nmap <TAB> <Action>(NextTab)
+nmap <s-TAB> <Action>(PreviousTab)
