@@ -7,13 +7,9 @@ set incsearch
 set relativenumber
 set idearefactormore=keep
 
-set quickscope
-let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
-
-set surround
-
-set NERDTree
-nmap <leader>e :NERDTreeToggle<CR>
+" ui to show key mapping
+set which-key
+set notimeout
 
 set mini-ai
 
@@ -24,8 +20,9 @@ Plug 'machakann/vim-highlightedyank'
 Plug 'tpope/vim-commentary'
 " Sneak (search by 2 letters)
 Plug 'justinmk/vim-sneak'
-" Surround (edited " { [ ( easily)
 Plug 'tpope/vim-surround'
+Plug 'preservim/nerdtree'
+
 
 " set <leader> to <space>
 let mapleader = " "
@@ -38,10 +35,12 @@ map n nzzzv
 map N Nzzzv
 vnoremap p "_dP
 
+
+nmap <leader>e :NERDTreeToggle<CR>
 " -- Map IDE actions to IdeaVim -- https://jb.gg/abva4t
-nmap cf <Action>(ReformatCode)
-nmap cF <Action>(com.github.lipiridi.spotless.applier.actions.ReformatFileAction)
-nmap ci <Action>(OptimizeImports)
+nmap <leader>cf <Action>(ReformatCode)
+nmap <leader>cF <Action>(com.github.lipiridi.spotless.applier.actions.ReformatFileAction)
+nmap <leader>ci <Action>(OptimizeImports)
 
 nmap rn <Action>(RenameElement)
 nmap rR <Action>(Refactorings.QuickListPopupAction)
