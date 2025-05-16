@@ -28,3 +28,4 @@ alias local-search="""
   docker-compose -f local-dragonflydb.yml up -d
   cd
 """
+alias lg="lazygit"
