@@ -60,7 +60,7 @@ nmap <leader>fs <Action>(FindInPath)
 
 nmap <leader>gg <Action>(Git.Menu)
 
-nma <leader>wq <Action>(CloseContent)
+nma <leader>ww <Action>(CloseContent)
 nmap <leader>ws <Action>(SplitHorizontally)
 nmap <leader>wv <Action>(SplitVertically)
 nmap <TAB> <Action>(NextTab)
