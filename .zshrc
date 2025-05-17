@@ -23,7 +23,7 @@ ff () {
 
 alias soy-health-check="watch -n 2 curl -m 1 -sS 127.0.0.1:2501/version"
 alias local-search="""
-  cd PycharmProjects/activities-local-vault
+  cd repositories/activities-local-vault
   docker-compose -f local-vault.yml up -d
   docker-compose -f local-dragonflydb.yml up -d
   cd
