@@ -17,6 +17,7 @@ brew install --cask spotify
 brew install --cask appcleaner
 brew install --cask betterdisplay
 brew install --cask raindropio
+brew install --cask zen
 ```
 
 # Screen customization
