@@ -51,18 +51,23 @@ nmap gI <Action>(GotoImplementation)
 nmap gD <Action>(GotoDeclaration)
 nmap gt <Action>(Scala.TypeInfo)
 nmap gT <Action>(GotoTest)
+nmap <leader>s <Action>(ToggleBookmark)
+nmap <leader>S <Action>(ShowBookmarks)
 
-nmap <leader>dd <Action>(Debug)
-nmap <leader>rr <Action>(Run)
+nmap <leader>dd <Action>(ChooseDebugConfiguration)
+nmap <leader>rr <Action>(ChooseRunConfiguration)
+nmap <leader>rR <Action>(Stop)
+nmap <leader>dD <Action>(Stop)
 nmap <leader>bb <Action>(ToggleLineBreakpoint)
+nmap <leader>bB <Action>(ViewBreakpoints)
 
 nmap <leader>ff <Action>(GotoFile)
 nmap <leader>fs <Action>(FindInPath)
-
-nmap <leader>gg <Action>(Git.Menu)
 
 nma <leader>ww <Action>(CloseContent)
 nmap <leader>ws <Action>(SplitHorizontally)
 nmap <leader>wv <Action>(SplitVertically)
 nmap <TAB> <Action>(NextTab)
 nmap <s-TAB> <Action>(PreviousTab)
+
+nnoremap <leader>re :action IdeaVim.ReloadVimRc.reload<CR>
