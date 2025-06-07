@@ -1,30 +1,37 @@
 ;; Tutorial https://github.com/yqrashawn/GokuRakuJoudo/blob/master/tutorial.md#command-a-to-control-1
 {
-	:devices {
-		:macbook-keyboard [{:vendor_id 1452 :product_id 835}]
-		:keychron-q3 [{:vendor_id 13364 :product_id 289}]
-		:nuphy-halo75 [{:vendor_id 1452 :product_id 591}]
-	}
-	:main, [
-        {:des "Swap caps lock to backspace" :rules [
-			[:##caps_lock :delete_or_backspace ]
-			[:##caps_lock :delete_or_backspace :keychron-q3]
-			[:##caps_lock :delete_or_backspace :nuphy-halo75]
-		]}
-
-		{:des "Arrow keys on MacBook keyboard" :rules [
-			;; right option + wasd -> arrow keys
-			[:!E##w :up_arrow :macbook-keyboard]
-			[:!E##a :left_arrow :macbook-keyboard]
-			[:!E##s :down_arrow :macbook-keyboard]
-			[:!E##d :right_arrow :macbook-keyboard]
-		]}
-
-		{:des "Super key" :rules [
-			;; fn -> command + option + shift
-			[:##fn :!SOleft_command :macbook-keyboard]
-			[:##right_option :!SOleft_command :keychron-q3]
-			[:##fn :!SOleft_command :nuphy-halo75]
-		]}
-	]
-}
+ :devices {
+           :macbook-keyboard [{:vendor_id 1452 :product_id 835}]
+           :keychron-q3 [{:vendor_id 13364 :product_id 289}]
+           :nuphy-halo75 [{:vendor_id 1452 :product_id 591}]
+           }
+ :main, [
+         {
+          :des "Swap caps lock to backspace" 
+          :rules [
+                  [:##caps_lock :delete_or_backspace ]
+                  [:##caps_lock :delete_or_backspace :keychron-q3]
+                  [:##caps_lock :delete_or_backspace :nuphy-halo75]
+                  ]
+          }
+         {
+          :des "Arrow keys on MacBook keyboard" 
+          :rules [
+                  ;; left option + hjkl -> arrow keys
+                  [:!O##h :left_arrow :macbook-keyboard]
+                  [:!O##j :down_arrow :macbook-keyboard]
+                  [:!O##k :up_arrow :macbook-keyboard]
+                  [:!O##l :right_arrow :macbook-keyboard]
+                  ]
+          }
+         {
+          :des "Super key" 
+          :rules [
+                  ;; fn -> command + option + shift
+                  [:##fn :!SOleft_command :macbook-keyboard]
+                  [:##right_option :!SOleft_command :keychron-q3]
+                  [:##fn :!SOleft_command :nuphy-halo75]
+                  ]
+          }
+         ]
+ }
