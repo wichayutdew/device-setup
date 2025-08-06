@@ -34,6 +34,10 @@ brew install goku
 brew install koekeishiya/formulae/yabai
 brew install koekeishiya/formulae/skhd
 ```
+brew install homerow # keyboard screen clicker
+bash <(curl -s https://raw.githubusercontent.com/dbalatero/VimMode.spoon/master/bin/installer) # vim binding on any text box
+# ref https://github.com/dbalatero/VimMode.spoon?tab=readme-ov-file#quick-installation
+
 
 # Development tools
 ```zsh
