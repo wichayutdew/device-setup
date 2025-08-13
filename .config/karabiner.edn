@@ -2,26 +2,22 @@
 {
  :devices {
            :macbook-keyboard [{:vendor_id 1452 :product_id 835}]
-           :keychron-q3 [{:vendor_id 13364 :product_id 289}]
-           :nuphy-halo75 [{:vendor_id 1452 :product_id 591}]
            }
  :main, [
          {
           :des "Swap caps lock to backspace" 
           :rules [
                   [:##caps_lock :delete_or_backspace ]
-                  [:##caps_lock :delete_or_backspace :keychron-q3]
-                  [:##caps_lock :delete_or_backspace :nuphy-halo75]
                   ]
           }
          {
           :des "Arrow keys on MacBook keyboard" 
           :rules [
                   ;; left option + hjkl -> arrow keys
-                  [:!O##h :left_arrow :macbook-keyboard]
-                  [:!O##j :down_arrow :macbook-keyboard]
-                  [:!O##k :up_arrow :macbook-keyboard]
-                  [:!O##l :right_arrow :macbook-keyboard]
+                  [:!T##h :left_arrow :macbook-keyboard]
+                  [:!T##j :down_arrow :macbook-keyboard]
+                  [:!T##k :up_arrow :macbook-keyboard]
+                  [:!T##l :right_arrow :macbook-keyboard]
                   ]
           }
          {
@@ -29,8 +25,6 @@
           :rules [
                   ;; fn -> command + option + shift
                   [:##fn :!SOleft_command :macbook-keyboard]
-                  [:##right_option :!SOleft_command :keychron-q3]
-                  [:##fn :!SOleft_command :nuphy-halo75]
                   ]
           }
          ]
