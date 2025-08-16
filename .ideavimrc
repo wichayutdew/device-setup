@@ -6,6 +6,7 @@ set scrolloff=5
 set incsearch
 set relativenumber
 set idearefactormore=keep
+set quickscope
 
 " ui to show key mapping
 set which-key
