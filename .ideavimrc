@@ -28,7 +28,7 @@ Plug 'preservim/nerdtree'
 " set <leader> to <space>
 let mapleader = " "
 
-imap jj <Esc>
+imap jk <Esc>
 
 map <C-d> <C-d>zz
 map <C-u> <C-u>zz
@@ -44,6 +44,7 @@ nmap <leader>cF <Action>(com.github.lipiridi.spotless.applier.actions.ReformatFi
 nmap <leader>ci <Action>(OptimizeImports)
 nmap <leader>ca <Action>(ShowIntentionActions)
 
+nmap rb <Action>(Vcs.RollbackChangedLines)
 nmap rn <Action>(RenameElement)
 nmap rR <Action>(Refactorings.QuickListPopupAction)
 
