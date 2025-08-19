@@ -2,7 +2,6 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 vim.opt.number = true
 vim.opt.relativenumber = true
-vim.opt.cursorline = true
 vim.opt.wrap = false
 vim.opt.scrolloff = 10
 vim.opt.sidescrolloff = 8
@@ -10,6 +9,7 @@ vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.winborder = "rounded"
 vim.opt.termguicolors = true
+
 
 -- Basic Keymap
 vim.keymap.set({ 'n', 'v', 'x' }, 'Y', '"+y')
@@ -23,9 +23,9 @@ vim.keymap.set("n", "<leader>sh", ":split<CR>")
 
 -- Transparency and Colorscheme
 vim.cmd.colorscheme("unokai")
--- vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
--- vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
--- vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "none" })
+vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
+vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "none" })
 
 -- Package Manager
 vim.pack.add({
@@ -37,7 +37,9 @@ vim.pack.add({
 	{ src = 'https://github.com/nvim-telescope/telescope.nvim' },
 	{ src = 'https://github.com/tpope/vim-surround' },
 	{ src = 'https://github.com/github/copilot.vim' },
-	{ src = 'https://github.com/scalameta/nvim-metals' },
+	{ src = 'https://github.com/akinsho/bufferline.nvim' },
+	{ src = 'https://github.com/tomasky/bookmarks.nvim' },
+	{ src = 'https://github.com/kdheepak/lazygit.nvim' },
 })
 
 -- Language Server, Syntax Highlight, Code Completion ( Mason and LSP)
@@ -65,16 +67,38 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 })
 vim.cmd("set completeopt+=noselect")
-require "metals".initialize_or_attach({})
 
 
 -- sidebar
-require("nvim-tree").setup()
+require("nvim-tree").setup {
+	view = { side = "right" }
+}
 vim.keymap.set('n', '<leader>e', ':NvimTreeToggle<CR>')
 
--- FuzzyFinder
-require("telescope").setup()
+-- FuzzyFinder and Bookmarks
+require('bookmarks').setup {
+	sign_priority = 20,
+	save_file = vim.fn.expand "$HOME/.bookmarks",
+	on_attach = function(bufnr)
+		local bm = require "bookmarks"
+		vim.keymap.set("n", "<leader>s", bm.bookmark_toggle)
+	end
+}
+require('telescope').setup()
+require('telescope').load_extension('bookmarks')
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })
 vim.keymap.set('n', '<leader>fs', builtin.live_grep, { desc = 'Telescope live grep' })
 vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' })
+vim.keymap.set('n', '<leader>S', ':Telescope bookmarks list<CR>')
+
+
+-- tab (buffer) management
+require("bufferline").setup()
+vim.keymap.set('n', '<Tab>', ':BufferLineCycleNext<CR>')
+vim.keymap.set('n', '<S-tab>', ':BufferLineCycleNext<CR>')
+vim.keymap.set('n', '<leader>ww', ':bd<CR>', { desc = 'Close current buffer' })
+
+
+-- Git integration
+vim.keymap.set('n', 'lg', ':LazyGit<CR>')
