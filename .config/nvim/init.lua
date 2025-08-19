@@ -17,9 +17,10 @@ vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
+vim.keymap.set("n", "<leader>qq", ":qa!<CR>")
 -- Windows Navigation
-vim.keymap.set("n", "<leader>sv", ":vsplit<CR>")
-vim.keymap.set("n", "<leader>sh", ":split<CR>")
+vim.keymap.set("n", "<leader>wv", ":vsplit<CR>")
+vim.keymap.set("n", "<leader>wh", ":split<CR>")
 
 -- Transparency and Colorscheme
 vim.cmd.colorscheme("unokai")
