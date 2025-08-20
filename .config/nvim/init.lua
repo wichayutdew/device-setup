@@ -42,6 +42,8 @@ vim.pack.add({
 	{ src = 'https://github.com/akinsho/bufferline.nvim' },
 	{ src = 'https://github.com/tomasky/bookmarks.nvim' },
 	{ src = 'https://github.com/kdheepak/lazygit.nvim' },
+	{ src = 'https://github.com/unblevable/quick-scope' },
+	{ src = 'https://github.com/echasnovski/mini.ai' },
 })
 
 -- Language Server, Syntax Highlight, Code Completion ( Mason and LSP)
@@ -69,11 +71,14 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 })
 vim.cmd("set completeopt+=noselect")
-
+require('mini.ai').setup()
 
 -- sidebar
 require("nvim-tree").setup {
-	view = { side = "right" }
+	view = {
+		side = "right",
+		width = 70
+	}
 }
 vim.keymap.set('n', '<leader>e', ':NvimTreeToggle<CR>')
 
