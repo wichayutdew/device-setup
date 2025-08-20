@@ -47,8 +47,8 @@ vim.pack.add({
 })
 
 -- Language Server, Syntax Highlight, Code Completion ( Mason and LSP)
-require "mason".setup()
-require "nvim-treesitter.configs".setup({
+require("mason").setup()
+require("nvim-treesitter.configs").setup({
 	ensure_installed = { "lua", "kotlin" },
 	highlight = { enable = true }
 })
