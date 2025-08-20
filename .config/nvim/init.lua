@@ -44,6 +44,10 @@ vim.pack.add({
 	{ src = 'https://github.com/kdheepak/lazygit.nvim' },
 	{ src = 'https://github.com/unblevable/quick-scope' },
 	{ src = 'https://github.com/echasnovski/mini.ai' },
+	{ src = 'https://github.com/nvim-neotest/nvim-nio' },
+	{ src = 'https://github.com/nvim-neotest/neotest' },
+	{ src = 'https://github.com/codymikol/neotest-kotlin' },
+	{ src = 'https://github.com/tpope/vim-projectionist' },
 })
 
 -- Language Server, Syntax Highlight, Code Completion ( Mason and LSP)
@@ -115,3 +119,17 @@ vim.keymap.set('n', '<leader>ww', ':bd<CR>', { desc = 'Close current buffer' })
 
 -- Git integration
 vim.keymap.set('n', 'lg', ':LazyGit<CR>')
+
+
+-- Testing & Debugging
+require("neotest").setup({
+	adapters = {
+		require("neotest-kotlin")
+	}
+})
+vim.keymap.set("n", "<leader>tt", function() require("neotest").run.run(vim.fn.expand("%")) end)
+vim.keymap.set("n", "<leader>ts", function() require("neotest").run.stop() end)
+vim.keymap.set("n", "<leader>to", function() require("neotest").summary.toggle() end)
+vim.keymap.set("n", "<leader>tp", function() require("neotest").output_panel.toggle() end)
+
+vim.keymap.set('n', 'gt', ':A<CR>', { noremap = true, silent = true })
