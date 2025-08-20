@@ -91,7 +91,13 @@ require('bookmarks').setup {
 		vim.keymap.set("n", "<leader>s", bm.bookmark_toggle)
 	end
 }
-require('telescope').setup()
+require('telescope').setup({
+	pickers = {
+		find_files = {
+			hidden = true
+		}
+	}
+})
 require('telescope').load_extension('bookmarks')
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })
