@@ -29,3 +29,4 @@ alias local-search="""
   cd
 """
 alias lg="lazygit"
+alias vi="nvim"
