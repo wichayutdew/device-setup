@@ -30,6 +30,8 @@ let mapleader = " "
 
 imap jk <Esc>
 
+nnoremap Y "+y
+vnoremap Y "+y
 map <C-d> <C-d>zz
 map <C-u> <C-u>zz
 map n nzzzv
