@@ -12,6 +12,7 @@ vim.opt.termguicolors = true
 
 
 -- Basic Keymap
+vim.keymap.set("n", "<leader>re", ":w | :so<CR>")
 vim.keymap.set({ 'n', 'v', 'x' }, 'Y', '"+y')
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
