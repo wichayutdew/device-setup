@@ -9,6 +9,8 @@ vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.winborder = "rounded"
 vim.opt.termguicolors = true
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
 
 
 -- Basic Keymap

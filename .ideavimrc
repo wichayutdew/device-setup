@@ -7,6 +7,8 @@ set incsearch
 set relativenumber
 set idearefactormore=keep
 set quickscope
+set ignorecase = true
+set smartcase = true
 
 " ui to show key mapping
 set which-key
