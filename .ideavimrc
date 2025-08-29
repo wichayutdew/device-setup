@@ -65,6 +65,7 @@ nmap <leader>rR <Action>(Stop)
 nmap <leader>dD <Action>(Stop)
 nmap <leader>bb <Action>(ToggleLineBreakpoint)
 nmap <leader>bB <Action>(ViewBreakpoints)
+nmap br <Action>(Resume)
 
 nmap <leader>ff <Action>(GotoFile)
 nmap <leader>fs <Action>(FindInPath)
