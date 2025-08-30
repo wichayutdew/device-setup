@@ -11,6 +11,7 @@ vim.opt.winborder = "rounded"
 vim.opt.termguicolors = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
+vim.opt.cursorline = true
 
 
 -- Basic Keymap
