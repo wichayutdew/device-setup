@@ -51,6 +51,10 @@ vim.pack.add({
 	{ src = 'https://github.com/nvim-neotest/neotest' },
 	{ src = 'https://github.com/codymikol/neotest-kotlin' },
 	{ src = 'https://github.com/tpope/vim-projectionist' },
+	{ src = 'https://github.com/MunifTanjim/nui.nvim' },
+	{ src = 'https://github.com/folke/noice.nvim' },
+	{ src = 'https://github.com/lewis6991/gitsigns.nvim' },
+	{ src = 'https://github.com/nvim-lualine/lualine.nvim' }
 })
 
 -- Language Server, Syntax Highlight, Code Completion ( Mason and LSP)
@@ -136,3 +140,16 @@ vim.keymap.set("n", "<leader>to", function() require("neotest").summary.toggle()
 vim.keymap.set("n", "<leader>tp", function() require("neotest").output_panel.toggle() end)
 
 vim.keymap.set('n', 'gt', ':A<CR>', { noremap = true, silent = true })
+
+require("noice").setup({
+	notify = {
+		enabled = false
+	}
+})
+
+
+require("lualine").setup {
+	options = {
+		theme = 'gruvbox'
+	}
+}
