@@ -3,6 +3,7 @@ source <(/opt/homebrew/bin/brew shellenv)
 
 # Added by Toolbox App
 export PATH="$PATH:/Users/wphongphanpa/Library/Application\ Support/JetBrains/Toolbox/scripts"
+export PATH="$PATH:/Users/wphongphanpa/Library/Application Support/Coursier/bin"
 
 # Added by zoxide
 source <(zoxide init --cmd cd zsh)
