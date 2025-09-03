@@ -35,43 +35,57 @@ vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "none" })
 
 -- Package Manager
 vim.pack.add({
-	{ src = 'https://github.com/nvim-lua/plenary.nvim' },
+	--------------------- PRE-REQUISUTES ---------------------
+	{ src = 'https://github.com/nvim-lua/plenary.nvim' }, -- Required by many plugins
+	{ src = 'https://github.com/nvim-neotest/nvim-nio' }, -- Required by neotest
+	{ src = 'https://github.com/MunifTanjim/nui.nvim' },
+	--------------------- LSP ---------------------
 	{ src = 'https://github.com/neovim/nvim-lspconfig' },
+	{ src = 'https://github.com/scalameta/nvim-metals' },
 	{ src = 'https://github.com/mason-org/mason.nvim' },
 	{ src = 'https://github.com/mason-org/mason-lspconfig.nvim' },
+	{ src = 'https://github.com/nvim-treesitter/nvim-treesitter' },
+	{ src = 'https://github.com/github/copilot.vim' },
+	--------------------- COMPLETION ---------------------
 	{ src = 'https://github.com/L3MON4D3/LuaSnip' },
-	{ src = 'https://github.com/hrsh7th/nvim-cmp' },
 	{ src = 'https://github.com/saadparwaiz1/cmp_luasnip' },
 	{ src = 'https://github.com/hrsh7th/cmp-buffer' },
 	{ src = 'https://github.com/hrsh7th/cmp-path' },
+	{ src = 'https://github.com/hrsh7th/nvim-cmp' },
 	{ src = 'https://github.com/hrsh7th/cmp-nvim-lsp' },
-	{ src = 'https://github.com/nvim-treesitter/nvim-treesitter' },
-	{ src = 'https://github.com/nvim-tree/nvim-tree.lua' },
-	{ src = 'https://github.com/nvim-telescope/telescope.nvim' },
-	{ src = 'https://github.com/gbrlsnchs/telescope-lsp-handlers.nvim' },
-	{ src = 'https://github.com/nvim-telescope/telescope-ui-select.nvim' },
-	{ src = 'https://github.com/tpope/vim-surround' },
-	{ src = 'https://github.com/github/copilot.vim' },
-	{ src = 'https://github.com/akinsho/bufferline.nvim' },
-	{ src = 'https://github.com/tomasky/bookmarks.nvim' },
-	{ src = 'https://github.com/kdheepak/lazygit.nvim' },
-	{ src = 'https://github.com/unblevable/quick-scope' },
-	{ src = 'https://github.com/echasnovski/mini.ai' },
+	--------------------- TESTING ---------------------
 	{ src = 'https://github.com/nvim-neotest/nvim-nio' },
 	{ src = 'https://github.com/nvim-neotest/neotest' },
 	{ src = 'https://github.com/codymikol/neotest-kotlin' },
-	{ src = 'https://github.com/tpope/vim-projectionist' },
-	{ src = 'https://github.com/MunifTanjim/nui.nvim' },
-	{ src = 'https://github.com/folke/noice.nvim' },
-	{ src = 'https://github.com/lewis6991/gitsigns.nvim' },
+	--------------------- DEBUGGING ---------------------
+	{ src = 'https://github.com/mfussenegger/nvim-dap' },
+	{ src = 'https://github.com/jay-babu/mason-nvim-dap.nvim' },
+	{ src = 'https://github.com/theHamsta/nvim-dap-virtual-text' },
+	{ src = 'https://github.com/rcarriga/nvim-dap-ui' },
+	--------------------- FZF ---------------------
+	{ src = 'https://github.com/nvim-tree/nvim-tree.lua' },
+	{ src = 'https://github.com/gbrlsnchs/telescope-lsp-handlers.nvim' },
+	{ src = 'https://github.com/nvim-telescope/telescope-ui-select.nvim' },
+	{ src = 'https://github.com/nvim-telescope/telescope.nvim' },
+	--------------------- GIT ---------------------
+	{ src = 'https://github.com/kdheepak/lazygit.nvim' },
+	{ src = 'https://github.com/lewis6991/gitsigns.nvim' }, -- For Git revert, Changes mark on left side
+	--------------------- EXTRA ---------------------
+	{ src = 'https://github.com/akinsho/bufferline.nvim' }, -- Tab manager
+	{ src = 'https://github.com/tomasky/bookmarks.nvim' },
+	{ src = 'https://github.com/folke/noice.nvim' },       -- Better command line and messages
 	{ src = 'https://github.com/nvim-lualine/lualine.nvim' },
-	{ src = 'https://github.com/scalameta/nvim-metals' },
+	{ src = 'https://github.com/tpope/vim-surround' },     -- Surroundings like parentheses, quotes, etc.
+	{ src = 'https://github.com/unblevable/quick-scope' }, -- Highlight f, F, t, T
+	{ src = 'https://github.com/echasnovski/mini.ai' },    -- e.g. q as " ' and b as ( [ {
 })
 
--- Language Server, Syntax Highlight, Code Completion ( Mason, LSP, and Metals(for Scala))
+---------------------- LSP (Syntax Highlight) ---------------------
 require('mason').setup()
+require("mason-nvim-dap").setup()
 require('mason-lspconfig').setup()
 
+---------------------- Code Completion ---------------------
 local lspconfig = require('lspconfig')
 local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
 lspconfig.lua_ls.setup({
@@ -189,10 +203,10 @@ require('telescope').setup({
 		}
 	},
 	extensions = {
-    ["ui-select"] = {
-      require("telescope.themes").get_dropdown {}
-    }
-  }
+		["ui-select"] = {
+			require("telescope.themes").get_dropdown {}
+		}
+	}
 })
 require("telescope").load_extension("ui-select")
 require('telescope').load_extension('bookmarks')
@@ -202,7 +216,6 @@ local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })
 vim.keymap.set('n', '<leader>fs', builtin.live_grep, { desc = 'Telescope live grep' })
 vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' })
-vim.keymap.set('n', '<leader>S', ':Telescope bookmarks list<CR>')
 vim.keymap.set('n', '<leader>cf', vim.lsp.buf.format, { desc = "Code formatting" })
 vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code actions" })
 vim.keymap.set("n", "gd", ':Telescope lsp_definitions<CR>', { desc = "Go to definition" })
@@ -229,6 +242,7 @@ require('bookmarks').setup {
 		vim.keymap.set("n", "<leader>s", bm.bookmark_toggle)
 	end
 }
+vim.keymap.set('n', '<leader>S', ':Telescope bookmarks list<CR>')
 
 -- tab (buffer) management
 require("bufferline").setup()
@@ -238,7 +252,7 @@ vim.keymap.set('n', '<leader>ww', ':bd<CR>', { desc = 'Close current buffer' })
 
 
 -- Git integration
-vim.keymap.set('n', 'lg', ':LazyGit<CR>')
+vim.keymap.set('n', '<leader>lg', ':LazyGit<CR>')
 
 
 -- Testing & Debugging
@@ -253,6 +267,89 @@ vim.keymap.set("n", "<leader>to", function() require("neotest").summary.toggle()
 vim.keymap.set("n", "<leader>tp", function() require("neotest").output_panel.toggle() end)
 
 vim.keymap.set('n', 'gt', ':A<CR>', { noremap = true, silent = true })
+
+
+-- Run & Debug
+local dap = require("dap")
+dap.adapters.ansible = {
+	type = "executable",
+	command = "python", -- or "/path/to/virtualenv/bin/python",
+	args = { "-m", "ansibug", "dap" },
+}
+dap.configurations["yaml.ansible"] = {
+	{
+		type = "ansible",
+		request = "launch",
+		name = "Debug playbook",
+		playbook = "${file}"
+	},
+}
+dap.configurations.scala = {
+	{
+		type = "scala",
+		request = "launch",
+		name = "RunOrTest",
+		metals = {
+			runType = "runOrTestFile",
+		},
+	},
+	{
+		type = "scala",
+		request = "launch",
+		name = "Test Target",
+		metals = {
+			runType = "testTarget",
+		},
+	},
+}
+
+local dapui = require("dapui")
+dapui.setup()
+dap.listeners.before.attach.dapui_config = function()
+	dapui.open()
+end
+dap.listeners.before.launch.dapui_config = function()
+	dapui.open()
+end
+dap.listeners.before.event_terminated.dapui_config = function()
+	dapui.close()
+end
+dap.listeners.before.event_exited.dapui_config = function()
+	dapui.close()
+end
+
+require("nvim-dap-virtual-text").setup({
+	enabled_commands = true,           -- create commands DapVirtualTextEnable, DapVirtualTextDisable, DapVirtualTextToggle, (DapVirtualTextForceRefresh for refreshing when debug adapter did not notify its termination)
+	highlight_changed_variables = true, -- highlight changed values with NvimDapVirtualTextChanged, else always NvimDapVirtualText
+	highlight_new_as_changed = false,  -- highlight new variables in the same way as changed variables (if highlight_changed_variables)
+	show_stop_reason = true,           -- show stop reason when stopped for exceptions
+	commented = false,                 -- prefix virtual text with comment string
+	only_first_definition = true,      -- only show virtual text at first definition (if there are multiple)
+	all_references = false,            -- show virtual text on all all references of the variable (not only definitions)
+	clear_on_continue = false,         -- clear virtual text on "continue" (might cause flickering when stepping)
+	display_callback = function(variable, _, _, _, options)
+		-- by default, strip out new line characters
+		if options.virt_text_pos == 'inline' then
+			return ' = ' .. variable.value:gsub("%s+", " ")
+		else
+			return variable.name .. ' = ' .. variable.value:gsub("%s+", " ")
+		end
+	end,
+	virt_text_pos = vim.fn.has 'nvim-0.10' == 1 and 'inline' or 'eol',
+})
+
+vim.keymap.set("n", "<leader>bb", ':DapToggleBreakpoint<CR>')
+vim.keymap.set("n", "<leader>dc", ':DapContinue<CR>')
+vim.keymap.set("n", "<leader>dr", ':DapToggleRepl<CR>')
+vim.keymap.set("n", "<leader>dso", ':DapStepOver<CR>')
+vim.keymap.set("n", "<leader>dsi", ':DapStepInto<CR>')
+vim.keymap.set("n", "<leader>dsu", ':DapStepOut<CR>')
+vim.keymap.set("n", "<leader>dl", function()
+	require("dap").run_last()
+end)
+vim.keymap.set("n", "<leader>dd", function()
+	dapui.toggle()
+end)
 
 -- Miscellaneous
 require('mini.ai').setup()
