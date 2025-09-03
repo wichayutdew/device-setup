@@ -80,11 +80,92 @@ vim.pack.add({
 	{ src = 'https://github.com/echasnovski/mini.ai' },    -- e.g. q as " ' and b as ( [ {
 })
 
+
+-- Run & Debug
+local dap = require("dap")
+dap.adapters.ansible = {
+	type = "executable",
+	command = "python", -- or "/path/to/virtualenv/bin/python",
+	args = { "-m", "ansibug", "dap" },
+}
+dap.configurations["yaml.ansible"] = {
+	{
+		type = "ansible",
+		request = "launch",
+		name = "Debug playbook",
+		playbook = "${file}"
+	},
+}
+dap.configurations.scala = {
+	{
+		type = "scala",
+		request = "launch",
+		name = "RunOrTest",
+		metals = {
+			runType = "runOrTestFile",
+		},
+	},
+	{
+		type = "scala",
+		request = "launch",
+		name = "Test Target",
+		metals = {
+			runType = "testTarget",
+		},
+	},
+}
+
+local dapui = require("dapui")
+dapui.setup()
+dap.listeners.before.attach.dapui_config = function()
+	dapui.open()
+end
+dap.listeners.before.launch.dapui_config = function()
+	dapui.open()
+end
+dap.listeners.before.event_terminated.dapui_config = function()
+	dapui.close()
+end
+dap.listeners.before.event_exited.dapui_config = function()
+	dapui.close()
+end
+
+require("nvim-dap-virtual-text").setup({
+	enabled_commands = true,           -- create commands DapVirtualTextEnable, DapVirtualTextDisable, DapVirtualTextToggle, (DapVirtualTextForceRefresh for refreshing when debug adapter did not notify its termination)
+	highlight_changed_variables = true, -- highlight changed values with NvimDapVirtualTextChanged, else always NvimDapVirtualText
+	highlight_new_as_changed = false,  -- highlight new variables in the same way as changed variables (if highlight_changed_variables)
+	show_stop_reason = true,           -- show stop reason when stopped for exceptions
+	commented = false,                 -- prefix virtual text with comment string
+	only_first_definition = true,      -- only show virtual text at first definition (if there are multiple)
+	all_references = false,            -- show virtual text on all all references of the variable (not only definitions)
+	clear_on_continue = false,         -- clear virtual text on "continue" (might cause flickering when stepping)
+	display_callback = function(variable, _, _, _, options)
+		-- by default, strip out new line characters
+		if options.virt_text_pos == 'inline' then
+			return ' = ' .. variable.value:gsub("%s+", " ")
+		else
+			return variable.name .. ' = ' .. variable.value:gsub("%s+", " ")
+		end
+	end,
+	virt_text_pos = vim.fn.has 'nvim-0.10' == 1 and 'inline' or 'eol',
+})
+
+vim.keymap.set("n", "<leader>bb", ':DapToggleBreakpoint<CR>')
+vim.keymap.set("n", "<leader>dc", ':DapContinue<CR>')
+vim.keymap.set("n", "<leader>dr", ':DapToggleRepl<CR>')
+vim.keymap.set("n", "<leader>dso", ':DapStepOver<CR>')
+vim.keymap.set("n", "<leader>dsi", ':DapStepInto<CR>')
+vim.keymap.set("n", "<leader>dsu", ':DapStepOut<CR>')
+vim.keymap.set("n", "<leader>dl", function()
+	require("dap").run_last()
+end)
+vim.keymap.set("n", "<leader>dd", function()
+	dapui.toggle()
+end)
 ---------------------- LSP (Syntax Highlight) ---------------------
 require('mason').setup()
 require("mason-nvim-dap").setup()
 require('mason-lspconfig').setup()
-
 ---------------------- Code Completion ---------------------
 local lspconfig = require('lspconfig')
 local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
@@ -190,6 +271,9 @@ vim.api.nvim_create_autocmd('FileType', {
 		}
 		metals_config.init_options.statusBarProvider = "on"
 		metals_config.capabilities = lsp_capabilities
+		metals_config.on_attach = function(client, bufnr)
+			require("metals").setup_dap()
+		end
 
 		require('metals').initialize_or_attach(metals_config)
 	end,
@@ -255,7 +339,6 @@ vim.keymap.set('n', '<leader>ww', ':bd<CR>', { desc = 'Close current buffer' })
 vim.keymap.set('n', '<leader>lg', ':LazyGit<CR>')
 vim.keymap.set('n', '<leader>zz', ':Gitsigns reset_hunk<CR>')
 
-
 -- Testing & Debugging
 require("neotest").setup({
 	adapters = {
@@ -268,89 +351,6 @@ vim.keymap.set("n", "<leader>to", function() require("neotest").summary.toggle()
 vim.keymap.set("n", "<leader>tp", function() require("neotest").output_panel.toggle() end)
 
 vim.keymap.set('n', 'gt', ':A<CR>', { noremap = true, silent = true })
-
-
--- Run & Debug
-local dap = require("dap")
-dap.adapters.ansible = {
-	type = "executable",
-	command = "python", -- or "/path/to/virtualenv/bin/python",
-	args = { "-m", "ansibug", "dap" },
-}
-dap.configurations["yaml.ansible"] = {
-	{
-		type = "ansible",
-		request = "launch",
-		name = "Debug playbook",
-		playbook = "${file}"
-	},
-}
-dap.configurations.scala = {
-	{
-		type = "scala",
-		request = "launch",
-		name = "RunOrTest",
-		metals = {
-			runType = "runOrTestFile",
-		},
-	},
-	{
-		type = "scala",
-		request = "launch",
-		name = "Test Target",
-		metals = {
-			runType = "testTarget",
-		},
-	},
-}
-
-local dapui = require("dapui")
-dapui.setup()
-dap.listeners.before.attach.dapui_config = function()
-	dapui.open()
-end
-dap.listeners.before.launch.dapui_config = function()
-	dapui.open()
-end
-dap.listeners.before.event_terminated.dapui_config = function()
-	dapui.close()
-end
-dap.listeners.before.event_exited.dapui_config = function()
-	dapui.close()
-end
-
-require("nvim-dap-virtual-text").setup({
-	enabled_commands = true,           -- create commands DapVirtualTextEnable, DapVirtualTextDisable, DapVirtualTextToggle, (DapVirtualTextForceRefresh for refreshing when debug adapter did not notify its termination)
-	highlight_changed_variables = true, -- highlight changed values with NvimDapVirtualTextChanged, else always NvimDapVirtualText
-	highlight_new_as_changed = false,  -- highlight new variables in the same way as changed variables (if highlight_changed_variables)
-	show_stop_reason = true,           -- show stop reason when stopped for exceptions
-	commented = false,                 -- prefix virtual text with comment string
-	only_first_definition = true,      -- only show virtual text at first definition (if there are multiple)
-	all_references = false,            -- show virtual text on all all references of the variable (not only definitions)
-	clear_on_continue = false,         -- clear virtual text on "continue" (might cause flickering when stepping)
-	display_callback = function(variable, _, _, _, options)
-		-- by default, strip out new line characters
-		if options.virt_text_pos == 'inline' then
-			return ' = ' .. variable.value:gsub("%s+", " ")
-		else
-			return variable.name .. ' = ' .. variable.value:gsub("%s+", " ")
-		end
-	end,
-	virt_text_pos = vim.fn.has 'nvim-0.10' == 1 and 'inline' or 'eol',
-})
-
-vim.keymap.set("n", "<leader>bb", ':DapToggleBreakpoint<CR>')
-vim.keymap.set("n", "<leader>dc", ':DapContinue<CR>')
-vim.keymap.set("n", "<leader>dr", ':DapToggleRepl<CR>')
-vim.keymap.set("n", "<leader>dso", ':DapStepOver<CR>')
-vim.keymap.set("n", "<leader>dsi", ':DapStepInto<CR>')
-vim.keymap.set("n", "<leader>dsu", ':DapStepOut<CR>')
-vim.keymap.set("n", "<leader>dl", function()
-	require("dap").run_last()
-end)
-vim.keymap.set("n", "<leader>dd", function()
-	dapui.toggle()
-end)
 
 -- Miscellaneous
 require('mini.ai').setup()
