@@ -253,6 +253,7 @@ vim.keymap.set('n', '<leader>ww', ':bd<CR>', { desc = 'Close current buffer' })
 
 -- Git integration
 vim.keymap.set('n', '<leader>lg', ':LazyGit<CR>')
+vim.keymap.set('n', '<leader>zz', ':Gitsigns reset_hunk<CR>')
 
 
 -- Testing & Debugging
