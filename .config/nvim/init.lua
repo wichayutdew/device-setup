@@ -45,7 +45,6 @@ vim.pack.add({
 	{ src = 'https://github.com/mason-org/mason.nvim' },
 	{ src = 'https://github.com/mason-org/mason-lspconfig.nvim' },
 	{ src = 'https://github.com/nvim-treesitter/nvim-treesitter' },
-	{ src = 'https://github.com/github/copilot.vim' },
 	--------------------- COMPLETION ---------------------
 	{ src = 'https://github.com/L3MON4D3/LuaSnip' },
 	{ src = 'https://github.com/saadparwaiz1/cmp_luasnip' },
@@ -53,6 +52,8 @@ vim.pack.add({
 	{ src = 'https://github.com/hrsh7th/cmp-path' },
 	{ src = 'https://github.com/hrsh7th/nvim-cmp' },
 	{ src = 'https://github.com/hrsh7th/cmp-nvim-lsp' },
+	{ src = 'https://github.com/zbirenbaum/copilot.lua' },
+	{ src = 'https://github.com/zbirenbaum/copilot-cmp' },
 	--------------------- TESTING ---------------------
 	{ src = 'https://github.com/nvim-neotest/nvim-nio' },
 	{ src = 'https://github.com/nvim-neotest/neotest' },
@@ -83,19 +84,34 @@ vim.pack.add({
 
 -- Run & Debug
 local dap = require("dap")
-dap.adapters.ansible = {
+-- kotlin dap
+dap.adapters.kotlin = {
 	type = "executable",
-	command = "python", -- or "/path/to/virtualenv/bin/python",
-	args = { "-m", "ansibug", "dap" },
+	command = "kotlin-debug-adapter",
+	options = { auto_continue_if_many_stopped = true },
 }
-dap.configurations["yaml.ansible"] = {
+dap.configurations.kotlin = {
 	{
-		type = "ansible",
+		type = "kotlin",
 		request = "launch",
-		name = "Debug playbook",
-		playbook = "${file}"
-	},
+		name = "Run current file",
+		mainClass = function()
+			local fname = vim.api.nvim_buf_get_name(0)
+			local base = fname:match("([^/]+)%.kt$")
+			local lines = vim.api.nvim_buf_get_lines(0, 0, 10, false)
+			local pkg = ""
+			for _, l in ipairs(lines) do
+				local p = l:match("^%s*package%s+([%w%.]+)")
+				if p then
+					pkg = p .. "."; break
+				end
+			end
+			return pkg .. (base and (base .. "Kt") or vim.fn.input("Main class: "))
+		end,
+		projectRoot = "${workspaceFolder}",
+	}
 }
+-- scala dap
 dap.configurations.scala = {
 	{
 		type = "scala",
@@ -116,52 +132,21 @@ dap.configurations.scala = {
 }
 
 local dapui = require("dapui")
-dapui.setup()
-dap.listeners.before.attach.dapui_config = function()
-	dapui.open()
-end
-dap.listeners.before.launch.dapui_config = function()
-	dapui.open()
-end
-dap.listeners.before.event_terminated.dapui_config = function()
-	dapui.close()
-end
-dap.listeners.before.event_exited.dapui_config = function()
-	dapui.close()
-end
+dapui.setup({})
+dap.listeners.before.attach.dapui_config = function() dapui.open() end
+dap.listeners.before.launch.dapui_config = function() dapui.open() end
+dap.listeners.before.event_terminated.dapui_config = function() dapui.close() end
+dap.listeners.before.event_exited.dapui_config = function() dapui.close() end
+require("nvim-dap-virtual-text").setup({})
 
-require("nvim-dap-virtual-text").setup({
-	enabled_commands = true,           -- create commands DapVirtualTextEnable, DapVirtualTextDisable, DapVirtualTextToggle, (DapVirtualTextForceRefresh for refreshing when debug adapter did not notify its termination)
-	highlight_changed_variables = true, -- highlight changed values with NvimDapVirtualTextChanged, else always NvimDapVirtualText
-	highlight_new_as_changed = false,  -- highlight new variables in the same way as changed variables (if highlight_changed_variables)
-	show_stop_reason = true,           -- show stop reason when stopped for exceptions
-	commented = false,                 -- prefix virtual text with comment string
-	only_first_definition = true,      -- only show virtual text at first definition (if there are multiple)
-	all_references = false,            -- show virtual text on all all references of the variable (not only definitions)
-	clear_on_continue = false,         -- clear virtual text on "continue" (might cause flickering when stepping)
-	display_callback = function(variable, _, _, _, options)
-		-- by default, strip out new line characters
-		if options.virt_text_pos == 'inline' then
-			return ' = ' .. variable.value:gsub("%s+", " ")
-		else
-			return variable.name .. ' = ' .. variable.value:gsub("%s+", " ")
-		end
-	end,
-	virt_text_pos = vim.fn.has 'nvim-0.10' == 1 and 'inline' or 'eol',
-})
+vim.keymap.set("n", "<leader>bb", dap.toggle_breakpoint)
+vim.keymap.set("n", "<leader>db", dapui.toggle)
+vim.keymap.set("n", "<leader>dd", dap.continue)
+vim.keymap.set("n", "<leader>dso", dap.step_over)
+vim.keymap.set("n", "<leader>dsi", dap.step_into)
+vim.keymap.set("n", "<leader>dsu", dap.step_out)
+vim.keymap.set("n", "<leader>dl", dap.run_last)
 
-vim.keymap.set("n", "<leader>bb", ':DapToggleBreakpoint<CR>')
-vim.keymap.set("n", "<leader>dc", ':DapContinue<CR>')
-vim.keymap.set("n", "<leader>dr", ':DapToggleRepl<CR>')
-vim.keymap.set("n", "<leader>dso", ':DapStepOver<CR>')
-vim.keymap.set("n", "<leader>dsi", ':DapStepInto<CR>')
-vim.keymap.set("n", "<leader>dsu", ':DapStepOut<CR>')
-vim.keymap.set("n", "<leader>dl", function()
-	require("dap").run_last()
-end)
-vim.keymap.set("n", "<leader>dd", function()
-	dapui.toggle()
-end)
 ---------------------- LSP (Syntax Highlight) ---------------------
 require('mason').setup()
 require("mason-nvim-dap").setup()
@@ -174,6 +159,11 @@ lspconfig.lua_ls.setup({
 })
 vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
 require('luasnip.loaders.from_vscode').lazy_load()
+require("copilot").setup({
+	suggestion = { enabled = false },
+	panel = { enabled = false },
+})
+require("copilot_cmp").setup({})
 local cmp = require('cmp')
 local luasnip = require('luasnip')
 local select_opts = { behavior = cmp.SelectBehavior.Select }
@@ -184,10 +174,11 @@ cmp.setup({
 		end
 	},
 	sources = {
-		{ name = 'path' },
-		{ name = 'nvim_lsp', keyword_length = 1 },
-		{ name = 'buffer',   keyword_length = 3 },
-		{ name = 'luasnip',  keyword_length = 2 },
+		{ name = "copilot",  group_index = 2 },
+		{ name = 'nvim_lsp', group_index = 2 },
+		{ name = 'path',     group_index = 2 },
+		{ name = 'luasnip',  group_index = 2 },
+		{ name = 'buffer',   group_index = 2 },
 	},
 	window = {
 		documentation = cmp.config.window.bordered()
@@ -257,7 +248,7 @@ require("nvim-treesitter.configs").setup({
 	highlight = { enable = true }
 })
 
-vim.lsp.enable({ "lua_ls", "kotlin_language_server" })
+vim.lsp.enable({ "lua_ls", "kotlin_language_server", "cucumber_language_server" })
 
 -- Metals-specific setup
 vim.api.nvim_create_autocmd('FileType', {
@@ -271,7 +262,7 @@ vim.api.nvim_create_autocmd('FileType', {
 		}
 		metals_config.init_options.statusBarProvider = "on"
 		metals_config.capabilities = lsp_capabilities
-		metals_config.on_attach = function(client, bufnr)
+		metals_config.on_attach = function(_, _)
 			require("metals").setup_dap()
 		end
 
@@ -309,7 +300,7 @@ vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "Find references" })
 vim.keymap.set("n", "rn", vim.lsp.buf.rename, { desc = "Rename symbol" })
 
 -- sidebar
-require("nvim-tree").setup {
+require('nvim-tree').setup {
 	view = {
 		side = "right",
 		width = 70
@@ -321,7 +312,7 @@ vim.keymap.set('n', '<leader>e', ':NvimTreeToggle<CR>')
 require('bookmarks').setup {
 	sign_priority = 20,
 	save_file = vim.fn.expand "$HOME/.bookmarks",
-	on_attach = function(bufnr)
+	on_attach = function(_)
 		local bm = require "bookmarks"
 		vim.keymap.set("n", "<leader>s", bm.bookmark_toggle)
 	end
@@ -340,11 +331,7 @@ vim.keymap.set('n', '<leader>lg', ':LazyGit<CR>')
 vim.keymap.set('n', '<leader>zz', ':Gitsigns reset_hunk<CR>')
 
 -- Testing & Debugging
-require("neotest").setup({
-	adapters = {
-		require("neotest-kotlin")
-	}
-})
+require("neotest").setup({ adapters = { require("neotest-kotlin") } })
 vim.keymap.set("n", "<leader>tt", function() require("neotest").run.run(vim.fn.expand("%")) end)
 vim.keymap.set("n", "<leader>ts", function() require("neotest").run.stop() end)
 vim.keymap.set("n", "<leader>to", function() require("neotest").summary.toggle() end)
@@ -354,15 +341,5 @@ vim.keymap.set('n', 'gt', ':A<CR>', { noremap = true, silent = true })
 
 -- Miscellaneous
 require('mini.ai').setup()
-
-require("noice").setup({
-	notify = {
-		enabled = false
-	}
-})
-
-require("lualine").setup {
-	options = {
-		theme = 'gruvbox'
-	}
-}
+require("noice").setup({ notify = { enabled = false } })
+require("lualine").setup({ options = { theme = 'gruvbox' } })
