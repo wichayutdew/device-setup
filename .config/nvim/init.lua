@@ -383,12 +383,12 @@ require('leetcode').setup({
 		},
 		testcase = {
 			virt_text = true,
-			size = "20%",
+			size = "50%",
 		},
 	},
 	description = {
-		position = "left",
-		width = "20%",
+		position = "right",
+		width = "50%",
 		show_stats = true,
 	},
 	hooks = {
@@ -411,6 +411,8 @@ vim.keymap.set('n', 'lff', ':Leet list<CR>')
 vim.keymap.set('n', 'lde', ':Leet desc<CR>')
 vim.keymap.set('n', 'ldd', ':Leet run<CR>')
 vim.keymap.set('n', 'lrr', ':Leet submit<CR>')
+vim.keymap.set('n', 'lre', ':Leet reset<CR>')
+vim.keymap.set('n', 'lgx', ':Leet open<CR>')
 
 require('image').setup()
 require("image").setup({
