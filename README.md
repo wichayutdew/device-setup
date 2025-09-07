@@ -1,5 +1,4 @@
 # Install Homebrew
-
 ```zsh
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
@@ -35,11 +34,16 @@ brew install koekeishiya/formulae/yabai
 brew install koekeishiya/formulae/skhd
 ```
 
-
 # Development tools
 ```zsh
 brew install --cask postman
 brew install --cask warp
+```
+
+# Neovim image renderer
+```zsh
+brew install imagemagick
+brew install jstkdng/programs/ueberzugpp
 ```
 
 # Coding language version control
