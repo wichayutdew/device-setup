@@ -40,12 +40,6 @@ brew install --cask postman
 brew install --cask warp
 ```
 
-# Neovim image renderer
-```zsh
-brew install imagemagick
-brew install jstkdng/programs/ueberzugpp
-```
-
 # Coding language version control
 ```zsh
 brew install asdf

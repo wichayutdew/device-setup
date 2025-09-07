@@ -82,7 +82,6 @@ vim.pack.add({
 	{ src = 'https://github.com/unblevable/quick-scope' }, -- Highlight f, F, t, T
 	{ src = 'https://github.com/echasnovski/mini.ai' },    -- e.g. q as " ' and b as ( [ {
 	{ src = 'https://github.com/kawre/leetcode.nvim' },    -- doing leetcode inside neovim
-	{ src = 'https://github.com/3rd/image.nvim' },         -- render image
 })
 
 
@@ -379,16 +378,16 @@ require('leetcode').setup({
 			height = "75%",
 		},
 		result = {
-			size = "50%",
+			size = "70%",
 		},
 		testcase = {
 			virt_text = true,
-			size = "50%",
+			size = "30%",
 		},
 	},
 	description = {
 		position = "right",
-		width = "50%",
+		width = "80%",
 		show_stats = true,
 	},
 	hooks = {
@@ -404,7 +403,7 @@ require('leetcode').setup({
 		focus_testcases = "H",
 		focus_result = "L",
 	},
-	image_support = true,
+	image_support = false,
 })
 
 vim.keymap.set('n', 'lff', ':Leet list<CR>')
@@ -413,44 +412,3 @@ vim.keymap.set('n', 'ldd', ':Leet run<CR>')
 vim.keymap.set('n', 'lrr', ':Leet submit<CR>')
 vim.keymap.set('n', 'lre', ':Leet reset<CR>')
 vim.keymap.set('n', 'lgx', ':Leet open<CR>')
-
-require('image').setup()
-require("image").setup({
-	backend = "kitty",
-	processor = "magick_cli",
-	integrations = {
-		markdown = {
-			enabled = true,
-			clear_in_insert_mode = false,
-			download_remote_images = true,
-			only_render_image_at_cursor = false,
-			only_render_image_at_cursor_mode = "popup",
-			floating_windows = false,
-			filetypes = { "markdown", "vimwiki" },
-		},
-		neorg = {
-			enabled = true,
-			filetypes = { "norg" },
-		},
-		typst = {
-			enabled = true,
-			filetypes = { "typst" },
-		},
-		html = {
-			enabled = false,
-		},
-		css = {
-			enabled = false,
-		},
-	},
-	max_width = nil,
-	max_height = nil,
-	max_width_window_percentage = nil,
-	max_height_window_percentage = 50,
-	scale_factor = 1.0,
-	window_overlap_clear_enabled = false,                                              -- toggles images when windows are overlapped
-	window_overlap_clear_ft_ignore = { "cmp_menu", "cmp_docs", "snacks_notif", "scrollview", "scrollview_sign" },
-	editor_only_render_when_focused = false,                                           -- auto show/hide images when the editor gains/looses focus
-	tmux_show_only_in_active_window = false,                                           -- auto show/hide images in the correct Tmux window (needs visual-activity off)
-	hijack_file_patterns = { "*.png", "*.jpg", "*.jpeg", "*.gif", "*.webp", "*.avif" }, -- render image files as images when opened
-})
