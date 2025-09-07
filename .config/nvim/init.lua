@@ -45,6 +45,7 @@ vim.pack.add({
 	{ src = 'https://github.com/mason-org/mason.nvim' },
 	{ src = 'https://github.com/mason-org/mason-lspconfig.nvim' },
 	{ src = 'https://github.com/nvim-treesitter/nvim-treesitter' },
+	{ src = 'https://github.com/tree-sitter/tree-sitter-html' },
 	--------------------- COMPLETION ---------------------
 	{ src = 'https://github.com/L3MON4D3/LuaSnip' },
 	{ src = 'https://github.com/saadparwaiz1/cmp_luasnip' },
@@ -54,6 +55,7 @@ vim.pack.add({
 	{ src = 'https://github.com/hrsh7th/cmp-nvim-lsp' },
 	{ src = 'https://github.com/zbirenbaum/copilot.lua' },
 	{ src = 'https://github.com/zbirenbaum/copilot-cmp' },
+	{ src = 'https://github.com/MeanderingProgrammer/render-markdown.nvim' }, -- render markdown
 	--------------------- TESTING ---------------------
 	{ src = 'https://github.com/nvim-neotest/nvim-nio' },
 	{ src = 'https://github.com/nvim-neotest/neotest' },
@@ -79,6 +81,8 @@ vim.pack.add({
 	{ src = 'https://github.com/tpope/vim-surround' },     -- Surroundings like parentheses, quotes, etc.
 	{ src = 'https://github.com/unblevable/quick-scope' }, -- Highlight f, F, t, T
 	{ src = 'https://github.com/echasnovski/mini.ai' },    -- e.g. q as " ' and b as ( [ {
+	{ src = 'https://github.com/kawre/leetcode.nvim' },    -- doing leetcode inside neovim
+	{ src = 'https://github.com/3rd/image.nvim' },         -- render image
 })
 
 
@@ -151,6 +155,9 @@ vim.keymap.set("n", "<leader>dl", dap.run_last)
 require('mason').setup()
 require("mason-nvim-dap").setup()
 require('mason-lspconfig').setup()
+require('render-markdown').setup({
+	completions = { lsp = { enabled = true } },
+})
 ---------------------- Code Completion ---------------------
 local lspconfig = require('lspconfig')
 local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
@@ -174,11 +181,12 @@ cmp.setup({
 		end
 	},
 	sources = {
-		{ name = "copilot",  group_index = 2 },
-		{ name = 'nvim_lsp', group_index = 2 },
-		{ name = 'path',     group_index = 2 },
-		{ name = 'luasnip',  group_index = 2 },
-		{ name = 'buffer',   group_index = 2 },
+		{ name = "copilot",         group_index = 2 },
+		{ name = 'nvim_lsp',        group_index = 2 },
+		{ name = 'path',            group_index = 2 },
+		{ name = 'luasnip',         group_index = 2 },
+		{ name = 'buffer',          group_index = 2 },
+		{ name = 'render-markdown', group_index = 2 },
 	},
 	window = {
 		documentation = cmp.config.window.bordered()
@@ -244,7 +252,7 @@ vim.diagnostic.config({
 })
 
 require("nvim-treesitter.configs").setup({
-	ensure_installed = { "lua", "kotlin" },
+	ensure_installed = { "lua", "kotlin", "html" },
 	highlight = { enable = true }
 })
 
@@ -343,3 +351,104 @@ vim.keymap.set('n', 'gt', ':A<CR>', { noremap = true, silent = true })
 require('mini.ai').setup()
 require("noice").setup({ notify = { enabled = false } })
 require("lualine").setup({ options = { theme = 'gruvbox' } })
+
+
+require('leetcode').setup({
+	arg = "leetcode.nvim",
+	lang = "kotlin",
+	storage = {
+		home = vim.fn.stdpath("data") .. "/leetcode",
+		cache = vim.fn.stdpath("cache") .. "/leetcode",
+	},
+	plugins = {
+		non_standalone = false,
+	},
+	logging = true,
+	cache = {
+		update_interval = 60 * 60 * 24 * 7,
+	},
+	editor = {
+		reset_previous_code = true,
+		fold_imports = true,
+	},
+	console = {
+		open_on_runcode = true,
+		dir = "row",
+		size = {
+			width = "90%",
+			height = "75%",
+		},
+		result = {
+			size = "50%",
+		},
+		testcase = {
+			virt_text = true,
+			size = "20%",
+		},
+	},
+	description = {
+		position = "left",
+		width = "20%",
+		show_stats = true,
+	},
+	hooks = {
+		["enter"] = {},
+		["question_enter"] = {},
+		["leave"] = {},
+	},
+	keys = {
+		toggle = { "q" },
+		confirm = { "<CR>" },
+		reset_testcases = "r",
+		use_testcase = "U",
+		focus_testcases = "H",
+		focus_result = "L",
+	},
+	image_support = true,
+})
+
+vim.keymap.set('n', 'lff', ':Leet list<CR>')
+vim.keymap.set('n', 'lde', ':Leet desc<CR>')
+vim.keymap.set('n', 'ldd', ':Leet run<CR>')
+vim.keymap.set('n', 'lrr', ':Leet submit<CR>')
+
+require('image').setup()
+require("image").setup({
+	backend = "kitty",
+	processor = "magick_cli",
+	integrations = {
+		markdown = {
+			enabled = true,
+			clear_in_insert_mode = false,
+			download_remote_images = true,
+			only_render_image_at_cursor = false,
+			only_render_image_at_cursor_mode = "popup",
+			floating_windows = false,
+			filetypes = { "markdown", "vimwiki" },
+		},
+		neorg = {
+			enabled = true,
+			filetypes = { "norg" },
+		},
+		typst = {
+			enabled = true,
+			filetypes = { "typst" },
+		},
+		html = {
+			enabled = false,
+		},
+		css = {
+			enabled = false,
+		},
+	},
+	max_width = nil,
+	max_height = nil,
+	max_width_window_percentage = nil,
+	max_height_window_percentage = 50,
+	scale_factor = 1.0,
+	window_overlap_clear_enabled = false,                                              -- toggles images when windows are overlapped
+	window_overlap_clear_ft_ignore = { "cmp_menu", "cmp_docs", "snacks_notif", "scrollview", "scrollview_sign" },
+	editor_only_render_when_focused = false,                                           -- auto show/hide images when the editor gains/looses focus
+	tmux_show_only_in_active_window = false,                                           -- auto show/hide images in the correct Tmux window (needs visual-activity off)
+	hijack_file_patterns = { "*.png", "*.jpg", "*.jpeg", "*.gif", "*.webp", "*.avif" }, -- render image files as images when opened
+})
