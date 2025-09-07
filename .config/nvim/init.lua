@@ -387,13 +387,8 @@ require('leetcode').setup({
 	},
 	description = {
 		position = "right",
-		width = "80%",
+		width = "60%",
 		show_stats = true,
-	},
-	hooks = {
-		["enter"] = {},
-		["question_enter"] = {},
-		["leave"] = {},
 	},
 	keys = {
 		toggle = { "q" },
