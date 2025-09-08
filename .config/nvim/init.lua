@@ -12,7 +12,7 @@ vim.opt.termguicolors = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.cursorline = true
-
+vim.opt.wrap = true
 
 -- Basic Keymap
 vim.keymap.set("n", "<leader>re", ":w | :so<CR>")
@@ -36,9 +36,10 @@ vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "none" })
 -- Package Manager
 vim.pack.add({
 	--------------------- PRE-REQUISUTES ---------------------
-	{ src = 'https://github.com/nvim-lua/plenary.nvim' }, -- Required by many plugins
-	{ src = 'https://github.com/nvim-neotest/nvim-nio' }, -- Required by neotest
+	{ src = 'https://github.com/nvim-lua/plenary.nvim' },      -- Required by many plugins
+	{ src = 'https://github.com/nvim-neotest/nvim-nio' },      -- Required by neotest
 	{ src = 'https://github.com/MunifTanjim/nui.nvim' },
+	{ src = 'https://github.com/nvim-tree/nvim-web-devicons' }, -- add icons
 	--------------------- LSP ---------------------
 	{ src = 'https://github.com/neovim/nvim-lspconfig' },
 	{ src = 'https://github.com/scalameta/nvim-metals' },
@@ -49,8 +50,6 @@ vim.pack.add({
 	--------------------- COMPLETION ---------------------
 	{ src = 'https://github.com/L3MON4D3/LuaSnip' },
 	{ src = 'https://github.com/saadparwaiz1/cmp_luasnip' },
-	{ src = 'https://github.com/hrsh7th/cmp-buffer' },
-	{ src = 'https://github.com/hrsh7th/cmp-path' },
 	{ src = 'https://github.com/hrsh7th/nvim-cmp' },
 	{ src = 'https://github.com/hrsh7th/cmp-nvim-lsp' },
 	{ src = 'https://github.com/zbirenbaum/copilot.lua' },
@@ -65,6 +64,7 @@ vim.pack.add({
 	{ src = 'https://github.com/jay-babu/mason-nvim-dap.nvim' },
 	{ src = 'https://github.com/theHamsta/nvim-dap-virtual-text' },
 	{ src = 'https://github.com/rcarriga/nvim-dap-ui' },
+	{ src = 'https://github.com/nvim-telescope/telescope-dap.nvim' },
 	--------------------- FZF ---------------------
 	{ src = 'https://github.com/nvim-tree/nvim-tree.lua' },
 	{ src = 'https://github.com/gbrlsnchs/telescope-lsp-handlers.nvim' },
@@ -74,14 +74,13 @@ vim.pack.add({
 	{ src = 'https://github.com/kdheepak/lazygit.nvim' },
 	{ src = 'https://github.com/lewis6991/gitsigns.nvim' }, -- For Git revert, Changes mark on left side
 	--------------------- EXTRA ---------------------
-	{ src = 'https://github.com/akinsho/bufferline.nvim' }, -- Tab manager
 	{ src = 'https://github.com/tomasky/bookmarks.nvim' },
-	{ src = 'https://github.com/folke/noice.nvim' },       -- Better command line and messages
+	{ src = 'https://github.com/folke/noice.nvim' },      -- Better command line and messages
 	{ src = 'https://github.com/nvim-lualine/lualine.nvim' },
-	{ src = 'https://github.com/tpope/vim-surround' },     -- Surroundings like parentheses, quotes, etc.
+	{ src = 'https://github.com/tpope/vim-surround' },    -- Surroundings like parentheses, quotes, etc.
 	{ src = 'https://github.com/unblevable/quick-scope' }, -- Highlight f, F, t, T
-	{ src = 'https://github.com/echasnovski/mini.ai' },    -- e.g. q as " ' and b as ( [ {
-	{ src = 'https://github.com/kawre/leetcode.nvim' },    -- doing leetcode inside neovim
+	{ src = 'https://github.com/echasnovski/mini.ai' },   -- e.g. q as " ' and b as ( [ {
+	{ src = 'https://github.com/kawre/leetcode.nvim' },   -- doing leetcode inside neovim
 })
 
 
@@ -143,6 +142,7 @@ dap.listeners.before.event_exited.dapui_config = function() dapui.close() end
 require("nvim-dap-virtual-text").setup({})
 
 vim.keymap.set("n", "<leader>bb", dap.toggle_breakpoint)
+vim.keymap.set("n", "<leader>bB", require 'telescope'.extensions.dap.list_breakpoints)
 vim.keymap.set("n", "<leader>db", dapui.toggle)
 vim.keymap.set("n", "<leader>dd", dap.continue)
 vim.keymap.set("n", "<leader>dso", dap.step_over)
@@ -180,12 +180,9 @@ cmp.setup({
 		end
 	},
 	sources = {
-		{ name = "copilot",         group_index = 2 },
-		{ name = 'nvim_lsp',        group_index = 2 },
-		{ name = 'path',            group_index = 2 },
-		{ name = 'luasnip',         group_index = 2 },
-		{ name = 'buffer',          group_index = 2 },
-		{ name = 'render-markdown', group_index = 2 },
+		{ name = "copilot",  group_index = 2 },
+		{ name = 'nvim_lsp', group_index = 2 },
+		{ name = 'luasnip',  group_index = 2 }
 	},
 	window = {
 		documentation = cmp.config.window.bordered()
@@ -194,10 +191,9 @@ cmp.setup({
 		fields = { 'menu', 'abbr', 'kind' },
 		format = function(entry, item)
 			local menu_icon = {
+				copilot = '',
 				nvim_lsp = 'λ',
 				luasnip = '⋗',
-				buffer = 'Ω',
-				path = '🖫',
 			}
 
 			item.menu = menu_icon[entry.source.name]
@@ -279,6 +275,26 @@ vim.api.nvim_create_autocmd('FileType', {
 })
 
 require('telescope').setup({
+	defaults = {
+		mappings = {
+			i = {
+				["q"] = require('telescope.actions').close
+			},
+			n = {
+				["q"] = require('telescope.actions').close
+			},
+		},
+		wrap_results = true,
+		layout_strategy = "flex",
+		layout_config = {
+			horizontal = {
+				prompt_position = "bottom",
+				width = 0.9,
+				height = 0.9,
+				preview_width = 0.5,
+			},
+		},
+	},
 	pickers = {
 		find_files = {
 			hidden = true
@@ -293,17 +309,19 @@ require('telescope').setup({
 require("telescope").load_extension("ui-select")
 require('telescope').load_extension('bookmarks')
 require('telescope').load_extension('lsp_handlers')
+require('telescope').load_extension('dap')
 
 local builtin = require('telescope.builtin')
+vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope list buffers' })
 vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })
 vim.keymap.set('n', '<leader>fs', builtin.live_grep, { desc = 'Telescope live grep' })
 vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' })
 vim.keymap.set('n', '<leader>cf', vim.lsp.buf.format, { desc = "Code formatting" })
 vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code actions" })
-vim.keymap.set("n", "gd", ':Telescope lsp_definitions<CR>', { desc = "Go to definition" })
+vim.keymap.set("n", "gd", builtin.lsp_definitions, { desc = "Go to definition" })
 vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Hover documentation" })
-vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { desc = "Go to implementation" })
-vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "Find references" })
+vim.keymap.set("n", "gi", builtin.lsp_implementations, { desc = "Go to implementation" })
+vim.keymap.set("n", "gr", builtin.lsp_references, { desc = "Find references" })
 vim.keymap.set("n", "rn", vim.lsp.buf.rename, { desc = "Rename symbol" })
 
 -- sidebar
@@ -327,9 +345,6 @@ require('bookmarks').setup {
 vim.keymap.set('n', '<leader>S', ':Telescope bookmarks list<CR>')
 
 -- tab (buffer) management
-require("bufferline").setup()
-vim.keymap.set('n', '<Tab>', ':BufferLineCycleNext<CR>')
-vim.keymap.set('n', '<S-tab>', ':BufferLineCycleNext<CR>')
 vim.keymap.set('n', '<leader>ww', ':bd<CR>', { desc = 'Close current buffer' })
 
 
