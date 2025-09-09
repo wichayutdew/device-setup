@@ -36,17 +36,19 @@ vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "none" })
 -- Package Manager
 vim.pack.add({
 	--------------------- PRE-REQUISUTES ---------------------
-	{ src = 'https://github.com/nvim-lua/plenary.nvim' },      -- Required by many plugins
-	{ src = 'https://github.com/nvim-neotest/nvim-nio' },      -- Required by neotest
-	{ src = 'https://github.com/MunifTanjim/nui.nvim' },
+	{ src = 'https://github.com/nvim-lua/plenary.nvim' },       -- Required by many plugins
+	{ src = 'https://github.com/nvim-neotest/nvim-nio' },       -- Required by neotest
+	{ src = 'https://github.com/MunifTanjim/nui.nvim' },        -- required by leetcode nvim and other packages
 	{ src = 'https://github.com/nvim-tree/nvim-web-devicons' }, -- add icons
+	{ src = 'https://github.com/tree-sitter/tree-sitter-html' }, -- required by leetcode nvim
 	--------------------- LSP ---------------------
 	{ src = 'https://github.com/neovim/nvim-lspconfig' },
 	{ src = 'https://github.com/scalameta/nvim-metals' },
 	{ src = 'https://github.com/mason-org/mason.nvim' },
 	{ src = 'https://github.com/mason-org/mason-lspconfig.nvim' },
 	{ src = 'https://github.com/nvim-treesitter/nvim-treesitter' },
-	{ src = 'https://github.com/tree-sitter/tree-sitter-html' },
+	{ src = 'https://github.com/gbrlsnchs/telescope-lsp-handlers.nvim' },
+	{ src = 'https://github.com/nvim-telescope/telescope-ui-select.nvim' },
 	--------------------- COMPLETION ---------------------
 	{ src = 'https://github.com/L3MON4D3/LuaSnip' },
 	{ src = 'https://github.com/saadparwaiz1/cmp_luasnip' },
@@ -56,9 +58,9 @@ vim.pack.add({
 	{ src = 'https://github.com/zbirenbaum/copilot-cmp' },
 	{ src = 'https://github.com/MeanderingProgrammer/render-markdown.nvim' }, -- render markdown
 	--------------------- TESTING ---------------------
-	{ src = 'https://github.com/nvim-neotest/nvim-nio' },
-	{ src = 'https://github.com/nvim-neotest/neotest' },
-	{ src = 'https://github.com/codymikol/neotest-kotlin' },
+	-- { src = 'https://github.com/nvim-neotest/nvim-nio' },
+	-- { src = 'https://github.com/nvim-neotest/neotest' },
+	-- { src = 'https://github.com/codymikol/neotest-kotlin' },
 	--------------------- DEBUGGING ---------------------
 	{ src = 'https://github.com/mfussenegger/nvim-dap' },
 	{ src = 'https://github.com/jay-babu/mason-nvim-dap.nvim' },
@@ -66,20 +68,21 @@ vim.pack.add({
 	{ src = 'https://github.com/rcarriga/nvim-dap-ui' },
 	{ src = 'https://github.com/nvim-telescope/telescope-dap.nvim' },
 	--------------------- FZF ---------------------
-	{ src = 'https://github.com/nvim-tree/nvim-tree.lua' },
-	{ src = 'https://github.com/gbrlsnchs/telescope-lsp-handlers.nvim' },
-	{ src = 'https://github.com/nvim-telescope/telescope-ui-select.nvim' },
 	{ src = 'https://github.com/nvim-telescope/telescope.nvim' },
 	--------------------- GIT ---------------------
 	{ src = 'https://github.com/kdheepak/lazygit.nvim' },
 	{ src = 'https://github.com/lewis6991/gitsigns.nvim' }, -- For Git revert, Changes mark on left side
+	--------------------- MINI ---------------------
+	{ src = 'https://github.com/nvim-mini/mini.surround' }, -- Surroundings like parentheses, quotes, etc.
+	{ src = 'https://github.com/echasnovski/mini.ai' },    -- e.g. q as " ' and b as ( [ {
+	{ src = 'https://github.com/nvim-mini/mini.files' },
+	{ src = 'https://github.com/nvim-mini/mini.pairs' },
+	{ src = 'https://github.com/nvim-mini/mini.cursorword' },
 	--------------------- EXTRA ---------------------
 	{ src = 'https://github.com/tomasky/bookmarks.nvim' },
-	{ src = 'https://github.com/folke/noice.nvim' },      -- Better command line and messages
+	{ src = 'https://github.com/folke/noice.nvim' },      -- Better command line and messagesj
 	{ src = 'https://github.com/nvim-lualine/lualine.nvim' },
-	{ src = 'https://github.com/tpope/vim-surround' },    -- Surroundings like parentheses, quotes, etc.
 	{ src = 'https://github.com/unblevable/quick-scope' }, -- Highlight f, F, t, T
-	{ src = 'https://github.com/echasnovski/mini.ai' },   -- e.g. q as " ' and b as ( [ {
 	{ src = 'https://github.com/kawre/leetcode.nvim' },   -- doing leetcode inside neovim
 })
 
@@ -278,7 +281,7 @@ require('telescope').setup({
 	defaults = {
 		mappings = {
 			i = {
-				["q"] = require('telescope.actions').close
+				["<esc>"] = require('telescope.actions').close
 			},
 			n = {
 				["q"] = require('telescope.actions').close
@@ -324,15 +327,6 @@ vim.keymap.set("n", "gi", builtin.lsp_implementations, { desc = "Go to implement
 vim.keymap.set("n", "gr", builtin.lsp_references, { desc = "Find references" })
 vim.keymap.set("n", "rn", vim.lsp.buf.rename, { desc = "Rename symbol" })
 
--- sidebar
-require('nvim-tree').setup {
-	view = {
-		side = "right",
-		width = 70
-	}
-}
-vim.keymap.set('n', '<leader>e', ':NvimTreeToggle<CR>')
-
 -- FuzzyFinder and Bookmarks
 require('bookmarks').setup {
 	sign_priority = 20,
@@ -344,25 +338,27 @@ require('bookmarks').setup {
 }
 vim.keymap.set('n', '<leader>S', ':Telescope bookmarks list<CR>')
 
--- tab (buffer) management
-vim.keymap.set('n', '<leader>ww', ':bd<CR>', { desc = 'Close current buffer' })
-
-
 -- Git integration
 vim.keymap.set('n', '<leader>lg', ':LazyGit<CR>')
 vim.keymap.set('n', '<leader>zz', ':Gitsigns reset_hunk<CR>')
 
 -- Testing & Debugging
-require("neotest").setup({ adapters = { require("neotest-kotlin") } })
-vim.keymap.set("n", "<leader>tt", function() require("neotest").run.run(vim.fn.expand("%")) end)
-vim.keymap.set("n", "<leader>ts", function() require("neotest").run.stop() end)
-vim.keymap.set("n", "<leader>to", function() require("neotest").summary.toggle() end)
-vim.keymap.set("n", "<leader>tp", function() require("neotest").output_panel.toggle() end)
+-- require("neotest").setup({ adapters = { require("neotest-kotlin") } })
+-- vim.keymap.set("n", "<leader>tt", function() require("neotest").run.run(vim.fn.expand("%")) end)
+-- vim.keymap.set("n", "<leader>ts", function() require("neotest").run.stop() end)
+-- vim.keymap.set("n", "<leader>to", function() require("neotest").summary.toggle() end)
+-- vim.keymap.set("n", "<leader>tp", function() require("neotest").output_panel.toggle() end)
+-- vim.keymap.set('n', 'gt', ':A<CR>', { noremap = true, silent = true })
 
-vim.keymap.set('n', 'gt', ':A<CR>', { noremap = true, silent = true })
+-- Mini
+require('mini.ai').setup()
+require('mini.surround').setup()
+require('mini.files').setup()
+vim.keymap.set('n', '<leader>e', function() if not MiniFiles.close() then MiniFiles.open() end end)
+require('mini.pairs').setup()
+require('mini.cursorword').setup()
 
 -- Miscellaneous
-require('mini.ai').setup()
 require("noice").setup({ notify = { enabled = false } })
 require("lualine").setup({ options = { theme = 'gruvbox' } })
 
