@@ -3,7 +3,7 @@ vim.g.maplocalleader = " "
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.wrap = false
-vim.opt.scrolloff = 10
+vim.opt.scrolloff = 999
 vim.opt.sidescrolloff = 8
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
@@ -19,6 +19,8 @@ vim.keymap.set("n", "<leader>re", ":w | :so<CR>")
 vim.keymap.set({ 'n', 'v', 'x' }, 'Y', '"+y')
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
+vim.keymap.set("n", "k", "kzz")
+vim.keymap.set("n", "j", "jzz")
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "<leader>qq", ":qa!<CR>")
