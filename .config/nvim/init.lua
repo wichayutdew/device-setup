@@ -305,7 +305,7 @@ vim.api.nvim_create_autocmd("FileType", {
 require("conform").setup({
 	formatters_by_ft = {
 		lua = { "stylua" },
-		kotlin = { "spotless_gradle", "ktfmt", "ktlint", "detekt" },
+		kotlin = { "detekt" },
 	},
 })
 
@@ -365,12 +365,11 @@ vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Telescope list buff
 vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Telescope find files" })
 vim.keymap.set("n", "<leader>fs", builtin.live_grep, { desc = "Telescope live grep" })
 vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Telescope buffers" })
--- vim.keymap.set('n', '<leader>cf', vim.lsp.buf.format, { desc = "Code formatting" })
 vim.keymap.set("n", "<leader>cf", function()
 	require("conform").format({
 		lsp_fallback = true,
 		async = false,
-		timeout_ms = 1000,
+		timeout_ms = 10000,
 	})
 end, { desc = "Format file or range" })
 vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code actions" })
