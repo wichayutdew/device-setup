@@ -55,6 +55,7 @@ vim.pack.add({
 	{ src = 'https://github.com/nvim-treesitter/nvim-treesitter-context' },
 	{ src = 'https://github.com/gbrlsnchs/telescope-lsp-handlers.nvim' },
 	{ src = 'https://github.com/nvim-telescope/telescope-ui-select.nvim' },
+	{ src = 'https://github.com/stevearc/conform.nvim' },
 	--------------------- COMPLETION ---------------------
 	{ src = 'https://github.com/L3MON4D3/LuaSnip' },
 	{ src = 'https://github.com/saadparwaiz1/cmp_luasnip' },
@@ -161,8 +162,6 @@ local dapui = require("dapui")
 dapui.setup({})
 dap.listeners.before.attach.dapui_config = function() dapui.open() end
 dap.listeners.before.launch.dapui_config = function() dapui.open() end
--- dap.listeners.before.event_terminated.dapui_config = function() dapui.close() end
--- dap.listeners.before.event_exited.dapui_config = function() dapui.close() end
 require("nvim-dap-virtual-text").setup({})
 
 vim.keymap.set("n", "<leader>b", dap.toggle_breakpoint)
@@ -299,6 +298,14 @@ vim.api.nvim_create_autocmd('FileType', {
 	group = vim.api.nvim_create_augroup("nvim-metals", { clear = true }),
 })
 
+-- Formatter
+require("conform").setup({
+	formatters_by_ft = {
+		lua = { "stylua" },
+		kotlin = { "spotless_gradle" }
+	},
+})
+
 
 local neotest = require("neotest")
 neotest.setup({
@@ -354,7 +361,14 @@ vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope list buff
 vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })
 vim.keymap.set('n', '<leader>fs', builtin.live_grep, { desc = 'Telescope live grep' })
 vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' })
-vim.keymap.set('n', '<leader>cf', vim.lsp.buf.format, { desc = "Code formatting" })
+-- vim.keymap.set('n', '<leader>cf', vim.lsp.buf.format, { desc = "Code formatting" })
+vim.keymap.set('n', "<leader>cf", function()
+	require("conform").format({
+		lsp_fallback = true,
+		async = false,
+		timeout_ms = 1000,
+	})
+end, { desc = "Format file or range" })
 vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code actions" })
 vim.keymap.set("n", "gd", builtin.lsp_definitions, { desc = "Go to definition" })
 vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Hover documentation" })
