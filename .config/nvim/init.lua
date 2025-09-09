@@ -16,6 +16,7 @@ vim.opt.wrap = true
 
 -- Basic Keymap
 vim.keymap.set("n", "<leader>re", ":w | :so<CR>")
+vim.keymap.set("n", "<leader>bg", "<C-z>")
 vim.keymap.set({ 'n', 'v', 'x' }, 'Y', '"+y')
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
@@ -25,6 +26,7 @@ vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "<leader>qq", ":qa!<CR>")
 vim.keymap.set("i", "jk", "<esc>")
+vim.keymap.set("n", "<leader>/", ":noh<CR>")
 -- Windows Navigation
 vim.keymap.set("n", "<leader>wv", ":vsplit<CR>")
 vim.keymap.set("n", "<leader>wh", ":split<CR>")
@@ -69,7 +71,6 @@ vim.pack.add({
 	--------------------- FZF ---------------------
 	{ src = 'https://github.com/nvim-telescope/telescope.nvim' },
 	--------------------- GIT ---------------------
-	{ src = 'https://github.com/kdheepak/lazygit.nvim' },
 	{ src = 'https://github.com/lewis6991/gitsigns.nvim' }, -- For Git revert, Changes mark on left side
 	--------------------- MINI ---------------------
 	{ src = 'https://github.com/nvim-mini/mini.surround' }, -- Surroundings like parentheses, quotes, etc.
@@ -79,9 +80,8 @@ vim.pack.add({
 	{ src = 'https://github.com/nvim-mini/mini.cursorword' },
 	--------------------- EXTRA ---------------------
 	{ src = 'https://github.com/tomasky/bookmarks.nvim' },
-	{ src = 'https://github.com/folke/noice.nvim' },      -- Better command line and messagesj
+	{ src = 'https://github.com/folke/noice.nvim' },      -- Better command line and messages
 	{ src = 'https://github.com/nvim-lualine/lualine.nvim' },
-	{ src = 'https://github.com/unblevable/quick-scope' }, -- Highlight f, F, t, T
 	{ src = 'https://github.com/lukas-reineke/indent-blankline.nvim' },
 	{ src = 'https://github.com/kawre/leetcode.nvim' },   -- doing leetcode inside neovim
 })
@@ -93,29 +93,46 @@ local dap = require("dap")
 dap.adapters.kotlin = {
 	type = "executable",
 	command = "kotlin-debug-adapter",
-	options = { auto_continue_if_many_stopped = true },
+	options = { auto_continue_if_many_stopped = false },
 }
-dap.configurations.kotlin = {
+
+local function get_kotlin_subproject()
+	local file = vim.fn.expand('%:p')
+	local workspace = vim.fn.getcwd()
+	local rel = file:sub(#workspace + 2) -- +2 to skip the trailing slash
+	local subproject = rel:match("([^/]+)/")
+	if subproject then
+		return workspace .. "/" .. subproject
+	else
+		return workspace
+	end
+end
+
+local function get_kotlin_main_class()
+	local file = vim.fn.expand('%:p')
+	local rel = file:match("src.*/kotlin/(.*)%.kt$")
+	if rel then
+		return rel:gsub("/", ".") .. "Kt"
+	end
+	return vim.fn.input('Main class (e.g. org.example.AppKt): ')
+end
+
+require('dap').configurations.kotlin = {
 	{
-		type = "kotlin",
-		request = "launch",
-		name = "Run current file",
-		mainClass = function()
-			local fname = vim.api.nvim_buf_get_name(0)
-			local base = fname:match("([^/]+)%.kt$")
-			local lines = vim.api.nvim_buf_get_lines(0, 0, 10, false)
-			local pkg = ""
-			for _, l in ipairs(lines) do
-				local p = l:match("^%s*package%s+([%w%.]+)")
-				if p then
-					pkg = p .. "."; break
-				end
-			end
-			return pkg .. (base and (base .. "Kt") or vim.fn.input("Main class: "))
+		type = 'kotlin',
+		request = 'launch',
+		name = "Launch current Kotlin file",
+		mainClass = get_kotlin_main_class,
+		cwd = get_kotlin_subproject,
+		projectRoot = get_kotlin_subproject,
+		classPaths = function()
+			local subproject = get_kotlin_subproject()
+			return { subproject .. "/build/classes/kotlin/main" }
 		end,
-		projectRoot = "${workspaceFolder}",
+		args = {},
 	}
 }
+
 -- scala dap
 dap.configurations.scala = {
 	{
@@ -140,18 +157,15 @@ local dapui = require("dapui")
 dapui.setup({})
 dap.listeners.before.attach.dapui_config = function() dapui.open() end
 dap.listeners.before.launch.dapui_config = function() dapui.open() end
-dap.listeners.before.event_terminated.dapui_config = function() dapui.close() end
-dap.listeners.before.event_exited.dapui_config = function() dapui.close() end
+-- dap.listeners.before.event_terminated.dapui_config = function() dapui.close() end
+-- dap.listeners.before.event_exited.dapui_config = function() dapui.close() end
 require("nvim-dap-virtual-text").setup({})
 
-vim.keymap.set("n", "<leader>bb", dap.toggle_breakpoint)
-vim.keymap.set("n", "<leader>bB", require 'telescope'.extensions.dap.list_breakpoints)
+vim.keymap.set("n", "<leader>b", dap.toggle_breakpoint)
+vim.keymap.set("n", "<leader>bd", dap.clear_breakpoints)
+vim.keymap.set("n", "<leader>bb", require 'telescope'.extensions.dap.list_breakpoints)
 vim.keymap.set("n", "<leader>db", dapui.toggle)
 vim.keymap.set("n", "<leader>dd", dap.continue)
-vim.keymap.set("n", "<leader>dso", dap.step_over)
-vim.keymap.set("n", "<leader>dsi", dap.step_into)
-vim.keymap.set("n", "<leader>dsu", dap.step_out)
-vim.keymap.set("n", "<leader>dl", dap.run_last)
 
 ---------------------- LSP (Syntax Highlight) ---------------------
 require('mason').setup()
@@ -343,7 +357,6 @@ require('bookmarks').setup {
 vim.keymap.set('n', '<leader>S', ':Telescope bookmarks list<CR>')
 
 -- Git integration
-vim.keymap.set('n', '<leader>lg', ':LazyGit<CR>')
 vim.keymap.set('n', '<leader>zz', ':Gitsigns reset_hunk<CR>')
 
 -- Mini
