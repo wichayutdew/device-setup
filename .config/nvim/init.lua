@@ -17,7 +17,7 @@ vim.opt.wrap = true
 -- Basic Keymap
 vim.keymap.set("n", "<leader>re", ":w | :so<CR>")
 vim.keymap.set("n", "<leader>bg", "<C-z>")
-vim.keymap.set({ 'n', 'v', 'x' }, 'Y', '"+y')
+vim.keymap.set({ "n", "v", "x" }, "Y", '"+y')
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 vim.keymap.set("n", "k", "kzz")
@@ -40,57 +40,56 @@ vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "none" })
 -- Package Manager
 vim.pack.add({
 	--------------------- PRE-REQUISUTES ---------------------
-	{ src = 'https://github.com/nvim-lua/plenary.nvim' },       -- Required by many plugins
-	{ src = 'https://github.com/nvim-neotest/nvim-nio' },       -- Required by neotest
-	{ src = 'https://github.com/MunifTanjim/nui.nvim' },        -- required by leetcode nvim and other packages
-	{ src = 'https://github.com/nvim-tree/nvim-web-devicons' }, -- add icons
-	{ src = 'https://github.com/tree-sitter/tree-sitter-html' }, -- required by leetcode nvim
-	{ src = 'https://github.com/nvim-neotest/nvim-nio' },       -- required by neotest
+	{ src = "https://github.com/nvim-lua/plenary.nvim" }, -- Required by many plugins
+	{ src = "https://github.com/nvim-neotest/nvim-nio" }, -- Required by neotest
+	{ src = "https://github.com/MunifTanjim/nui.nvim" }, -- required by leetcode nvim and other packages
+	{ src = "https://github.com/nvim-tree/nvim-web-devicons" }, -- add icons
+	{ src = "https://github.com/tree-sitter/tree-sitter-html" }, -- required by leetcode nvim
+	{ src = "https://github.com/nvim-neotest/nvim-nio" }, -- required by neotest
 	--------------------- LSP ---------------------
-	{ src = 'https://github.com/neovim/nvim-lspconfig' },
-	{ src = 'https://github.com/scalameta/nvim-metals' },
-	{ src = 'https://github.com/mason-org/mason.nvim' },
-	{ src = 'https://github.com/mason-org/mason-lspconfig.nvim' },
-	{ src = 'https://github.com/nvim-treesitter/nvim-treesitter' },
-	{ src = 'https://github.com/nvim-treesitter/nvim-treesitter-context' },
-	{ src = 'https://github.com/gbrlsnchs/telescope-lsp-handlers.nvim' },
-	{ src = 'https://github.com/nvim-telescope/telescope-ui-select.nvim' },
-	{ src = 'https://github.com/stevearc/conform.nvim' },
+	{ src = "https://github.com/neovim/nvim-lspconfig" },
+	{ src = "https://github.com/scalameta/nvim-metals" },
+	{ src = "https://github.com/mason-org/mason.nvim" },
+	{ src = "https://github.com/mason-org/mason-lspconfig.nvim" },
+	{ src = "https://github.com/nvim-treesitter/nvim-treesitter" },
+	{ src = "https://github.com/nvim-treesitter/nvim-treesitter-context" },
+	{ src = "https://github.com/gbrlsnchs/telescope-lsp-handlers.nvim" },
+	{ src = "https://github.com/nvim-telescope/telescope-ui-select.nvim" },
+	{ src = "https://github.com/stevearc/conform.nvim" },
 	--------------------- COMPLETION ---------------------
-	{ src = 'https://github.com/L3MON4D3/LuaSnip' },
-	{ src = 'https://github.com/saadparwaiz1/cmp_luasnip' },
-	{ src = 'https://github.com/hrsh7th/nvim-cmp' },
-	{ src = 'https://github.com/hrsh7th/cmp-nvim-lsp' },
-	{ src = 'https://github.com/zbirenbaum/copilot.lua' },
-	{ src = 'https://github.com/zbirenbaum/copilot-cmp' },
-	{ src = 'https://github.com/MeanderingProgrammer/render-markdown.nvim' }, -- render markdown
+	{ src = "https://github.com/L3MON4D3/LuaSnip" },
+	{ src = "https://github.com/saadparwaiz1/cmp_luasnip" },
+	{ src = "https://github.com/hrsh7th/nvim-cmp" },
+	{ src = "https://github.com/hrsh7th/cmp-nvim-lsp" },
+	{ src = "https://github.com/zbirenbaum/copilot.lua" },
+	{ src = "https://github.com/zbirenbaum/copilot-cmp" },
+	{ src = "https://github.com/MeanderingProgrammer/render-markdown.nvim" }, -- render markdown
 	--------------------- DEBUGGING ---------------------
-	{ src = 'https://github.com/mfussenegger/nvim-dap' },
-	{ src = 'https://github.com/jay-babu/mason-nvim-dap.nvim' },
-	{ src = 'https://github.com/theHamsta/nvim-dap-virtual-text' },
-	{ src = 'https://github.com/rcarriga/nvim-dap-ui' },
-	{ src = 'https://github.com/nvim-telescope/telescope-dap.nvim' },
+	{ src = "https://github.com/mfussenegger/nvim-dap" },
+	{ src = "https://github.com/jay-babu/mason-nvim-dap.nvim" },
+	{ src = "https://github.com/theHamsta/nvim-dap-virtual-text" },
+	{ src = "https://github.com/rcarriga/nvim-dap-ui" },
+	{ src = "https://github.com/nvim-telescope/telescope-dap.nvim" },
 	--------------------- TESTING ---------------------
-	{ src = 'https://github.com/nvim-neotest/neotest' },
-	{ src = 'https://github.com/codymikol/neotest-kotlin' },
+	{ src = "https://github.com/nvim-neotest/neotest" },
+	{ src = "https://github.com/codymikol/neotest-kotlin" },
 	--------------------- FZF ---------------------
-	{ src = 'https://github.com/nvim-telescope/telescope.nvim' },
+	{ src = "https://github.com/nvim-telescope/telescope.nvim" },
 	--------------------- GIT ---------------------
-	{ src = 'https://github.com/lewis6991/gitsigns.nvim' }, -- For Git revert, Changes mark on left side
+	{ src = "https://github.com/lewis6991/gitsigns.nvim" }, -- For Git revert, Changes mark on left side
 	--------------------- MINI ---------------------
-	{ src = 'https://github.com/nvim-mini/mini.surround' }, -- Surroundings like parentheses, quotes, etc.
-	{ src = 'https://github.com/echasnovski/mini.ai' },    -- e.g. q as " ' and b as ( [ {
-	{ src = 'https://github.com/nvim-mini/mini.files' },
-	{ src = 'https://github.com/nvim-mini/mini.pairs' },
-	{ src = 'https://github.com/nvim-mini/mini.cursorword' },
+	{ src = "https://github.com/nvim-mini/mini.surround" }, -- Surroundings like parentheses, quotes, etc.
+	{ src = "https://github.com/echasnovski/mini.ai" }, -- e.g. q as " ' and b as ( [ {
+	{ src = "https://github.com/nvim-mini/mini.files" },
+	{ src = "https://github.com/nvim-mini/mini.pairs" },
+	{ src = "https://github.com/nvim-mini/mini.cursorword" },
 	--------------------- EXTRA ---------------------
-	{ src = 'https://github.com/tomasky/bookmarks.nvim' },
-	{ src = 'https://github.com/folke/noice.nvim' }, -- Better command line and messages
-	{ src = 'https://github.com/nvim-lualine/lualine.nvim' },
-	{ src = 'https://github.com/lukas-reineke/indent-blankline.nvim' },
-	{ src = 'https://github.com/kawre/leetcode.nvim' }, -- doing leetcode inside neovim
+	{ src = "https://github.com/tomasky/bookmarks.nvim" },
+	{ src = "https://github.com/folke/noice.nvim" }, -- Better command line and messages
+	{ src = "https://github.com/nvim-lualine/lualine.nvim" },
+	{ src = "https://github.com/lukas-reineke/indent-blankline.nvim" },
+	{ src = "https://github.com/kawre/leetcode.nvim" }, -- doing leetcode inside neovim
 })
-
 
 -- Run & Debug
 local dap = require("dap")
@@ -102,7 +101,7 @@ dap.adapters.kotlin = {
 }
 
 local function get_kotlin_subproject()
-	local file = vim.fn.expand('%:p')
+	local file = vim.fn.expand("%:p")
 	local workspace = vim.fn.getcwd()
 	local rel = file:sub(#workspace + 2) -- +2 to skip the trailing slash
 	local subproject = rel:match("([^/]+)/")
@@ -114,18 +113,18 @@ local function get_kotlin_subproject()
 end
 
 local function get_kotlin_main_class()
-	local file = vim.fn.expand('%:p')
+	local file = vim.fn.expand("%:p")
 	local rel = file:match("src.*/kotlin/(.*)%.kt$")
 	if rel then
 		return rel:gsub("/", ".") .. "Kt"
 	end
-	return vim.fn.input('Main class (e.g. org.example.AppKt): ')
+	return vim.fn.input("Main class (e.g. org.example.AppKt): ")
 end
 
-require('dap').configurations.kotlin = {
+require("dap").configurations.kotlin = {
 	{
-		type = 'kotlin',
-		request = 'launch',
+		type = "kotlin",
+		request = "launch",
 		name = "Launch current Kotlin file",
 		mainClass = get_kotlin_main_class,
 		cwd = get_kotlin_subproject,
@@ -135,7 +134,7 @@ require('dap').configurations.kotlin = {
 			return { subproject .. "/build/classes/kotlin/main" }
 		end,
 		args = {},
-	}
+	},
 }
 
 -- scala dap
@@ -160,60 +159,64 @@ dap.configurations.scala = {
 
 local dapui = require("dapui")
 dapui.setup({})
-dap.listeners.before.attach.dapui_config = function() dapui.open() end
-dap.listeners.before.launch.dapui_config = function() dapui.open() end
+dap.listeners.before.attach.dapui_config = function()
+	dapui.open()
+end
+dap.listeners.before.launch.dapui_config = function()
+	dapui.open()
+end
 require("nvim-dap-virtual-text").setup({})
 
 vim.keymap.set("n", "<leader>b", dap.toggle_breakpoint)
 vim.keymap.set("n", "<leader>bd", dap.clear_breakpoints)
-vim.keymap.set("n", "<leader>bb", require 'telescope'.extensions.dap.list_breakpoints)
+vim.keymap.set("n", "<leader>bb", require("telescope").extensions.dap.list_breakpoints)
 vim.keymap.set("n", "<leader>db", dapui.toggle)
 vim.keymap.set("n", "<leader>dd", dap.continue)
 
 ---------------------- LSP (Syntax Highlight) ---------------------
-require('mason').setup()
+require("mason").setup()
 require("mason-nvim-dap").setup()
-require('mason-lspconfig').setup()
-require('render-markdown').setup({
+require("mason-lspconfig").setup()
+require("render-markdown").setup({
 	completions = { lsp = { enabled = true } },
 })
 ---------------------- Code Completion ---------------------
-local lspconfig = require('lspconfig')
-local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
+local lspconfig = require("lspconfig")
+local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
 lspconfig.lua_ls.setup({
-	capabilities = lsp_capabilities
+	capabilities = lsp_capabilities,
 })
-vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
-require('luasnip.loaders.from_vscode').lazy_load()
+vim.opt.completeopt = { "menu", "menuone", "noselect" }
+require("luasnip.loaders.from_vscode").lazy_load()
 require("copilot").setup({
 	suggestion = { enabled = false },
 	panel = { enabled = false },
 })
 require("copilot_cmp").setup({})
-local cmp = require('cmp')
-local luasnip = require('luasnip')
+local cmp = require("cmp")
+local luasnip = require("luasnip")
 local select_opts = { behavior = cmp.SelectBehavior.Select }
 cmp.setup({
 	snippet = {
 		expand = function(args)
 			luasnip.lsp_expand(args.body)
-		end
+		end,
 	},
 	sources = {
-		{ name = "copilot",  group_index = 2 },
-		{ name = 'nvim_lsp', group_index = 2 },
-		{ name = 'luasnip',  group_index = 2 }
+		{ name = "copilot", group_index = 2 },
+		{ name = "nvim_lsp", group_index = 2 },
+		{ name = "luasnip", group_index = 2 },
 	},
 	window = {
-		documentation = cmp.config.window.bordered()
+		documentation = cmp.config.window.bordered(),
 	},
 	formatting = {
-		fields = { 'menu', 'abbr', 'kind' },
+		fields = { "menu", "abbr", "kind" },
 		format = function(entry, item)
 			local menu_icon = {
-				copilot = '',
-				nvim_lsp = 'λ',
-				luasnip = '⋗',
+				copilot = "",
+				nvim_lsp = "λ",
+				luasnip = "⋗",
 			}
 
 			item.menu = menu_icon[entry.source.name]
@@ -221,54 +224,54 @@ cmp.setup({
 		end,
 	},
 	mapping = {
-		['<Up>'] = cmp.mapping.select_prev_item(select_opts),
-		['<Down>'] = cmp.mapping.select_next_item(select_opts),
-		['<CR>'] = cmp.mapping.confirm({ select = false }),
-		['<Tab>'] = cmp.mapping(function(fallback)
-			local col = vim.fn.col('.') - 1
+		["<Up>"] = cmp.mapping.select_prev_item(select_opts),
+		["<Down>"] = cmp.mapping.select_next_item(select_opts),
+		["<CR>"] = cmp.mapping.confirm({ select = false }),
+		["<Tab>"] = cmp.mapping(function(fallback)
+			local col = vim.fn.col(".") - 1
 
 			if cmp.visible() then
 				cmp.select_next_item(select_opts)
-			elseif col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') then
+			elseif col == 0 or vim.fn.getline("."):sub(col, col):match("%s") then
 				fallback()
 			else
 				cmp.complete()
 			end
-		end, { 'i', 's' }),
+		end, { "i", "s" }),
 
-		['<S-Tab>'] = cmp.mapping(function(fallback)
+		["<S-Tab>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				cmp.select_prev_item(select_opts)
 			else
 				fallback()
 			end
-		end, { 'i', 's' }),
+		end, { "i", "s" }),
 	},
 })
 local sign = function(opts)
 	vim.fn.sign_define(opts.name, {
 		texthl = opts.name,
 		text = opts.text,
-		numhl = ''
+		numhl = "",
 	})
 end
 
-sign({ name = 'DiagnosticSignError', text = '✘' })
-sign({ name = 'DiagnosticSignWarn', text = '▲' })
-sign({ name = 'DiagnosticSignHint', text = '⚑' })
-sign({ name = 'DiagnosticSignInfo', text = '»' })
+sign({ name = "DiagnosticSignError", text = "✘" })
+sign({ name = "DiagnosticSignWarn", text = "▲" })
+sign({ name = "DiagnosticSignHint", text = "⚑" })
+sign({ name = "DiagnosticSignInfo", text = "»" })
 vim.diagnostic.config({
 	virtual_text = true,
 	severity_sort = true,
 	float = {
-		border = 'rounded',
-		source = 'always',
+		border = "rounded",
+		source = "always",
 	},
 })
 
 require("nvim-treesitter.configs").setup({
 	ensure_installed = { "lua", "kotlin", "html" },
-	highlight = { enable = true }
+	highlight = { enable = true },
 })
 
 vim.lsp.enable({ "lua_ls", "kotlin_language_server", "cucumber_language_server" })
@@ -278,14 +281,14 @@ vim.keymap.set("n", "ct", function()
 end, { silent = true })
 
 -- Metals-specific setup
-vim.api.nvim_create_autocmd('FileType', {
-	pattern = { 'scala', 'sbt' },
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = { "scala", "sbt" },
 	callback = function()
-		local metals_config = require('metals').bare_config()
+		local metals_config = require("metals").bare_config()
 
 		metals_config.settings = {
 			showImplicitArguments = true,
-			showInferredType = true
+			showInferredType = true,
 		}
 		metals_config.init_options.statusBarProvider = "on"
 		metals_config.capabilities = lsp_capabilities
@@ -293,7 +296,7 @@ vim.api.nvim_create_autocmd('FileType', {
 			require("metals").setup_dap()
 		end
 
-		require('metals').initialize_or_attach(metals_config)
+		require("metals").initialize_or_attach(metals_config)
 	end,
 	group = vim.api.nvim_create_augroup("nvim-metals", { clear = true }),
 })
@@ -302,32 +305,33 @@ vim.api.nvim_create_autocmd('FileType', {
 require("conform").setup({
 	formatters_by_ft = {
 		lua = { "stylua" },
-		kotlin = { "spotless_gradle" }
+		kotlin = { "spotless_gradle", "ktfmt", "ktlint", "detekt" },
 	},
 })
-
 
 local neotest = require("neotest")
 neotest.setup({
 	running = {
-		strategy = 'dap',
+		strategy = "dap",
 	},
-	adapters = { require("neotest-kotlin") }
+	adapters = { require("neotest-kotlin") },
 })
-vim.keymap.set("n", "<leader>tt", function() neotest.run.run(vim.fn.expand("%")) end)
+vim.keymap.set("n", "<leader>tt", function()
+	neotest.run.run(vim.fn.expand("%"))
+end)
 vim.keymap.set("n", "<leader>ts", neotest.run.stop)
 vim.keymap.set("n", "<leader>to", neotest.summary.toggle)
 vim.keymap.set("n", "<leader>tp", neotest.output_panel.toggle)
 
 -- Telescope
-require('telescope').setup({
+require("telescope").setup({
 	defaults = {
 		mappings = {
 			i = {
-				["<esc>"] = require('telescope.actions').close
+				["<esc>"] = require("telescope.actions").close,
 			},
 			n = {
-				["q"] = require('telescope.actions').close
+				["q"] = require("telescope.actions").close,
 			},
 		},
 		wrap_results = true,
@@ -343,26 +347,26 @@ require('telescope').setup({
 	},
 	pickers = {
 		find_files = {
-			hidden = true
-		}
+			hidden = true,
+		},
 	},
 	extensions = {
 		["ui-select"] = {
-			require("telescope.themes").get_dropdown {}
-		}
-	}
+			require("telescope.themes").get_dropdown({}),
+		},
+	},
 })
 require("telescope").load_extension("ui-select")
-require('telescope').load_extension('bookmarks')
-require('telescope').load_extension('lsp_handlers')
-require('telescope').load_extension('dap')
-local builtin = require('telescope.builtin')
-vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope list buffers' })
-vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })
-vim.keymap.set('n', '<leader>fs', builtin.live_grep, { desc = 'Telescope live grep' })
-vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' })
+require("telescope").load_extension("bookmarks")
+require("telescope").load_extension("lsp_handlers")
+require("telescope").load_extension("dap")
+local builtin = require("telescope.builtin")
+vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Telescope list buffers" })
+vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Telescope find files" })
+vim.keymap.set("n", "<leader>fs", builtin.live_grep, { desc = "Telescope live grep" })
+vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Telescope buffers" })
 -- vim.keymap.set('n', '<leader>cf', vim.lsp.buf.format, { desc = "Code formatting" })
-vim.keymap.set('n', "<leader>cf", function()
+vim.keymap.set("n", "<leader>cf", function()
 	require("conform").format({
 		lsp_fallback = true,
 		async = false,
@@ -377,38 +381,42 @@ vim.keymap.set("n", "gr", builtin.lsp_references, { desc = "Find references" })
 vim.keymap.set("n", "rn", vim.lsp.buf.rename, { desc = "Rename symbol" })
 
 -- FuzzyFinder and Bookmarks
-require('bookmarks').setup {
+require("bookmarks").setup({
 	sign_priority = 20,
-	save_file = vim.fn.expand "$HOME/.bookmarks",
+	save_file = vim.fn.expand("$HOME/.bookmarks"),
 	on_attach = function(_)
-		local bm = require "bookmarks"
+		local bm = require("bookmarks")
 		vim.keymap.set("n", "<leader>s", bm.bookmark_toggle)
-	end
-}
-vim.keymap.set('n', '<leader>S', ':Telescope bookmarks list<CR>')
+	end,
+})
+vim.keymap.set("n", "<leader>S", ":Telescope bookmarks list<CR>")
 
 -- Git integration
-vim.keymap.set('n', '<leader>zz', ':Gitsigns reset_hunk<CR>')
+vim.keymap.set("n", "<leader>zz", ":Gitsigns reset_hunk<CR>")
 
 -- Mini
-require('mini.ai').setup()
-require('mini.surround').setup()
-require('mini.files').setup()
-vim.keymap.set('n', '<leader>e', function() if not MiniFiles.close() then MiniFiles.open() end end)
-require('mini.pairs').setup()
-require('mini.cursorword').setup()
+require("mini.ai").setup()
+require("mini.surround").setup()
+require("mini.files").setup()
+vim.keymap.set("n", "<leader>e", function()
+	if not MiniFiles.close() then
+		MiniFiles.open()
+	end
+end)
+require("mini.pairs").setup()
+require("mini.cursorword").setup()
 
 -- Miscellaneous
 require("noice").setup({ notify = { enabled = false } })
 require("lualine").setup({
 	options = {
-		theme = 'tomorrow_night',
+		theme = "tomorrow_night",
 	},
 })
 require("ibl").setup({})
 
 -- leetcode
-require('leetcode').setup({
+require("leetcode").setup({
 	arg = "leetcode.nvim",
 	lang = "kotlin",
 	storage = {
@@ -457,9 +465,9 @@ require('leetcode').setup({
 	image_support = false,
 })
 
-vim.keymap.set('n', 'lff', ':Leet list<CR>')
-vim.keymap.set('n', 'lde', ':Leet desc<CR>')
-vim.keymap.set('n', 'ldd', ':Leet run<CR>')
-vim.keymap.set('n', 'lrr', ':Leet submit<CR>')
-vim.keymap.set('n', 'lre', ':Leet reset<CR>')
-vim.keymap.set('n', 'lgx', ':Leet open<CR>')
+vim.keymap.set("n", "lff", ":Leet list<CR>")
+vim.keymap.set("n", "lde", ":Leet desc<CR>")
+vim.keymap.set("n", "ldd", ":Leet run<CR>")
+vim.keymap.set("n", "lrr", ":Leet submit<CR>")
+vim.keymap.set("n", "lre", ":Leet reset<CR>")
+vim.keymap.set("n", "lgx", ":Leet open<CR>")
