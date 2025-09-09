@@ -45,6 +45,7 @@ vim.pack.add({
 	{ src = 'https://github.com/MunifTanjim/nui.nvim' },        -- required by leetcode nvim and other packages
 	{ src = 'https://github.com/nvim-tree/nvim-web-devicons' }, -- add icons
 	{ src = 'https://github.com/tree-sitter/tree-sitter-html' }, -- required by leetcode nvim
+	{ src = 'https://github.com/nvim-neotest/nvim-nio' },       -- required by neotest
 	--------------------- LSP ---------------------
 	{ src = 'https://github.com/neovim/nvim-lspconfig' },
 	{ src = 'https://github.com/scalameta/nvim-metals' },
@@ -68,6 +69,9 @@ vim.pack.add({
 	{ src = 'https://github.com/theHamsta/nvim-dap-virtual-text' },
 	{ src = 'https://github.com/rcarriga/nvim-dap-ui' },
 	{ src = 'https://github.com/nvim-telescope/telescope-dap.nvim' },
+	--------------------- TESTING ---------------------
+	{ src = 'https://github.com/nvim-neotest/neotest' },
+	{ src = 'https://github.com/codymikol/neotest-kotlin' },
 	--------------------- FZF ---------------------
 	{ src = 'https://github.com/nvim-telescope/telescope.nvim' },
 	--------------------- GIT ---------------------
@@ -80,10 +84,10 @@ vim.pack.add({
 	{ src = 'https://github.com/nvim-mini/mini.cursorword' },
 	--------------------- EXTRA ---------------------
 	{ src = 'https://github.com/tomasky/bookmarks.nvim' },
-	{ src = 'https://github.com/folke/noice.nvim' },      -- Better command line and messages
+	{ src = 'https://github.com/folke/noice.nvim' }, -- Better command line and messages
 	{ src = 'https://github.com/nvim-lualine/lualine.nvim' },
 	{ src = 'https://github.com/lukas-reineke/indent-blankline.nvim' },
-	{ src = 'https://github.com/kawre/leetcode.nvim' },   -- doing leetcode inside neovim
+	{ src = 'https://github.com/kawre/leetcode.nvim' }, -- doing leetcode inside neovim
 })
 
 
@@ -294,6 +298,19 @@ vim.api.nvim_create_autocmd('FileType', {
 	end,
 	group = vim.api.nvim_create_augroup("nvim-metals", { clear = true }),
 })
+
+
+local neotest = require("neotest")
+neotest.setup({
+	running = {
+		strategy = 'dap',
+	},
+	adapters = { require("neotest-kotlin") }
+})
+vim.keymap.set("n", "<leader>tt", function() neotest.run.run(vim.fn.expand("%")) end)
+vim.keymap.set("n", "<leader>ts", neotest.run.stop)
+vim.keymap.set("n", "<leader>to", neotest.summary.toggle)
+vim.keymap.set("n", "<leader>tp", neotest.output_panel.toggle)
 
 -- Telescope
 require('telescope').setup({
