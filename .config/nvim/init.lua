@@ -391,7 +391,7 @@ require("bookmarks").setup({
 vim.keymap.set("n", "<leader>S", ":Telescope bookmarks list<CR>")
 
 -- Git integration
-vim.keymap.set("n", "<leader>zz", ":Gitsigns reset_hunk<CR>")
+vim.keymap.set({ "n", "v" }, "<leader>zz", ":Gitsigns reset_hunk<CR>")
 
 -- Mini
 require("mini.ai").setup()
