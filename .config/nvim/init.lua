@@ -356,7 +356,11 @@ require('mini.cursorword').setup()
 
 -- Miscellaneous
 require("noice").setup({ notify = { enabled = false } })
-require("lualine").setup({ options = { theme = 'gruvbox' } })
+require("lualine").setup({
+	options = {
+		theme = 'tomorrow_night',
+	},
+})
 require("ibl").setup({})
 
 -- leetcode
