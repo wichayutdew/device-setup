@@ -47,6 +47,7 @@ vim.pack.add({
 	{ src = 'https://github.com/mason-org/mason.nvim' },
 	{ src = 'https://github.com/mason-org/mason-lspconfig.nvim' },
 	{ src = 'https://github.com/nvim-treesitter/nvim-treesitter' },
+	{ src = 'https://github.com/nvim-treesitter/nvim-treesitter-context' },
 	{ src = 'https://github.com/gbrlsnchs/telescope-lsp-handlers.nvim' },
 	{ src = 'https://github.com/nvim-telescope/telescope-ui-select.nvim' },
 	--------------------- COMPLETION ---------------------
@@ -57,10 +58,6 @@ vim.pack.add({
 	{ src = 'https://github.com/zbirenbaum/copilot.lua' },
 	{ src = 'https://github.com/zbirenbaum/copilot-cmp' },
 	{ src = 'https://github.com/MeanderingProgrammer/render-markdown.nvim' }, -- render markdown
-	--------------------- TESTING ---------------------
-	-- { src = 'https://github.com/nvim-neotest/nvim-nio' },
-	-- { src = 'https://github.com/nvim-neotest/neotest' },
-	-- { src = 'https://github.com/codymikol/neotest-kotlin' },
 	--------------------- DEBUGGING ---------------------
 	{ src = 'https://github.com/mfussenegger/nvim-dap' },
 	{ src = 'https://github.com/jay-babu/mason-nvim-dap.nvim' },
@@ -83,6 +80,7 @@ vim.pack.add({
 	{ src = 'https://github.com/folke/noice.nvim' },      -- Better command line and messagesj
 	{ src = 'https://github.com/nvim-lualine/lualine.nvim' },
 	{ src = 'https://github.com/unblevable/quick-scope' }, -- Highlight f, F, t, T
+	{ src = 'https://github.com/lukas-reineke/indent-blankline.nvim' },
 	{ src = 'https://github.com/kawre/leetcode.nvim' },   -- doing leetcode inside neovim
 })
 
@@ -256,6 +254,10 @@ require("nvim-treesitter.configs").setup({
 
 vim.lsp.enable({ "lua_ls", "kotlin_language_server", "cucumber_language_server" })
 
+vim.keymap.set("n", "ct", function()
+	require("treesitter-context").go_to_context(vim.v.count1)
+end, { silent = true })
+
 -- Metals-specific setup
 vim.api.nvim_create_autocmd('FileType', {
 	pattern = { 'scala', 'sbt' },
@@ -277,6 +279,7 @@ vim.api.nvim_create_autocmd('FileType', {
 	group = vim.api.nvim_create_augroup("nvim-metals", { clear = true }),
 })
 
+-- Telescope
 require('telescope').setup({
 	defaults = {
 		mappings = {
@@ -313,7 +316,6 @@ require("telescope").load_extension("ui-select")
 require('telescope').load_extension('bookmarks')
 require('telescope').load_extension('lsp_handlers')
 require('telescope').load_extension('dap')
-
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope list buffers' })
 vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })
@@ -342,14 +344,6 @@ vim.keymap.set('n', '<leader>S', ':Telescope bookmarks list<CR>')
 vim.keymap.set('n', '<leader>lg', ':LazyGit<CR>')
 vim.keymap.set('n', '<leader>zz', ':Gitsigns reset_hunk<CR>')
 
--- Testing & Debugging
--- require("neotest").setup({ adapters = { require("neotest-kotlin") } })
--- vim.keymap.set("n", "<leader>tt", function() require("neotest").run.run(vim.fn.expand("%")) end)
--- vim.keymap.set("n", "<leader>ts", function() require("neotest").run.stop() end)
--- vim.keymap.set("n", "<leader>to", function() require("neotest").summary.toggle() end)
--- vim.keymap.set("n", "<leader>tp", function() require("neotest").output_panel.toggle() end)
--- vim.keymap.set('n', 'gt', ':A<CR>', { noremap = true, silent = true })
-
 -- Mini
 require('mini.ai').setup()
 require('mini.surround').setup()
@@ -361,8 +355,9 @@ require('mini.cursorword').setup()
 -- Miscellaneous
 require("noice").setup({ notify = { enabled = false } })
 require("lualine").setup({ options = { theme = 'gruvbox' } })
+require("ibl").setup({})
 
-
+-- leetcode
 require('leetcode').setup({
 	arg = "leetcode.nvim",
 	lang = "kotlin",
