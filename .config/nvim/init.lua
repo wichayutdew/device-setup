@@ -16,7 +16,6 @@ vim.opt.cursorline = true
 
 -- Basic Keymap
 vim.keymap.set("n", "<leader>re", ":w | :so<CR>")
-vim.keymap.set("n", "<leader>bg", "<C-z>")
 vim.keymap.set("n", "<leader>ww", ":bd<CR>")
 vim.keymap.set({ "n", "v", "x" }, "Y", '"+y')
 vim.keymap.set("n", "n", "nzzzv")
