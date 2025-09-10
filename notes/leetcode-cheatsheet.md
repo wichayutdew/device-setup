@@ -313,3 +313,15 @@
            into the result string builder
         5. reverse the string builder and create string result
 
+### Diameter of Binary Tree
+
+    _Default case_, if root is null, the diameter = 0 (diameter always doesn't
+    count root node)
+
+
+    **Solve**
+        1. create global variable to keep track of longest diameter
+        2. create helper function getHeight, but while getting the sum of left
+           and rigth height always check if it's exceed longest variable
+        3. then just return longest variable
+
