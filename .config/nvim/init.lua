@@ -172,7 +172,7 @@ require("nvim-dap-virtual-text").setup({})
 
 vim.keymap.set("n", "<leader>bb", dap.toggle_breakpoint)
 vim.keymap.set("n", "<leader>bc", dap.clear_breakpoints)
-vim.keymap.set("n", "<leader>fbb", require("telescope").extensions.dap.list_breakpoints)
+vim.keymap.set("n", "<leader>bB", require("telescope").extensions.dap.list_breakpoints)
 vim.keymap.set("n", "<leader>db", dapui.toggle)
 vim.keymap.set("n", "<leader>dd", dap.continue)
 
@@ -185,7 +185,6 @@ require("mason-tool-installer").setup({
 		"lua_ls",
 		"stylua",
 		"kotlin_language_server",
-		"detekt",
 		"kotlin-debug-adapter",
 		"cucumber_language_server",
 		"reformat-gherkin",
@@ -320,7 +319,7 @@ vim.api.nvim_create_autocmd("FileType", {
 require("conform").setup({
 	formatters_by_ft = {
 		lua = { "stylua" },
-		kotlin = { "detekt" },
+		kotlin = { "spotless_gradle" },
 		markdown = { "markdownlint" },
 		gherkin = { "reformat-gherkin" },
 	},
@@ -339,7 +338,6 @@ end)
 vim.keymap.set("n", "<leader>ts", neotest.run.stop)
 vim.keymap.set("n", "<leader>to", neotest.summary.toggle)
 vim.keymap.set("n", "<leader>tp", neotest.output_panel.toggle)
-
 -- Telescope
 require("telescope").setup({
 	defaults = {
@@ -386,7 +384,7 @@ vim.keymap.set("n", "<leader>cf", function()
 	require("conform").format({
 		lsp_fallback = true,
 		async = false,
-		timeout_ms = 10000,
+		timeout_ms = 20000,
 	})
 end, { desc = "Format file or range" })
 vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code actions" })
