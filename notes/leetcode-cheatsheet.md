@@ -236,3 +236,22 @@
            couldn't be created then we return false rigth away
         4. if we can loop the entire ransomNote that's mean we can create it,
            return true
+
+### Longest Palindrome
+
+    _Default case_, if the input string is length of 0 or 1 then it's
+    automatically a palindrome
+
+    **Solve**
+        1. create 2 variables, 1 to keep track of number of palindrome length,
+           another Set to keep track if we are able to create a palindrome char
+           or not
+        2. loop thru the entire string, if the character is not appear in set,
+           then we add it in, once we found it's there in the set already,
+           that's mean we have 1 palindrome character, then length of
+           palindrome increases by 2 and we remove the character from set since
+           it's getting matched already.
+        3. after looping thru the entire string, we check lastly if there's any
+           left over string in set, if there's at least 1, we can pick anything
+           to put it in the middle to create odd palindrome, so add length +1,
+           otherwise length stays the same
