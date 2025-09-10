@@ -17,6 +17,7 @@ vim.opt.wrap = true
 -- Basic Keymap
 vim.keymap.set("n", "<leader>re", ":w | :so<CR>")
 vim.keymap.set("n", "<leader>bg", "<C-z>")
+vim.keymap.set("n", "<leader>ww", ":bd<CR>")
 vim.keymap.set({ "n", "v", "x" }, "Y", '"+y')
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
@@ -45,6 +46,7 @@ vim.pack.add({
 	{ src = "https://github.com/scalameta/nvim-metals" },
 	{ src = "https://github.com/mason-org/mason.nvim" },
 	{ src = "https://github.com/mason-org/mason-lspconfig.nvim" },
+	{ src = "https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim" },
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter" },
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter-context" },
 	{ src = "https://github.com/gbrlsnchs/telescope-lsp-handlers.nvim" },
@@ -168,9 +170,9 @@ dap.listeners.before.launch.dapui_config = function()
 end
 require("nvim-dap-virtual-text").setup({})
 
-vim.keymap.set("n", "<leader>b", dap.toggle_breakpoint)
-vim.keymap.set("n", "<leader>bd", dap.clear_breakpoints)
-vim.keymap.set("n", "<leader>bb", require("telescope").extensions.dap.list_breakpoints)
+vim.keymap.set("n", "<leader>bb", dap.toggle_breakpoint)
+vim.keymap.set("n", "<leader>bc", dap.clear_breakpoints)
+vim.keymap.set("n", "<leader>fbb", require("telescope").extensions.dap.list_breakpoints)
 vim.keymap.set("n", "<leader>db", dapui.toggle)
 vim.keymap.set("n", "<leader>dd", dap.continue)
 
@@ -178,6 +180,18 @@ vim.keymap.set("n", "<leader>dd", dap.continue)
 require("mason").setup()
 require("mason-nvim-dap").setup()
 require("mason-lspconfig").setup()
+require("mason-tool-installer").setup({
+	ensure_installed = {
+		"lua_ls",
+		"stylua",
+		"kotlin_language_server",
+		"detekt",
+		"kotlin-debug-adapter",
+		"cucumber_language_server",
+		"reformat-gherkin",
+		"markdownlint",
+	},
+})
 require("render-markdown").setup({
 	completions = { lsp = { enabled = true } },
 })
@@ -271,7 +285,7 @@ vim.diagnostic.config({
 })
 
 require("nvim-treesitter.configs").setup({
-	ensure_installed = { "lua", "kotlin", "html" },
+	ensure_installed = { "lua", "kotlin", "html", "scala" },
 	highlight = { enable = true },
 })
 
