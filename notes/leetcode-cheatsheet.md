@@ -203,3 +203,18 @@
         4. peek - do the same as pop, just change to peek in last step
         5. empty - to check if empty check if both stack are empty or not
 
+### First bad version
+
+    _Default case_, if there is only 1 version, check if it's bad, if not
+    return default -1, if yes just return that version 1
+
+
+    **Solve**
+        1. using Binary Search style logic to keep finding mid index and check
+           if it's bad.
+        2. if mid is bad, then we can assume that there might possibly be some
+           early version that is bad as well, so we move right window down
+        3. if mid is not bad, then we move left window up cause we kinda
+           confirm that there's no bad version before that
+        4. keep repeating this process until l <= r
+        5. return the left index since it's the actual first bad version
