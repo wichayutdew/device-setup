@@ -146,3 +146,19 @@
               the loop early if we know the tree is not balanced
         2. for main function, just validate that the result of helper function
         is not -1
+
+### Linked list cycle
+
+    _Default case_, check if current head and value next to head is null or
+    not, if either of it is null then we would never have loop in that linked
+    list 
+
+
+    **Solve**
+        1. using slow,fast pointer to determine if the linklist have a loop or
+           not.
+        2. do a while loop to keep checking if fast pointer is null or not,
+           cause if it's null then there's no loop
+        3. in a loop slow pointer move 1 node, fast pointer move 2 node, after
+           move we check if both pointer point to the same node or not, if yes
+           then this linklist do have a loop
