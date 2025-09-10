@@ -294,3 +294,22 @@
             3. while value == checker we increment count else decrement it
             4. any value that can survive this process confirms to be the
                majority of the array
+
+### Add binary
+
+    _Default case_, if both string are empty then return 0 or if one the binary
+    string is empty return value of another string
+    
+    **Solve**
+        1. start at the last character of each string. and create stringbuilder
+           to keep track of result and carry variable if we need to carry the
+           value over to next digit
+        2. while both string still not reached index 0, calculate sum of each
+           character + carry over. then append the sum%2 and update carry by
+           sum/2
+        3. try to check each string if there's still left over character and
+           follow the same method as step 2 just don't need to sum it together
+        4. one last step, always check if we have 1 carry left over to push
+           into the result string builder
+        5. reverse the string builder and create string result
+
