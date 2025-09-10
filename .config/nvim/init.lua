@@ -2,8 +2,9 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 vim.opt.number = true
 vim.opt.relativenumber = true
-vim.opt.wrap = false
 vim.opt.scrolloff = 999
+vim.opt.wrap = false
+vim.api.nvim_set_option_value("colorcolumn", "80", {})
 vim.opt.sidescrolloff = 8
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
@@ -12,7 +13,6 @@ vim.opt.termguicolors = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.cursorline = true
-vim.opt.wrap = true
 
 -- Basic Keymap
 vim.keymap.set("n", "<leader>re", ":w | :so<CR>")
