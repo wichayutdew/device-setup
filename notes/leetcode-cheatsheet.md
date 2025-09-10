@@ -13,6 +13,10 @@
            `MutableMap`, if yes build `IntArray` of value of that map and
            current index
         3. Default case, return empty `IntArray`
+    
+    **Complexity**
+        Time: O(n)
+        Space: O(n)
 
 ### Valid Parentheses
 
@@ -25,6 +29,10 @@
            last value in stack doesn't match char, then it's not valid
         3. Last step, check if stack isEmpty, otherwise the string doesn't
            contains valid parentheses
+
+    **Complexity**
+        Time: O(n)
+        Space: O(n)
 
 ### Merge Two Sorted Lists
 
@@ -45,6 +53,10 @@
            the remaining iterator, then we can attach next node of temp to that
            iterator and return the node after head tracker created in step 1
 
+    **Complexity**
+        Time: O(n)
+        Space: O(1) // exclude the result linklist
+
 ### Best time to buy and sell stock
 
     _Default case_, if prices array have 1 or less price then default to 0
@@ -58,6 +70,10 @@
         3. after that see if we buy on min date, and sell in this iteration,
            will we get better profit or not
         4. finally, we will have the best profit in `maxProfit variable`
+
+    **Complexity**
+        Time: O(n)
+        Space: O(1) // static variable just change value
 
 ### Valid Palindrome
 
@@ -82,6 +98,10 @@
         compare. but it will take longer time since we need to go into a loop 2
         times
 
+    **Complexity**
+        Time: O(n) // O(2n) if we do extra cleanup
+        Space: O(1)
+
 ### Invert Binary Tree
 
     _Default case_, if root is null then just return root
@@ -89,6 +109,10 @@
     **Solve**
         1. For each node from root, swap left and right branch of it.
         2. then run the same function on left and right branch
+
+    **Complexity**
+        Time: O(h)  // h = height
+        Space: O(1)
 
 ### Valid Anagram
 
@@ -106,6 +130,11 @@
         4. lastly check if there's any remaining key inside map, if there is
            then it's not an anagram, otherwise it is
 
+    **Complexity**
+        Time: O(2n) // length of 2 input string 
+        Space: O(n) // keep track only 1 set of char and remove it out in 2nd
+        pass
+
 ### Binary Search
 
     _Default case_, if nums is empty, then there's never a chance to match the
@@ -120,6 +149,10 @@
             - nums[mid] > target then right need to be before mid
             - else -- we found the index of target
         4. if we can't find the target, then return -1
+
+    **Complexity**
+        Time: O(logn) // usual binary seach complexity
+        Space: O(1)
 
 ### Flood fill
 
@@ -137,6 +170,10 @@
         indices
         3. In main function, just call this helper function once on image[sr][sc]
         4. return the fill image
+        
+    **Complexity**
+        Time: O(m * n) // usual matrix complexity
+        Space: O(1)
 
 ### Lowest Common Ancestor (LCA) of a Binary Search Tree
 
@@ -149,6 +186,10 @@
         2. check the same way but if value at root is lesser than both value of
            node p and q, then LCA needs to be right side of the tree
         3. otherwise, root is actually already a LCA of that tree
+
+    **Complexity**
+        Time: O(h) // h = height
+        Space: O(1)
 
 ### Balanced Binary Tree
 
@@ -170,6 +211,10 @@
         2. for main function, just validate that the result of helper function
         is not -1
 
+    **Complexity**
+        Time: O(h) // h = height
+        Space: O(1)
+
 ### Linked list cycle
 
     _Default case_, check if current head and value next to head is null or
@@ -185,6 +230,10 @@
         3. in a loop slow pointer move 1 node, fast pointer move 2 node, after
            move we check if both pointer point to the same node or not, if yes
            then this linklist do have a loop
+
+    **Complexity**
+        Time: O(n) 
+        Space: O(1)
 
 ### Implement Queue using Stack
 
@@ -203,6 +252,10 @@
         4. peek - do the same as pop, just change to peek in last step
         5. empty - to check if empty check if both stack are empty or not
 
+    **Complexity**
+        Time: O(n) // worst need to swap the entire stack to another stack
+        Space: O(n)
+
 ### First bad version
 
     _Default case_, if there is only 1 version, check if it's bad, if not
@@ -218,6 +271,10 @@
            confirm that there's no bad version before that
         4. keep repeating this process until l <= r
         5. return the left index since it's the actual first bad version
+
+    **Complexity**
+        Time: O(logn) 
+        Space: O(1)
 
 ### Ransom note
 
@@ -236,6 +293,10 @@
            couldn't be created then we return false rigth away
         4. if we can loop the entire ransomNote that's mean we can create it,
            return true
+
+    **Complexity**
+        Time: O(2n) // worst if magazine and ransomNote size is the same
+        Space: O(n) // size of magazine
 
 ### Longest Palindrome
 
@@ -256,6 +317,10 @@
            to put it in the middle to create odd palindrome, so add length +1,
            otherwise length stays the same
 
+    **Complexity**
+        Time: O(n) 
+        Space: O(n) // size of set
+
 ### Reverse linklist
 
     _Default case_, if the linklist is null or next is null then we cannot
@@ -271,6 +336,10 @@
            prev node to iterator
         5. then we can move iterator to right node.
         6. to return, we can just return prev, that's where new head is located.
+
+    **Complexity**
+        Time: O(n) 
+        Space: O(1) 
 
 ### Majority Element
 
@@ -294,6 +363,10 @@
             3. while value == checker we increment count else decrement it
             4. any value that can survive this process confirms to be the
                majority of the array
+               
+    **Complexity**
+        Time: O(n) 
+        Space: O(n) method 1 / O(1) method 2 
 
 ### Add binary
 
@@ -312,6 +385,10 @@
         4. one last step, always check if we have 1 carry left over to push
            into the result string builder
         5. reverse the string builder and create string result
+               
+    **Complexity**
+        Time: O(n) 
+        Space: O(1) // exclde result string
 
 ### Diameter of Binary Tree
 
@@ -325,3 +402,6 @@
            and rigth height always check if it's exceed longest variable
         3. then just return longest variable
 
+    **Complexity**
+        Time: O(h) // h = height 
+        Space: O(1)
