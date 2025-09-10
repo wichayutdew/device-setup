@@ -82,3 +82,47 @@
            return false
         4. lastly check if there's any remaining key inside map, if there is
            then it's not an anagram, otherwise it is
+
+### Binary Search
+
+    _Default case_, if nums is empty, then there's never a chance to match the
+    target
+
+    **Solve**
+        1. create variable to track left and right window of sorted array,
+           return -1
+        2. while l <= r, find mid by `val mid = l + (r-l)/2`
+        3. check if 
+            - nums[mid] < target then left need to be after mid
+            - nums[mid] > target then right need to be before mid
+            - else -- we found the index of target
+        4. if we can't find the target, then return -1
+
+### Flood fill
+
+    _Default case_, if value at image[sr][sc] == color, there's nothing to do,
+    return the image
+
+    **Solve**
+        1. create helper function to change image[row][col] = color but with
+        default case of
+            - row is not over bound
+            - col is not over bound
+            - image[row][col] == image[sr][sc]
+            - image[row][col] != color
+        2. for that helper function, also expand the fill to all 4 vertical
+        indices
+        3. In main function, just call this helper function once on image[sr][sc]
+        4. return the fill image
+
+### Lowest Common Ancestor (LCA) of a Binary Search Tree
+
+    _Default case_, if either of root, node p, or node q is null, then root is
+    LCA of that tree
+
+    **Solve**
+        1. try to check if value at current root is greater than both value of
+           node p and q, if yes, LCA should be at the left side of the tree
+        2. check the same way but if value at root is lesser than both value of
+           node p and q, then LCA needs to be right side of the tree
+        3. otherwise, root is actually already a LCA of that tree
