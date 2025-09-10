@@ -24,7 +24,7 @@ vim.keymap.set("n", "k", "kzz")
 vim.keymap.set("n", "j", "jzz")
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
-vim.keymap.set("n", "<leader>qq", ":qa!<CR>")
+vim.keymap.set("n", "<leader>qq", ":qa<CR>")
 vim.keymap.set("i", "jk", "<esc>")
 vim.keymap.set("n", "<leader>/", ":noh<CR>")
 -- Windows Navigation
