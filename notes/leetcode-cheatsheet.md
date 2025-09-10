@@ -185,3 +185,21 @@
         3. in a loop slow pointer move 1 node, fast pointer move 2 node, after
            move we check if both pointer point to the same node or not, if yes
            then this linklist do have a loop
+
+### Implement Queue using Stack
+
+    _Default case_, there is no default case, we just create a data class
+
+    **Solve**
+        1. create 2 stack called in and out stack. in uses to feed in all the
+           value we got from push. out doing the completely opposite, to feed
+           out anything we have in the queue
+        2. push - just add the value into instack
+        3. pop - to pop the value out, check if there's any outstanding item in
+           outstack, if there is none, we move all the items from instack to
+           outstack by push what ever pop from instack to outstack. after we
+           move everything, check if we can pop anything from outstack, if
+           there's none return fallback value -1, else pop the value out
+        4. peek - do the same as pop, just change to peek in last step
+        5. empty - to check if empty check if both stack are empty or not
+
