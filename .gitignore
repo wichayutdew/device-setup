@@ -10,6 +10,7 @@
 /.config/op
 /.config/raycast
 /.config/thefuck
+!/notes
 
 # except these files
 !.asdfrc
@@ -17,3 +18,4 @@
 !.gitignore
 !.gitconfig
 !.ideavimrc
+!README.md
