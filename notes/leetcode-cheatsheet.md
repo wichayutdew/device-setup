@@ -59,6 +59,29 @@
            will we get better profit or not
         4. finally, we will have the best profit in `maxProfit variable`
 
+### Valid Palindrome
+
+    _Default case_, check if input string trimmed is of length 1 or less, if
+    yes then it's a palindrome
+
+    **Solve**
+        1. create variable left and right to keep track of index window in string
+        2. do while loop l<r
+            - in a while loop, do another while loop on both left and right
+              side to skip any non letter or digit character by using
+              `char.isLetterOrDigit()`
+            - once we reach letter or digit char, the compare char on l and r
+              pointer case insensitive using `char.lowercaseChar() or
+              char.uppercaseChar()`, if it's not the same then it's not a
+              palindrome
+            - else keep increment l and decrement r
+        3. finally if we are able to get out of while loop, the string itselves
+        is palindrome
+        extra: if we want to do functional way, we can also do filter function
+        to cleanup any non letter or digit character and just do clean loop to
+        compare. but it will take longer time since we need to go into a loop 2
+        times
+
 ### Invert Binary Tree
 
     _Default case_, if root is null then just return root
