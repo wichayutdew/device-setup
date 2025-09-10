@@ -255,3 +255,19 @@
            left over string in set, if there's at least 1, we can pick anything
            to put it in the middle to create odd palindrome, so add length +1,
            otherwise length stays the same
+
+### Reverse linklist
+
+    _Default case_, if the linklist is null or next is null then we cannot
+    reverse any, just return the node
+
+    **Solve**
+        1. create prev node = null to keep track of node to be reversed to
+        2. create iterator variable to keep moving right along the input node
+        3. for each iteration until iterator points to null, keep track of
+           right node, once we reverse the current node, the iterator should
+           point to that right node
+        4. to reverse the node, we point iterator.next to prev node, and move
+           prev node to iterator
+        5. then we can move iterator to right node.
+        6. to return, we can just return prev, that's where new head is located.
