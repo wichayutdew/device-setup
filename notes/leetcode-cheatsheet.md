@@ -126,3 +126,23 @@
         2. check the same way but if value at root is lesser than both value of
            node p and q, then LCA needs to be right side of the tree
         3. otherwise, root is actually already a LCA of that tree
+
+### Balanced Binary Tree
+
+    _Default case_, if root is null, then tree is balanced
+
+    **Solve**
+        1. create helper function to calculate each node height while also keep
+           checking if the height is balanced
+            - default the helper function to return height of 0 if root is null
+            - do loop call to calculate left and right height, since the return
+              statement will be usual `return 1+maxOf(left height,right
+              height)`
+            - but this helper will have another condition to check if height of
+              both side are balanced or not by checking if diff is > 1
+            - if it's not balanced, then we return fallback value of -1
+            - while calculating the left height and right height for each loop
+              call, we also look for this fallback value, so we can just end
+              the loop early if we know the tree is not balanced
+        2. for main function, just validate that the result of helper function
+        is not -1
