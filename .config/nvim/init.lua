@@ -308,6 +308,7 @@ require("conform").setup({
 		lua = { "stylua" },
 		kotlin = { "detekt" },
 		markdown = { "markdownlint" },
+		gherkin = { "reformat-gherkin" },
 	},
 })
 
