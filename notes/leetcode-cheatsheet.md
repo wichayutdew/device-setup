@@ -218,3 +218,21 @@
            confirm that there's no bad version before that
         4. keep repeating this process until l <= r
         5. return the left index since it's the actual first bad version
+
+### Ransom note
+
+    _Default case_, if magazine is empty, then we would never create
+    ransomnote, so it's false. otherway around if ransomNote is empty, then we
+    don't need to build any then it's true
+
+    **Solve**
+        1. create map or array to keep track of number of usable character and
+           it's occurance in magazine
+        2. as we have list of available character, we can loop thru each
+           character in ransomNote and keep deducting the usage from map
+           (always remove the record if occurance is == 0 since there's no more
+           available usage)
+        3. some default case, if there's no character in map then ransomNote
+           couldn't be created then we return false rigth away
+        4. if we can loop the entire ransomNote that's mean we can create it,
+           return true
