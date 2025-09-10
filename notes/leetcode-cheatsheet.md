@@ -271,3 +271,26 @@
            prev node to iterator
         5. then we can move iterator to right node.
         6. to return, we can just return prev, that's where new head is located.
+
+### Majority Element
+
+    _Default case_, if the input array only have upto 2 records, we can just
+    return index 0 as majority
+
+    **Solve**
+        Method1: slower
+            1. calculate for threshold for majority by doing array.size/2
+            2. create map to keep track of key=number,value=occurance of each
+               number
+            3. loop thru array and keep incrementing the map
+            4. once the occurance of any value in the map exceed the threshold
+               return that value
+            5. if there's none, fallback to -1
+        Method2: faster
+            1. create 2 variables to keep track of value checker (can default
+               to value at index 0) and count of that value, starting from 0
+            2. loop thru array, keep checking if count reach 0 we change
+               checker to new value we are on in that index
+            3. while value == checker we increment count else decrement it
+            4. any value that can survive this process confirms to be the
+               majority of the array
