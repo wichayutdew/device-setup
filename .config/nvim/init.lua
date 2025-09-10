@@ -31,12 +31,6 @@ vim.keymap.set("n", "<leader>/", ":noh<CR>")
 vim.keymap.set("n", "<leader>wv", ":vsplit<CR>")
 vim.keymap.set("n", "<leader>wh", ":split<CR>")
 
--- Transparency and Colorscheme
-vim.cmd.colorscheme("unokai")
-vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
-vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "none" })
-
 -- Package Manager
 vim.pack.add({
 	--------------------- PRE-REQUISUTES ---------------------
@@ -85,11 +79,18 @@ vim.pack.add({
 	{ src = "https://github.com/nvim-mini/mini.cursorword" },
 	--------------------- EXTRA ---------------------
 	{ src = "https://github.com/tomasky/bookmarks.nvim" },
+	{ src = "https://github.com/sainnhe/gruvbox-material" },
 	{ src = "https://github.com/folke/noice.nvim" }, -- Better command line and messages
 	{ src = "https://github.com/nvim-lualine/lualine.nvim" },
 	{ src = "https://github.com/lukas-reineke/indent-blankline.nvim" },
 	{ src = "https://github.com/kawre/leetcode.nvim" }, -- doing leetcode inside neovim
 })
+
+-- Transparency and Colorscheme
+vim.cmd.colorscheme("gruvbox-material")
+vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
+vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "none" })
 
 -- Run & Debug
 local dap = require("dap")
