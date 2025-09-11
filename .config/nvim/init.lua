@@ -476,6 +476,14 @@ require("leetcode").setup({
 		focus_result = "L",
 	},
 	image_support = false,
+	theme = {
+		["alt"] = {
+			bg = "#FFFFFF",
+		},
+		["normal"] = {
+			fg = "#EA4AAA",
+		},
+	},
 })
 
 vim.keymap.set("n", "lff", ":Leet list<CR>")
