@@ -433,3 +433,18 @@
     **Complexity**
         Time: O(h)
         Space: O(1)
+
+
+### Contains Duplicate
+
+    _Default case_, if array size is 1 or less then it's always false
+
+    **Solve**
+        1. use set to keep track of occurance
+        2. loop thru the array and add value into set, if found same value from
+           the set then return true since it's duplicated
+
+    **Complexity**
+        Time: O(n)
+        Space: O(n) // worst case we add everything into the set and there's no
+        duplicate
