@@ -566,3 +566,28 @@
            iterator, then append/decrease the pointer accordingly
 
     **Complexity** Time: O(n/2) Space: O(1) // not including result array
+
+## Medium
+
+### Insert Interval
+
+    _Default case_, if newInterval is empty, there's nothing to add, if
+    intervals is empty, just put newInterval as 1st interval in result
+
+    **Solve**
+        1. create iterator to keep track if interval to check, and new array
+           list to keep track of result intervals
+        2. split the insertion into 3 section (while always keep track that we
+           are not out of bound of input intervals)
+            - while intervals[i][1] < newInterval[0], just add existing
+              interval(s) into new result since it's not merging point yet
+            - while tempInterval[1] >= intervals[i][0], this is where we keep
+              combining the newInterval with the existing interval(s). once we
+              gone out of this loop, we can just append the tempInterval
+            - while we have remaining intervals to add from input array. just
+              add it as-is
+        3. once we have result array list, we can do `.toTypedArray()` to
+           convert it back to Array
+
+
+    **Complexity** Time: O(n) Space: O(1)
