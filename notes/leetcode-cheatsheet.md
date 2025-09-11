@@ -516,3 +516,20 @@
     **Complexity**
         Time: O(n) // length of 1st string
         Space: O(n) // worst case it's as long as the 1st string
+
+
+### Palindrome Linked List
+
+    _Default case_, if linked list is null or next node is null, then itself is
+    a palindrome
+
+    **Solve**
+        1. create another reversed linked list from input
+        2. then just keep comparing 2 linked list, if some node aren't similar
+           then return false
+        3. if reachs tail, then both are identical, then it's palindrome,
+           return true
+
+    **Complexity**
+        Time: O(n)
+        Space: O(n)
