@@ -517,7 +517,6 @@
         Time: O(n) // length of 1st string
         Space: O(n) // worst case it's as long as the 1st string
 
-
 ### Palindrome Linked List
 
     _Default case_, if linked list is null or next node is null, then itself is
@@ -533,3 +532,18 @@
     **Complexity**
         Time: O(n)
         Space: O(n)
+
+### Move Zeroes
+    
+    _Default case_, if the array size is 1 or less, just return, there's
+    nothing to move
+
+    **Solve**
+        1. create pointer to keep track of index where we need to move non zero value to.
+        2. loop along the array, if the value is not zero, then assign that
+           value to the pointer and move pointer
+        3. once finished, we can do another loop from pointer until end of array to assign zero in
+
+    **Complexity**
+        Time: O(n)
+        Space: O(1)
