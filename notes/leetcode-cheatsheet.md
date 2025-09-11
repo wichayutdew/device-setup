@@ -467,3 +467,27 @@
     **Complexity**
         Time: O(n)
         Space: O(1)
+
+### Backspace string compare
+
+    _Default case_, there is no default case apart from actually clean both
+    string once
+
+    **Solve**
+        1. create helper function to clean the string by using stack. loop thru
+           each character in each string, if # found check if we can pop
+           anything from stack, if yes pop it, otherwise just add character
+           into the stack. then return the "said" stack out
+        2. now we clean both string and will get 2 stack as a result, 1st step,
+           check if both stack size is equal, otherwise it wouldn't be similar,
+           if not equal the return false right away
+        3. loop thru both stack and keep popping the latest value in stack, if
+           latest value from 2 stacks aren't similar then just return false
+        4. otherwise, we have the identical string after backspace, return true
+
+    **Complexity**
+        Time: O(3n) // 2 pass to clean string 1 pass to compare result
+        Space: O(2n) // store 2 stack
+
+
+
