@@ -499,3 +499,20 @@
     **Complexity**
         Time: O(h)
         Space: O(1)
+
+### Longest Common Prefix
+
+    _Default case_, if array only have 1 string, then return length of that string.
+
+    **Solve**
+        1. we based off the 1st string in the array, and keeps checking if the
+           character from other string in same index is the same as the one in
+           1st string. if yes, just keeps on the loop, else (or if any of the
+           2nd checker string reach it's length limit) we substring just up
+           until that index
+        2. once loop terminated, just return the 1st string, that's the longest
+           we can do
+
+    **Complexity**
+        Time: O(n) // length of 1st string
+        Space: O(n) // worst case it's as long as the 1st string
