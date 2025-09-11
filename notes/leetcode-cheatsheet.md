@@ -406,9 +406,8 @@
         Time: O(h) // h = height 
         Space: O(1)
 
-
 ### Middle of the Linked List
-    
+
     _Default case_, if head is null , return null. if next is null, return head
 
     **Solve**
@@ -419,7 +418,6 @@
     **Complexity**
         Time: O(n)
         Space: O(1)
-
 
 ### Maximum Depth of Binary tree
 
@@ -434,7 +432,6 @@
         Time: O(h)
         Space: O(1)
 
-
 ### Contains Duplicate
 
     _Default case_, if array size is 1 or less then it's always false
@@ -448,7 +445,6 @@
         Time: O(n)
         Space: O(n) // worst case we add everything into the set and there's no
         duplicate
-
 
 ### Roman to Integer
 
@@ -489,5 +485,17 @@
         Time: O(3n) // 2 pass to clean string 1 pass to compare result
         Space: O(2n) // store 2 stack
 
+### Same Tree
+
+    _Default case_, if both p and q node are null, then it's same null tree.
+    otherwise if p or q is null then it's not the same tree. lastly check if
+    the node value is similar, if not return false
 
 
+    **Solve**
+        1. we based off the check from default case, then we just confirm that
+           both left and right child of 2 tree are silimar and so on.
+
+    **Complexity**
+        Time: O(h)
+        Space: O(1)
