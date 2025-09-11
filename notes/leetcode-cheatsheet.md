@@ -409,7 +409,7 @@
 
 ### Middle of the Linked List
     
-    __Default case_, if head is null , return null. if next is null, return head
+    _Default case_, if head is null , return null. if next is null, return head
 
     **Solve**
         1. use slow/fast pointer method to find the middle node
@@ -420,3 +420,16 @@
         Time: O(n)
         Space: O(1)
 
+
+### Maximum Depth of Binary tree
+
+    _Default case_, if root is null then depth is 0
+
+    **Solve**
+        1. keep going down and get the longer height of left and right child
+        2. return 1 + height of longer child, and it'll recursively return the
+           correct maxDepth
+
+    **Complexity**
+        Time: O(h)
+        Space: O(1)
