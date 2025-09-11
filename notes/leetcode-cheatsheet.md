@@ -591,3 +591,21 @@
 
 
     **Complexity** Time: O(n) Space: O(1)
+
+### 01 Matrix
+
+    _Default case_, if the matrix is empty, do nothing
+
+    **Solve**
+        1. we need to do 2 pass for the entire matrix, start from top/left and
+           then from bottom/right
+        2. for each cell that is not = 0, we check min distance from closest 0
+           between top/left cell then + 1, but if it's top/left most cell we
+           default to some max value (the other corner from current location),
+           cause there's still possibility the closest 0 is at bottom/right of
+           the cell
+        3. once finish we start from bottom/right instead, now we check if the
+           one we calculated from top/right is actually the closest or we can
+           find the same thing from bottom/right cells
+
+    **Complexity** Time: O(m*n*2) // loop the matrix 2 times Space: O(1)
