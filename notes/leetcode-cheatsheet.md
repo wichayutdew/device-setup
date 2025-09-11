@@ -551,3 +551,18 @@
 
     **Complexity** Time: O(m*n) Space: O(m) // m is height of root, n is height
     of subRoot
+
+
+### Squared of sorted array
+
+    _Default case_, if the array is empty, do nothing
+
+    **Solve**
+        1. create new IntArray of same size as input, and initiate the iterator
+           at last index
+        2. since the input array is sorted, either the 1st or last value
+           squared can be bigger. so we keep track of left and right index and
+           compare the squared value, we put bigger value into new IntArray
+           iterator, then append/decrease the pointer accordingly
+
+    **Complexity** Time: O(n/2) Space: O(1) // not including result array
