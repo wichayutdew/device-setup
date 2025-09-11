@@ -509,3 +509,15 @@
         branch
 
     **Complexity** Time: O(h) Space: O(1)
+
+## Palindrome Number
+
+    _Default case_, check if size <= 1, if yes it's palindrome
+
+    **Solve**
+        1. convert int input to string and do similar method to normal
+           palindrome
+        2. create variable to keep track of left and right pointer and keeps
+           checking if character is similar or not, if not return false
+
+    **Complexity** Time: O(n) Space: O(1)
