@@ -405,3 +405,18 @@
     **Complexity**
         Time: O(h) // h = height 
         Space: O(1)
+
+
+### Middle of the Linked List
+    
+    __Default case_, if head is null , return null. if next is null, return head
+
+    **Solve**
+        1. use slow/fast pointer method to find the middle node
+        2. loop until next node of fast pointer is null then return the slow
+           pointer
+
+    **Complexity**
+        Time: O(n)
+        Space: O(1)
+
