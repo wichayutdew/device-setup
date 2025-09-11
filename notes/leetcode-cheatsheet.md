@@ -609,3 +609,16 @@
            find the same thing from bottom/right cells
 
     **Complexity** Time: O(m*n*2) // loop the matrix 2 times Space: O(1)
+
+### K Closest point to origin
+
+    _Default case_, if there is no point to check or k is negative/0
+
+    **Solve**
+        1. We need priority queue (min heap) to store the number of points in
+           closest manner by using this compare script 
+           `(x1*x1 - x2*x2) + (y1*y1 - y2*y2)`
+        2. then we just offer what ever we have in points to heap.
+        3. to get k closest point, we just poll heap k amount of times
+
+    **Complexity** Time: O(logn) // normal heap time complexity, Space: O(n)
