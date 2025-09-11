@@ -521,3 +521,17 @@
            checking if character is similar or not, if not return false
 
     **Complexity** Time: O(n) Space: O(1)
+
+### Converted Sorted Array to Binary Search Tree
+
+    _Default case_, the array size is 1, then build root from 1st index
+
+    **Solve**
+        1. create helper function which have logic like normal binary search,
+           but the function accept left and right index of the array
+        2. in the helper function, calculate for mid point, create tree node
+           from that value in mid point, then call helper function to create
+           left branch and right branch by splitting the left and right index
+           from mid point
+
+    **Complexity** Time: O(logn) Space: O(1)
