@@ -448,3 +448,22 @@
         Time: O(n)
         Space: O(n) // worst case we add everything into the set and there's no
         duplicate
+
+
+### Roman to Integer
+
+    _Default case_, if input string is empty then return 0
+
+    **Solve**
+        1. loop thru each index of the string, at every index always check next
+           character so we can do 4,9 calculation.
+        2. create int variable to keep track of calculation
+        3. do roman to int calculations for `I, IV, V, IX, X, XL, L, XC, C, CD,
+           D, CM, M`
+        4. for `I, X, C` also check for next char if we should do subtract from
+           the 4,9 sign
+        5. return the int result
+
+    **Complexity**
+        Time: O(n)
+        Space: O(1)
