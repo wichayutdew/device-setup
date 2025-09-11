@@ -535,3 +535,19 @@
            from mid point
 
     **Complexity** Time: O(logn) Space: O(1)
+
+### Sub tree of another tree
+
+    _Default case_, if subRoot is null then it's always a subtree of any tree,
+    otherwise if root is null, no subRoot can be found in the root
+
+    **Solve**
+        1. create helper function to check if 2 tree are similar, same logic as
+           is same tree, keep checking if all nodes are having similar value
+        2. in main function, keep check if root and subRoot are similar, if
+           found any, return true.
+        3. in the main function, we can always find both left and right branch
+           if we have sub tree in the main tree or not
+
+    **Complexity** Time: O(m*n) Space: O(m) // m is height of root, n is height
+    of subRoot
