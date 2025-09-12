@@ -552,7 +552,6 @@
     **Complexity** Time: O(m*n) Space: O(m) // m is height of root, n is height
     of subRoot
 
-
 ### Squared of sorted array
 
     _Default case_, if the array is empty, do nothing
@@ -651,5 +650,26 @@
            sure to be fiiled with the longest non repeating substring so we can
            return that value
 
-    **Complexity** Time: O(n) Space: O(n) // extra value saved in map
+    **Complexity** Time: O(n) Space: O(n)
 
+### 3Sum
+
+    _Default case_, if the input array have 2 or less number, we cannot produce
+    3 sum.
+
+    **Solve**
+        1. the question statement doesn't say the array is sorted, so we need
+           to do sort once O(nlong)
+        2. create mutable set to hold the list of sum 0 pairs. we need set
+           cause we might be end up with duplicated record, so this is a
+           cheapest safeguard
+        3. loop from index 0 until 2 index before last index (this is to allow
+           us to get another 2 number to do sum)
+        4. in each loop do 2 pointer from index i + 1 and last index to try
+           find sum 0 pairs.
+        5. if found the pair add to set and keep on going until we reaches
+           final pair.
+        6. last step convert result set into list to satisfy the problem return
+           type
+
+    **Complexity** Time: O(n^2) Space: O(1)
