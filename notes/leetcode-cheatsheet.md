@@ -870,3 +870,41 @@
         4. then we do normal binary search with new scope we set normally.
 
     **Complexity** Time: O(logn) Space: O(1)
+
+### Combination sum
+
+    _Default case_, if input array is empty then return empty result
+
+    **Solve**
+        1. this is backtracking problem, so we need to create helper
+           backtracking function.
+        2. the goal of this backtrack function is to add temp list of sum ==
+           target into result list. if exceed we do nothing, if sum stil not
+           reaches target we keep looking to add more value in candidates into
+           the temp list (we don't search entire list but rather try adding
+           only from index we are on onwards)
+        3. we call backtrack function with some mutableMap and tell them to
+           start looking in index 0 of candidates array
+        4. after that we can return the result since backtracking already
+           handle everything
+
+    **Complexity** Time: O(2^n) Space: O(n) // usual backtracking complexity
+
+### Permutation
+
+    _Default case_, if input array is empty then return empty result
+
+    **Solve**
+        1. this is another backtracking problem, so we need to create helper
+           backtracking function.
+        2. goal of this problem is to create another array of same size as
+           input but in different ordering. so we do base check in backtrack
+           function to see if the size are equals, if yes just add to result
+           list. otherwise we loop entire input array to see if we have any
+           value not added into temp list or not.
+        3. we call backtrack function with some mutableMap
+        4. after that we can return the result since backtracking already
+           handle everything
+
+    **Complexity** Time: O(2^n) Space: O(n) // usual backtracking complexity
+
