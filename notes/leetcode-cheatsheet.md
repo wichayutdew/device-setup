@@ -908,3 +908,61 @@
 
     **Complexity** Time: O(2^n) Space: O(n) // usual backtracking complexity
 
+### Merge Intervals
+
+    _Default case_, if the input interval size is 1 or less there's nothing to
+    merge
+
+    **Solve**
+        1. since the question statement doesn't state anything about input
+           being sorted, we need to sort the intervals by 1st value
+        2. we create new list to store the result. and create 2 variable to
+           hold min/max value of each iteration (this is to support the merge)
+        3. start the loop from index 1 until reachs end of intervals, for each
+           iteration. always check if the 1st value in interval exceed current
+           max value already, if it is then we need to push the merged interval
+           from min/max into result list. and then define new min/max as the
+           one we encountered
+        4. otherwise, we still need to merge the intervals, so we can just keep
+           updating the max value since min will always be the 1st one we
+           selected from the sorting
+        5. then we convert list back to ToTypedArray() and return the result
+
+    **Complexity** Time: O(nlogn + n) //sorting and iterating Space: O(1)
+
+### Lowest Common Ancestor (LCA) of Binary Tree
+
+    _Default case_, if root is null or root == p or q then root is the lca of
+    the tree
+
+    **Solve**
+        1. This is a normal dfs tree question, so we reuse the default case to
+           solve question in recursion stack
+        2. from the root, we check 2 thing if it passed default case, then try
+           to see of left or right can be the candidate for lca or not
+        3. if both left and right doesn't return null then we found both p and
+           q as a descendant from the current root. return root. otherwise if
+           one side of it is null, then the lca should be on another side
+
+    **Complexity** Time: O(h) Space: O(1)
+
+### Account merge
+
+    _Default case_, if size of input is 1 or less, nothing to merge
+
+    **Solve**
+        1. This question is a harder to comprehend graph/dfs question. so we
+           would need to create a graph to link all the email to their
+           correspondent neighbors in the same owner set
+        2. then we need helper function to merge the list of email together
+           from the graph we have. this can be done by normal dfs with visiting
+           variables. e.g. we receive some email in with temp list, if the
+           email is not yet visited we add into temp list and visited list,
+           then we find all their neighbor and call the helper function to
+           visit all the email in the graph node
+        3. then in final loop, we loop from all the possible email we have and
+           try to visit each one using helper function we create previously.
+           then we sort the result and add owner into index 0 from owner map we
+           created previously
+
+    **Complexity** Time: O(nlogn) Space: O(n) // n == number of distinct emails
