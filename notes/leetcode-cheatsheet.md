@@ -552,7 +552,6 @@
     **Complexity** Time: O(m*n) Space: O(m) // m is height of root, n is height
     of subRoot
 
-
 ### Squared of sorted array
 
     _Default case_, if the array is empty, do nothing
@@ -566,3 +565,404 @@
            iterator, then append/decrease the pointer accordingly
 
     **Complexity** Time: O(n/2) Space: O(1) // not including result array
+
+## Medium
+
+### Insert Interval
+
+    _Default case_, if newInterval is empty, there's nothing to add, if
+    intervals is empty, just put newInterval as 1st interval in result
+
+    **Solve**
+        1. create iterator to keep track if interval to check, and new array
+           list to keep track of result intervals
+        2. split the insertion into 3 section (while always keep track that we
+           are not out of bound of input intervals)
+            - while intervals[i][1] < newInterval[0], just add existing
+              interval(s) into new result since it's not merging point yet
+            - while tempInterval[1] >= intervals[i][0], this is where we keep
+              combining the newInterval with the existing interval(s). once we
+              gone out of this loop, we can just append the tempInterval
+            - while we have remaining intervals to add from input array. just
+              add it as-is
+        3. once we have result array list, we can do `.toTypedArray()` to
+           convert it back to Array
+
+
+    **Complexity** Time: O(n) Space: O(1)
+
+### 01 Matrix
+
+    _Default case_, if the matrix is empty, do nothing
+
+    **Solve**
+        1. we need to do 2 pass for the entire matrix, start from top/left and
+           then from bottom/right
+        2. for each cell that is not = 0, we check min distance from closest 0
+           between top/left cell then + 1, but if it's top/left most cell we
+           default to some max value (the other corner from current location),
+           cause there's still possibility the closest 0 is at bottom/right of
+           the cell
+        3. once finish we start from bottom/right instead, now we check if the
+           one we calculated from top/right is actually the closest or we can
+           find the same thing from bottom/right cells
+
+    **Complexity** Time: O(m*n*2) // loop the matrix 2 times Space: O(1)
+
+### K Closest point to origin
+
+    _Default case_, if there is no point to check or k is negative/0
+
+    **Solve**
+        1. We need priority queue (min heap) to store the number of points in
+           closest manner by using this compare script 
+           `(x1*x1 - x2*x2) + (y1*y1 - y2*y2)`
+        2. then we just offer what ever we have in points to heap.
+        3. to get k closest point, we just poll heap k amount of times
+
+    **Complexity** Time: O(logn) // normal heap time complexity, Space: O(n)
+
+### Longest substring without repeating character
+
+    _Default case_, if the input string length is 1 or less then there's no
+    repeating character
+
+    **Solve**
+        1. This is a sliding windows question, so start off 2 pointer at index
+           0. and another variable to keep track of longest non-repeating
+           character
+        2. To confirm we don't have repeating character we need to have map of
+           key = character, value = occurance
+        3. while end pointer doesn't reach last index, we keep adding the
+           character we found into the map
+        4. before we put any value into the map we keep checking if map already
+           contains that character or not. if it does, we need to increment the
+           start pointer to ultimately move the pointer beyond the point where
+           we have repeating character
+        5. while moving start pointer, we keep decrementing the value in map up
+           until we don't have any left, so we remove that key from map. we do
+           all this while also moving the start pointer as well.
+        6. now finally we are sure that we don't really have repeating
+           character, we add the 1st occurance of that character into the map
+           and check if this current length of substring between start/end
+           pointer is the longest non repeating substring or not.
+        7. finally once we reaches end of string, the longest variable will
+           sure to be fiiled with the longest non repeating substring so we can
+           return that value
+
+    **Complexity** Time: O(n) Space: O(n)
+
+### 3Sum
+
+    _Default case_, if the input array have 2 or less number, we cannot produce
+    3 sum.
+
+    **Solve**
+        1. the question statement doesn't say the array is sorted, so we need
+           to do sort once O(nlong)
+        2. create mutable set to hold the list of sum 0 pairs. we need set
+           cause we might be end up with duplicated record, so this is a
+           cheapest safeguard
+        3. loop from index 0 until 2 index before last index (this is to allow
+           us to get another 2 number to do sum)
+        4. in each loop do 2 pointer from index i + 1 and last index to try
+           find sum 0 pairs.
+        5. if found the pair add to set and keep on going until we reaches
+           final pair.
+        6. last step convert result set into list to satisfy the problem return
+           type
+
+    **Complexity** Time: O(n^2) Space: O(1)
+
+### Binary tree level order traversal
+
+    _Default case_, if the root is null return empty list, there's nothing to
+    traverse
+
+    **Solve**
+        1. create mutable list of mutable list to store result
+        2. create helper function to do traversal, input tree node and the
+           level currently in.
+        3. for the helper function, do the same default case. then check if the
+           size of result is at the same level, if yes then we need to create
+           empty mutable list to store all the node value
+        4. for each function call add current node value to the list of current
+           level
+        5. then recursively call traverse from left to right branch
+        6. in main function, we can just call traverse from root with level 0
+           and just return the result build from helper function
+
+    **Complexity** Time: O(h) Space: O(1) // not keeping account of result list
+
+### Clone graph
+
+    _Default case_, the node is null, just don't clone anything and return null
+
+    **Solve**
+        1. this is DFS question. so we create map to keep track of visited node
+           and create dfs helper to do the job
+        2. the dfs helper will accept any node and create a clone of it and put
+           that into map. then it'll traverse the original node neighbors and
+           check if it's been visited already by lookin at the map. if yes,
+           just add the cloned neighbor into this cloned node. otherwise do
+           another dfs and add the cloned neighbor into this clone node.
+        3. then we just call dfs to root node and recursion stack will handle
+           the clone for us.
+
+    **Complexity** Time: O(v + e) Space: O(v + e) //node + neighbors 
+
+### Evaluate reverse polish notation
+
+    _Default case_, if the input is empty it's 0, if input size is 1 then
+    that's the result, just return it as int. we can ignore pretty much all the
+    error handling since the question statement itselves state that all input
+    are arithmetically correct.
+
+    **Solve**
+        1. create stack to hold all the int value
+        2. loop thru the input tokens, if found mathematical operation just pop
+           previous 2 int and do math, then push back. otherwise just push the
+           number into stack
+        3. lastly, just pop the remaining value in stack as a result. we can
+           assume this from the statement that the input is arithmetically
+           correct
+
+
+    **Complexity** Time: O(n) Space: O(n)
+
+### Course schedule
+
+    _Default case_, if there is no prerequisites or only 1 course, it can
+    definitely be finished
+
+    **Solve**
+        1. this is one derivative of dfs question. idea is to find if we have
+           loop in a graph or not. can view the prerequisites list as graph
+           neighbors
+        2. create list of node (course) with neighbors (prereq course)
+        3. once we have the graph, we can just create 2 helper list to store if
+           it's a studying node or finished node
+        4. in helper function, accept course number, and do 2 initial check
+           whether it's already finished per the prerequisites course from
+           other already, if yes then return true for that course, and check if
+           it's still a studying course from another chain of prereq courses or
+           not, if it is then return false since the course is stil not
+           finished
+        5. once we passed initial check, we do dfs to the entire prerequisites
+           for that certain course, and check if there is any ongoing studying
+           course in the list, if there is return false, since we found the
+           node loop
+        6. if we can pass the prerequisites loop, then we considered that
+           course finished and remove it out from studying list
+        7. then we use this dfs to check for all the courses if we can study
+           all of it. and same thing if we found any course stuck in the loop
+           then we can just return false since this schedule can never be
+           finished. otherwise, return true if we can pass the entire loop
+
+    **Complexity** Time: O(v + e) Space: O(v + e) // same complexity with
+    normal graph problem since we need to reach each vertices and edges once.
+
+### Product of array except self
+
+    _Default case_, if the input array size is 1 or less then just return it
+
+    **Solve**
+        1. we create 2 new variable result list and temp variable to keep track
+           of multiplication
+        2. then we do 2 loop from left to right and right to left, in each
+           loop, we try to do *= temp to that result index. then we do *= with
+           actual value in the source index to temp variable
+        3. now we will be combining all the result from left and right into
+           each certain result index
+
+    **Complexity** Time: O(n) Space: O(1)
+
+### Min Stack
+
+    _Default case_, there is no default case it's a data structure
+
+    **Solve**
+        1. this question uses LinkedList to help with the complexity, but we
+           add one more field call min, to always stored min value of entire
+           list
+        2. for a start we create null node, then for each operation, we do
+            - push: if node is null create new node with value and min == input
+              value and next node is null, otherwise, we create new node with
+              value = input, min = min of current node and input, and next node
+              is the previous one O(1)
+            - pop: we just move the node to next pointer O(1)
+            - top: return the value of head node O(1)
+            - min: returned the min value in the head node O(1)
+
+        **Complexity** Time: O(1) Space: O(1) // all the data stored is part of
+        answer
+
+### Validate Binary Search Tree
+
+    _Default case_, if the root is null then it's valid
+
+    **Solve**
+        1. create helper method to do cascade check whether the tree is valid,
+           by defining the min and max value for each node not to bypass this.
+           then we cascade to left and right branch by setting min/max value to
+           current value accordinly
+        2. in core function, just pass root and actual MIN/MAX value (in Long,
+           this will prevent int overflow)
+    
+    **Complexity** Time: O(h) Space: O(1)
+
+### Number of Islands
+
+    _Default case_, if matrix is empty then return 0
+
+    **Solve**
+        1. this question can be solved with dfs by starting from top left of
+           the grid. and once 1 (an Island) is found we append the tracker then
+           do dfs to drown the entire island
+        2. in dfs, we do normal bound check, and check if it's island or not.
+           if yes we drown it and cascade 4 direction horizontal and verically
+        3. once we reaches end of grid, return the tracker.
+
+    **Complexity** Time: O(m*n) Space: O(1)
+
+### Rotting orange
+
+    _Default case_, if the grid is empty then there's nothing to rot
+
+    **Solve**
+        1. one of DFS question variant with some twist. 1st we need to do 1
+           loop to rot the entire grid. by starting from top/left of the grid
+           and cascade the way down.
+        2. in first loop, once we found rotting spot (2) we call dfs helper
+           function to cascade the rotting to other cells along with the
+           rotting minute (2).
+        3. helper dfs is handles normal out of bound, if cell is 0, or if cell
+           is rot but minute that rot is lesser than current minute, we don't
+           touch that. otherwise change the cell value to the minute it rot.
+           then call same function stack to 4 directional with minute +1
+        4. then we do another loop to get the max value of minute this grid has
+           rot. do keep in mind that we should start from 2 to skip those 0s
+           and 1s.
+        5. if in 2nd loop we found 1, then the batch is not entirely rotten
+           return -1
+        6. otherwise if it's more than 1 we keep collecting the max value.
+        7. then finally we return maxtime - 2 (from the shift we do earlier to
+           get actual rot minutes)
+
+    **Complexity** Time: O(m*n) Space: O(1)
+
+### Search in rotated sorted array
+
+    _Default case_, if the input array is empty then return default -1
+
+
+    **Solve**
+        1. this is one of the variant of binary search question, so the idea is
+           pretty similar
+        2. first binary search, we will try to find the min value in array.
+           just like the first bad version question. check mid with value of
+           last index, if it's larger, then min is right of the mid, otherwise,
+           the current location might be min or it's on left side
+        3. once we know index of min value, we check if our target is
+           smaller/bigger than last index of the input.
+            - if it's smaller -> target must be between min up until last index
+            - if it's larget -> must be between 0 until 1 index before min
+        4. then we do normal binary search with new scope we set normally.
+
+    **Complexity** Time: O(logn) Space: O(1)
+
+### Combination sum
+
+    _Default case_, if input array is empty then return empty result
+
+    **Solve**
+        1. this is backtracking problem, so we need to create helper
+           backtracking function.
+        2. the goal of this backtrack function is to add temp list of sum ==
+           target into result list. if exceed we do nothing, if sum stil not
+           reaches target we keep looking to add more value in candidates into
+           the temp list (we don't search entire list but rather try adding
+           only from index we are on onwards)
+        3. we call backtrack function with some mutableMap and tell them to
+           start looking in index 0 of candidates array
+        4. after that we can return the result since backtracking already
+           handle everything
+
+    **Complexity** Time: O(2^n) Space: O(n) // usual backtracking complexity
+
+### Permutation
+
+    _Default case_, if input array is empty then return empty result
+
+    **Solve**
+        1. this is another backtracking problem, so we need to create helper
+           backtracking function.
+        2. goal of this problem is to create another array of same size as
+           input but in different ordering. so we do base check in backtrack
+           function to see if the size are equals, if yes just add to result
+           list. otherwise we loop entire input array to see if we have any
+           value not added into temp list or not.
+        3. we call backtrack function with some mutableMap
+        4. after that we can return the result since backtracking already
+           handle everything
+
+    **Complexity** Time: O(2^n) Space: O(n) // usual backtracking complexity
+
+### Merge Intervals
+
+    _Default case_, if the input interval size is 1 or less there's nothing to
+    merge
+
+    **Solve**
+        1. since the question statement doesn't state anything about input
+           being sorted, we need to sort the intervals by 1st value
+        2. we create new list to store the result. and create 2 variable to
+           hold min/max value of each iteration (this is to support the merge)
+        3. start the loop from index 1 until reachs end of intervals, for each
+           iteration. always check if the 1st value in interval exceed current
+           max value already, if it is then we need to push the merged interval
+           from min/max into result list. and then define new min/max as the
+           one we encountered
+        4. otherwise, we still need to merge the intervals, so we can just keep
+           updating the max value since min will always be the 1st one we
+           selected from the sorting
+        5. then we convert list back to ToTypedArray() and return the result
+
+    **Complexity** Time: O(nlogn + n) //sorting and iterating Space: O(1)
+
+### Lowest Common Ancestor (LCA) of Binary Tree
+
+    _Default case_, if root is null or root == p or q then root is the lca of
+    the tree
+
+    **Solve**
+        1. This is a normal dfs tree question, so we reuse the default case to
+           solve question in recursion stack
+        2. from the root, we check 2 thing if it passed default case, then try
+           to see of left or right can be the candidate for lca or not
+        3. if both left and right doesn't return null then we found both p and
+           q as a descendant from the current root. return root. otherwise if
+           one side of it is null, then the lca should be on another side
+
+    **Complexity** Time: O(h) Space: O(1)
+
+### Account merge
+
+    _Default case_, if size of input is 1 or less, nothing to merge
+
+    **Solve**
+        1. This question is a harder to comprehend graph/dfs question. so we
+           would need to create a graph to link all the email to their
+           correspondent neighbors in the same owner set
+        2. then we need helper function to merge the list of email together
+           from the graph we have. this can be done by normal dfs with visiting
+           variables. e.g. we receive some email in with temp list, if the
+           email is not yet visited we add into temp list and visited list,
+           then we find all their neighbor and call the helper function to
+           visit all the email in the graph node
+        3. then in final loop, we loop from all the possible email we have and
+           try to visit each one using helper function we create previously.
+           then we sort the result and add owner into index 0 from owner map we
+           created previously
+
+    **Complexity** Time: O(nlogn) Space: O(n) // n == number of distinct emails

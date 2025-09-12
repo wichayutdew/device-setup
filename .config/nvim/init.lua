@@ -22,6 +22,8 @@ vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 vim.keymap.set("n", "k", "kzz")
 vim.keymap.set("n", "j", "jzz")
+vim.keymap.set("n", "i", "zzi")
+vim.keymap.set("n", "a", "zza")
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "<leader>qq", ":qa<CR>")
@@ -476,6 +478,14 @@ require("leetcode").setup({
 		focus_result = "L",
 	},
 	image_support = false,
+	theme = {
+		["alt"] = {
+			bg = "#FFFFFF",
+		},
+		["normal"] = {
+			fg = "#EA4AAA",
+		},
+	},
 })
 
 vim.keymap.set("n", "lff", ":Leet list<CR>")
