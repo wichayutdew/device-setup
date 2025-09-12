@@ -825,7 +825,6 @@
 
     **Complexity** Time: O(m*n) Space: O(1)
 
-
 ### Rotting orange
 
     _Default case_, if the grid is empty then there's nothing to rot
@@ -851,3 +850,23 @@
            get actual rot minutes)
 
     **Complexity** Time: O(m*n) Space: O(1)
+
+### Search in rotated sorted array
+
+    _Default case_, if the input array is empty then return default -1
+
+
+    **Solve**
+        1. this is one of the variant of binary search question, so the idea is
+           pretty similar
+        2. first binary search, we will try to find the min value in array.
+           just like the first bad version question. check mid with value of
+           last index, if it's larger, then min is right of the mid, otherwise,
+           the current location might be min or it's on left side
+        3. once we know index of min value, we check if our target is
+           smaller/bigger than last index of the input.
+            - if it's smaller -> target must be between min up until last index
+            - if it's larget -> must be between 0 until 1 index before min
+        4. then we do normal binary search with new scope we set normally.
+
+    **Complexity** Time: O(logn) Space: O(1)
