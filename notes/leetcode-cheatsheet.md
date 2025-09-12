@@ -776,3 +776,78 @@
            each certain result index
 
     **Complexity** Time: O(n) Space: O(1)
+
+### Min Stack
+
+    _Default case_, there is no default case it's a data structure
+
+    **Solve**
+        1. this question uses LinkedList to help with the complexity, but we
+           add one more field call min, to always stored min value of entire
+           list
+        2. for a start we create null node, then for each operation, we do
+            - push: if node is null create new node with value and min == input
+              value and next node is null, otherwise, we create new node with
+              value = input, min = min of current node and input, and next node
+              is the previous one O(1)
+            - pop: we just move the node to next pointer O(1)
+            - top: return the value of head node O(1)
+            - min: returned the min value in the head node O(1)
+
+        **Complexity** Time: O(1) Space: O(1) // all the data stored is part of
+        answer
+
+### Validate Binary Search Tree
+
+    _Default case_, if the root is null then it's valid
+
+    **Solve**
+        1. create helper method to do cascade check whether the tree is valid,
+           by defining the min and max value for each node not to bypass this.
+           then we cascade to left and right branch by setting min/max value to
+           current value accordinly
+        2. in core function, just pass root and actual MIN/MAX value (in Long,
+           this will prevent int overflow)
+    
+    **Complexity** Time: O(h) Space: O(1)
+
+### Number of Islands
+
+    _Default case_, if matrix is empty then return 0
+
+    **Solve**
+        1. this question can be solved with dfs by starting from top left of
+           the grid. and once 1 (an Island) is found we append the tracker then
+           do dfs to drown the entire island
+        2. in dfs, we do normal bound check, and check if it's island or not.
+           if yes we drown it and cascade 4 direction horizontal and verically
+        3. once we reaches end of grid, return the tracker.
+
+    **Complexity** Time: O(m*n) Space: O(1)
+
+
+### Rotting orange
+
+    _Default case_, if the grid is empty then there's nothing to rot
+
+    **Solve**
+        1. one of DFS question variant with some twist. 1st we need to do 1
+           loop to rot the entire grid. by starting from top/left of the grid
+           and cascade the way down.
+        2. in first loop, once we found rotting spot (2) we call dfs helper
+           function to cascade the rotting to other cells along with the
+           rotting minute (2).
+        3. helper dfs is handles normal out of bound, if cell is 0, or if cell
+           is rot but minute that rot is lesser than current minute, we don't
+           touch that. otherwise change the cell value to the minute it rot.
+           then call same function stack to 4 directional with minute +1
+        4. then we do another loop to get the max value of minute this grid has
+           rot. do keep in mind that we should start from 2 to skip those 0s
+           and 1s.
+        5. if in 2nd loop we found 1, then the batch is not entirely rotten
+           return -1
+        6. otherwise if it's more than 1 we keep collecting the max value.
+        7. then finally we return maxtime - 2 (from the shift we do earlier to
+           get actual rot minutes)
+
+    **Complexity** Time: O(m*n) Space: O(1)
