@@ -693,3 +693,86 @@
            and just return the result build from helper function
 
     **Complexity** Time: O(h) Space: O(1) // not keeping account of result list
+
+### Clone graph
+
+    _Default case_, the node is null, just don't clone anything and return null
+
+    **Solve**
+        1. this is DFS question. so we create map to keep track of visited node
+           and create dfs helper to do the job
+        2. the dfs helper will accept any node and create a clone of it and put
+           that into map. then it'll traverse the original node neighbors and
+           check if it's been visited already by lookin at the map. if yes,
+           just add the cloned neighbor into this cloned node. otherwise do
+           another dfs and add the cloned neighbor into this clone node.
+        3. then we just call dfs to root node and recursion stack will handle
+           the clone for us.
+
+    **Complexity** Time: O(v + e) Space: O(v + e) //node + neighbors 
+
+### Evaluate reverse polish notation
+
+    _Default case_, if the input is empty it's 0, if input size is 1 then
+    that's the result, just return it as int. we can ignore pretty much all the
+    error handling since the question statement itselves state that all input
+    are arithmetically correct.
+
+    **Solve**
+        1. create stack to hold all the int value
+        2. loop thru the input tokens, if found mathematical operation just pop
+           previous 2 int and do math, then push back. otherwise just push the
+           number into stack
+        3. lastly, just pop the remaining value in stack as a result. we can
+           assume this from the statement that the input is arithmetically
+           correct
+
+
+    **Complexity** Time: O(n) Space: O(n)
+
+### Course schedule
+
+    _Default case_, if there is no prerequisites or only 1 course, it can
+    definitely be finished
+
+    **Solve**
+        1. this is one derivative of dfs question. idea is to find if we have
+           loop in a graph or not. can view the prerequisites list as graph
+           neighbors
+        2. create list of node (course) with neighbors (prereq course)
+        3. once we have the graph, we can just create 2 helper list to store if
+           it's a studying node or finished node
+        4. in helper function, accept course number, and do 2 initial check
+           whether it's already finished per the prerequisites course from
+           other already, if yes then return true for that course, and check if
+           it's still a studying course from another chain of prereq courses or
+           not, if it is then return false since the course is stil not
+           finished
+        5. once we passed initial check, we do dfs to the entire prerequisites
+           for that certain course, and check if there is any ongoing studying
+           course in the list, if there is return false, since we found the
+           node loop
+        6. if we can pass the prerequisites loop, then we considered that
+           course finished and remove it out from studying list
+        7. then we use this dfs to check for all the courses if we can study
+           all of it. and same thing if we found any course stuck in the loop
+           then we can just return false since this schedule can never be
+           finished. otherwise, return true if we can pass the entire loop
+
+    **Complexity** Time: O(v + e) Space: O(v + e) // same complexity with
+    normal graph problem since we need to reach each vertices and edges once.
+
+### Product of array except self
+
+    _Default case_, if the input array size is 1 or less then just return it
+
+    **Solve**
+        1. we create 2 new variable result list and temp variable to keep track
+           of multiplication
+        2. then we do 2 loop from left to right and right to left, in each
+           loop, we try to do *= temp to that result index. then we do *= with
+           actual value in the source index to temp variable
+        3. now we will be combining all the result from left and right into
+           each certain result index
+
+    **Complexity** Time: O(n) Space: O(1)
