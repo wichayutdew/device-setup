@@ -673,3 +673,23 @@
            type
 
     **Complexity** Time: O(n^2) Space: O(1)
+
+### Binary tree level order traversal
+
+    _Default case_, if the root is null return empty list, there's nothing to
+    traverse
+
+    **Solve**
+        1. create mutable list of mutable list to store result
+        2. create helper function to do traversal, input tree node and the
+           level currently in.
+        3. for the helper function, do the same default case. then check if the
+           size of result is at the same level, if yes then we need to create
+           empty mutable list to store all the node value
+        4. for each function call add current node value to the list of current
+           level
+        5. then recursively call traverse from left to right branch
+        6. in main function, we can just call traverse from root with level 0
+           and just return the result build from helper function
+
+    **Complexity** Time: O(h) Space: O(1) // not keeping account of result list
