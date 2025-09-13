@@ -966,3 +966,97 @@
            created previously
 
     **Complexity** Time: O(nlogn) Space: O(n) // n == number of distinct emails
+
+### Sort color
+
+    _Default case_, if the input array size is less than 2 there's nothing to
+    sort
+
+    **Solve**
+        **this is a sorting question, so we can practice quicksort and
+           mergesort
+        - Quicksort
+            1. idea is to always cut the array in half and sort each of it in
+               recursion stack.
+            2. create 3 helper function quicksort, partition, swap. all including
+               left and right pointer as a params
+                - quicksort is the main recursion call, do this function if the
+                  left pointer < right pointer. what to do is call partition
+                  function to find mid point of half sorted array and call
+                  another quicksort recursively for each of left/right half
+                - partition, this function will assume the rightmost index
+                  value is the arary partition, it'll try to swap item around
+                  so that left half value is less than partition and right half
+                  value is greater than the partition
+                - swap, straightforward, swap value between 2, indices.
+            3. in core function we just call quicksort with left/right most
+               index and everything will be sorted automaticaly
+        - Mergeosrt
+            1. idea is to split the input index up until the point where we
+               have n array of size 1 and try to merge them together in a
+               sorting manner
+            2. we need 2 helper function, mergesort and merge.
+                - mergesort helper is similar to quicksort helper, it handles
+                  splitting the array in have and do a recursive call. so for
+                  mergesort we need extra n space for the splitted array. after
+                  we splitted the array into 2 halves, we call another helper
+                  merge to merge both of them back in a sorting manner
+                - just like the merge 2 sorted list question we have pointer on
+                  each half and keep adding smaller value in to main array
+            3. same thing in core function just call merge sort from left/right
+               most index
+
+    **Complexity** Time : O(nlogn) Space: O(n)
+
+## Spiral matrix
+
+    _Default case_, if the matrix is empty just return empty list
+
+    **Solve**
+        1. create result list to collects the answer.
+        2. do while loop until result list size is equals to matrix size
+           (rows*cols)
+        3. for each while loop, do 4 subsequence steps
+            - loop from left to right index inclusively
+            - loop from top to bottom index exclusively (without top and bottom
+              idx included)
+            - loop from right back to left index inclusively
+            - loop from bottom back to top index exclusively
+        4. for each loop, keeps checking of result size is equals to matrix
+           size or not. if not add that cell into result.
+
+    **Complexity** Time: O(m*n) Space:O(1)
+
+### Subset
+
+    _Default case_, if the input array is empty return empty list
+
+    **Solve**
+        1. this is another variant of backtrack problem. the idea is to get all
+           possible subset of input array.
+        2. create result list to keep track of subset value
+        3. create backtrack function, always push temp list into result list
+           since we want all sort of subsets. in for loop part of backtrack,
+           keeps the current index and always call another backtrack
+           recursively to next index to let it fill the subset
+        4. in main function, just call backtrack with some temp list and start
+           from index 0
+
+    **Complexity** Time: O(2^n) Space: O(n) // usual backtracking complexity
+
+### Binary Tree Right side view
+
+    _Default case_, if the root node is null return empty list
+
+    **Solve**
+        1. create helper function to collect node and level. if the result size
+           is same as level, means we are in new level, we push that node value
+           in.
+        2. then we do recursive call starts from right branch first, to align
+           with question statement rightsie view. and then do left afterwards.
+        3. for main function, just call the helper function to traverse from
+           root node and level 0
+        4. finally recursive stack will handle and fills right side value and
+           we can return the result list
+
+    **Complexity** Time: O(h) Space O(1)
