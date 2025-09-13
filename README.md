@@ -42,7 +42,7 @@ brew install koekeishiya/formulae/skhd
 
 ```zsh
 brew install --cask postman
-brew install --cask warp
+brew install --cask ghostty
 ```
 
 # Coding language version control
@@ -69,6 +69,8 @@ brew install eza
 brew install fd
 brew install rg
 brew install git
+brew install tmux
+brew install tpm
 ```
 
 ## Commands
@@ -77,3 +79,4 @@ brew install git
 `mkdir ..` --> Create folder
 `rm ...` --> delete file
 `rm -r ..` --> delete folder
+`mv $SOURCE $DESTINATION` --> move/rename file
