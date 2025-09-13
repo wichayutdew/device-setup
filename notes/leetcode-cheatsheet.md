@@ -966,3 +966,44 @@
            created previously
 
     **Complexity** Time: O(nlogn) Space: O(n) // n == number of distinct emails
+
+### Sort color
+
+    _Default case_, if the input array size is less than 2 there's nothing to
+    sort
+
+    **Solve**
+        **this is a sorting question, so we can practice quicksort and
+           mergesort
+        - Quicksort
+            1. idea is to always cut the array in half and sort each of it in
+               recursion stack.
+            2. create 3 helper function quicksort, partition, swap. all including
+               left and right pointer as a params
+                - quicksort is the main recursion call, do this function if the
+                  left pointer < right pointer. what to do is call partition
+                  function to find mid point of half sorted array and call
+                  another quicksort recursively for each of left/right half
+                - partition, this function will assume the rightmost index
+                  value is the arary partition, it'll try to swap item around
+                  so that left half value is less than partition and right half
+                  value is greater than the partition
+                - swap, straightforward, swap value between 2, indices.
+            3. in core function we just call quicksort with left/right most
+               index and everything will be sorted automaticaly
+        - Mergeosrt
+            1. idea is to split the input index up until the point where we
+               have n array of size 1 and try to merge them together in a
+               sorting manner
+            2. we need 2 helper function, mergesort and merge.
+                - mergesort helper is similar to quicksort helper, it handles
+                  splitting the array in have and do a recursive call. so for
+                  mergesort we need extra n space for the splitted array. after
+                  we splitted the array into 2 halves, we call another helper
+                  merge to merge both of them back in a sorting manner
+                - just like the merge 2 sorted list question we have pointer on
+                  each half and keep adding smaller value in to main array
+            3. same thing in core function just call merge sort from left/right
+               most index
+
+    **Complexity** Time : O(nlogn) Space: O(n)
