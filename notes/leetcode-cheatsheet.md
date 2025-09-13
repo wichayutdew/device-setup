@@ -1043,3 +1043,20 @@
            from index 0
 
     **Complexity** Time: O(2^n) Space: O(n) // usual backtracking complexity
+
+### Binary Tree Right side view
+
+    _Default case_, if the root node is null return empty list
+
+    **Solve**
+        1. create helper function to collect node and level. if the result size
+           is same as level, means we are in new level, we push that node value
+           in.
+        2. then we do recursive call starts from right branch first, to align
+           with question statement rightsie view. and then do left afterwards.
+        3. for main function, just call the helper function to traverse from
+           root node and level 0
+        4. finally recursive stack will handle and fills right side value and
+           we can return the result list
+
+    **Complexity** Time: O(h) Space O(1)
