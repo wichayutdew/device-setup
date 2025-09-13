@@ -1,14 +1,17 @@
-# fet PATH, MANPATH, etc., for Homebrew.
+# ---- Starship ----
+eval "$(starship init zsh)"
+
+# ---- fetch PATH, MANPATH, etc., for Homebrew. ----
 source <(/opt/homebrew/bin/brew shellenv)
 
-# Added by Toolbox App
+# ---- Added by Toolbox App ----
 export PATH="$PATH:/Users/wphongphanpa/Library/Application\ Support/JetBrains/Toolbox/scripts"
 export PATH="$PATH:/Users/wphongphanpa/Library/Application Support/Coursier/bin"
 
-# Added by zoxide
+# ---- Added by zoxide ----
 source <(zoxide init --cmd cd zsh)
 
-# Direct usage to asdf location
+# ---- Direct usage to asdf location ----
 . /opt/homebrew/opt/asdf/libexec/asdf.sh
 
 # ---- Eza (better ls) -----
@@ -22,6 +25,8 @@ ff () {
     aerospace list-windows --all | fzf --bind 'enter:execute(bash -c "aerospace focus --window-id {1}")+abort'
 }
 
+
+# --- Aliases ----
 alias soy-health-check="watch -n 2 curl -m 1 -sS 127.0.0.1:2501/version"
 alias local-search="""
   cd repositories/activities-local-vault
