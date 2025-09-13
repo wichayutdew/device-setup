@@ -65,6 +65,7 @@ asdf list
 
 ```zsh
 brew install starship
+brew install carapace
 brew install zoxide
 brew install bat
 brew install eza
