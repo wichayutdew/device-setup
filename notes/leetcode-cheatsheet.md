@@ -1007,3 +1007,39 @@
                most index
 
     **Complexity** Time : O(nlogn) Space: O(n)
+
+## Spiral matrix
+
+    _Default case_, if the matrix is empty just return empty list
+
+    **Solve**
+        1. create result list to collects the answer.
+        2. do while loop until result list size is equals to matrix size
+           (rows*cols)
+        3. for each while loop, do 4 subsequence steps
+            - loop from left to right index inclusively
+            - loop from top to bottom index exclusively (without top and bottom
+              idx included)
+            - loop from right back to left index inclusively
+            - loop from bottom back to top index exclusively
+        4. for each loop, keeps checking of result size is equals to matrix
+           size or not. if not add that cell into result.
+
+    **Complexity** Time: O(m*n) Space:O(1)
+
+### Subset
+
+    _Default case_, if the input array is empty return empty list
+
+    **Solve**
+        1. this is another variant of backtrack problem. the idea is to get all
+           possible subset of input array.
+        2. create result list to keep track of subset value
+        3. create backtrack function, always push temp list into result list
+           since we want all sort of subsets. in for loop part of backtrack,
+           keeps the current index and always call another backtrack
+           recursively to next index to let it fill the subset
+        4. in main function, just call backtrack with some temp list and start
+           from index 0
+
+    **Complexity** Time: O(2^n) Space: O(n) // usual backtracking complexity
