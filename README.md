@@ -62,7 +62,9 @@ asdf list
 
 # Terminal essential
 
+
 ```zsh
+brew install starship
 brew install zoxide
 brew install bat
 brew install eza

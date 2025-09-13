@@ -1,8 +1,8 @@
-# ---- Starship ----
-eval "$(starship init zsh)"
-
 # ---- fetch PATH, MANPATH, etc., for Homebrew. ----
 source <(/opt/homebrew/bin/brew shellenv)
+
+# ---- Starship ----
+eval "$(starship init zsh)"
 
 # ---- Added by Toolbox App ----
 export PATH="$PATH:/Users/wphongphanpa/Library/Application\ Support/JetBrains/Toolbox/scripts"
