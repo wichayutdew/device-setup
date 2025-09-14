@@ -1216,3 +1216,38 @@
            really need any idle period
 
     **Complexity** Time: O(nlogn) Space: O(n)
+
+### Kth smallest element in BST
+
+    _Default case_, if k is 0 or root is null, then we cannot solve the
+    problem, return 0
+
+    **Solve**
+        1. this question is to teach us inorder traversal of bst. so we can
+           create a sorting helper function to do inorder traversal and return
+           the kth-1 index value from sorted list
+        2. to do inorder traversal we just create helper function to push node
+           value into list in the middle of 2 recursive call to left and right
+           branches
+
+    **Complexity** Time: O(h) Space: O(h) // recursion stack
+
+### Daily temperatures
+
+    _Default case_, if the temperatures size is 1 or less, we cannot get any
+    warmer, return array of 0 state that it can't be warmer
+
+    **Solve**
+        1. this is a stack question, so we 1st create a default result list of
+           value 0 stating that there's no warmer day for any index
+        2. then we loop thru each index keep adding the index number into the
+           stack. but for each index we reach, we keep checking while the stack
+           is not empty and we found out that current index's temperature is
+           actually hotter that the one on top of the stack.
+        3. that is when we know that for the previous unprocessed index, we
+           found the earliest hotter day. which is the day in the index.
+        4. then we just update the result list of that index to be number of
+           difference in days we are at and that initial date
+        5. finally, we return the result list
+
+    **Compleixty** Time: O(n) Space: O(n)
