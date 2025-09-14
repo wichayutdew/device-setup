@@ -1161,3 +1161,30 @@
     **Complexity** Time: O(m*n*4^l) Space: O(l) // m*n == board size, l = word
     length
 
+### Find all anagrams in a string
+
+    _Default case_, there's no default case for this question
+
+    **Solve**
+        1. this is a sliding window problem which utilize map as a helper
+        2. first we push all characters with number of occurance into a map. we
+           also create variable to keep track of total number of unique chars
+           we have in the map
+        3. then we create sliding window and loop thru string s. In each
+           iteration. we do 2 things.
+            - moving end pointer and keeps reducing the occurance number in
+              map. if the occurance reaches 0 we reduct the total of chars.
+            - another inner loop while we reachs total uniquq chars == 0, means
+              we probably found an anagram, but we only add the index if and
+              only if the size of start-->end pointer is equal to string p.
+            - then in the same while loop, we keeps incrementing start pointer
+              and adding value back into the map. once some certain character
+              occurances exceeds 0 then we increment totalUniqueCharacters
+              value means we lose the anagram feature in current window, so we
+              keeps exapanding/decreasing window till we reaches the end of
+              strign s
+        4. finally the result will consists of all starting index where we
+           found an anagram
+
+    **Complexity** Time: O(n) Space: O(n)
+
