@@ -488,9 +488,9 @@ require("leetcode").setup({
 	},
 })
 
-vim.keymap.set("n", "lff", ":Leet list<CR>")
-vim.keymap.set("n", "lde", ":Leet desc<CR>")
-vim.keymap.set("n", "ldd", ":Leet run<CR>")
-vim.keymap.set("n", "lrr", ":Leet submit<CR>")
-vim.keymap.set("n", "lre", ":Leet reset<CR>")
-vim.keymap.set("n", "lgx", ":Leet open<CR>")
+vim.keymap.set("n", "<leader>lff", ":Leet list<CR>")
+vim.keymap.set("n", "<leader>lde", ":Leet desc<CR>")
+vim.keymap.set("n", "<leader>ldd", ":Leet run<CR>")
+vim.keymap.set("n", "<leader>lrr", ":Leet submit<CR>")
+vim.keymap.set("n", "<leader>lre", ":Leet reset<CR>")
+vim.keymap.set("n", "<leader>lgx", ":Leet open<CR>")
