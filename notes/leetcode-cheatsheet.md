@@ -1298,3 +1298,33 @@
         3. then finally, we can just pick just values and convert into list
 
     **Complexity** Time: O(n * nlogn) Space: O(n)
+
+### Pacific Atlantic water flow
+    
+    _Default case_, if the input matrix is empty then return empty list
+
+    **Solve**
+        1. idea of the question is to return the coordinate(s) in matrix where
+           rain water flows to both pacific and atlantic ocean
+        2. so, we need 2 boolean matrices to store each coordinate that water
+           can flow back to either pacific or atlantic ocean respectively
+        3. the idea to check the water flow is one variance of dfs question. so
+           we need dfs helper function to do reverse check if water from each
+           ocean can reaches back to that certain cell.
+        4. in helper function, we do normal out of bound check, if the water is
+           already flows thru that coordinate, or if water aren't able to reach
+           that certain cell since the height of current coordinate is lower
+           than the surrounding cells
+        5. otherwise we mark the cell as reached
+        6. in main function, we loop thru each column, top and bottom row, to
+           see if pacific and atlantic ocean water can reach back to each cells
+        7. then in each rows, left and right most column, we do the same to
+           check ocean water can flow back or not
+        8. then finally we iterate thru the matrix. to see if both pacific and
+           atlantic reach boolean array are true. if yes we add that coordinate
+           into result list.
+        9. then return the result
+
+    **Complexity** Time: O(m*n) Space: O(m*n) // we need to flows to all cells
+    3 times
+
