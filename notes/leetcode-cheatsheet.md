@@ -1122,3 +1122,23 @@
            variable
 
     **Complexity** Time: O(n) Space: O(1)
+
+### Letter combinations of phone number
+
+    _Default case_, the input string is empty
+
+    **Solve**
+        1. this is another variant of backtrack problem, so backtrack helper
+           function is a must
+        2. first we need to create array of letters map to be reuse in
+           backtrack function
+        3. in backtrack function, we insert stringbuilder and current index of
+           digits. if stringbuilder length equals to digits length, add that
+           string into result
+        4. otherwise, we need to get all the letters combination from letter
+           map according to that digits index then do backtrack to add the
+           letter into string builder and call recursively to next digit
+        5. then we can return the result list as backtrack handles all the
+           calculation
+
+    **Complexity** Time: O(2^n) Space: O(n) // usual backtracking complexity
