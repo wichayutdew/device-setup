@@ -1365,3 +1365,16 @@
            k pair and add the word into result list
 
     **Complexity** Time: O(nlogn) Space: O(n)
+
+### Course schedules II
+
+    _Default case_, if there's no prerequisites or only 1 course or less, just
+    build int array of number of courses in incremental order
+
+    **Solve**
+        1. this is just Course schedules question that want us to answer with
+           finished list instead of boolean
+        2. the entire logic is the same, just change the return type and value
+
+    **Complexity** Time: O(v + e) Space: O(v + e) // same complexity with
+    normal graph problem since we need to reach each vertices and edges once.
