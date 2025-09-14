@@ -1251,3 +1251,50 @@
         5. finally, we return the result list
 
     **Compleixty** Time: O(n) Space: O(n)
+
+### Gas station
+
+    _Default case_, if input array is empty then there's nothing to calculate
+
+    **Solve**
+        1. we wanted to find the starting point that allow us to do 1 full
+           circle, then we need to keep track of the valid starting point and
+           whether it's possible to go full circle or not (based off the gas in
+           tank and cost to go)
+        2. to determine starting point, we can just check if from point a to b
+           we can even use that gas amount to go. if not the starting point
+           might possibly be at point b+1
+        3. finally, before return the starting point we found, we first need to
+           check if we can go full circle from the total gas usage variable we
+           keep track since beginning
+
+    **Complexity** Time: O(n) Space: O(1)
+
+### Valid sudoku
+
+    _Default case_, if the board is empty then it's probably valid we cannot
+    check anything
+
+    **Solve**
+        1. we know from sudoku rule that we can have 1 number per
+           row/col/diagonally.
+        2. from this rule we can just use simple string set to keep track of
+           each value in each row/col/diagonal position. when we try to add
+           some value and it's exists in set, then the sudoku board is not
+           valid we can just return false
+        3. if we gone thru entire board then it's a valid board
+
+    **Complexity** Time: O(m*n) Space : O(m*n)
+
+### Group anagram
+
+    _Default case_, if the input is empty return empty list
+
+    **Solve**
+        1. idea of this question is easy, we create some map to store string in
+           group of sorted variance of itselves.
+        2. so we just loop thru each string, try to sort it and add itselves
+           into sorted groups.
+        3. then finally, we can just pick just values and convert into list
+
+    **Complexity** Time: O(n * nlogn) Space: O(n)
