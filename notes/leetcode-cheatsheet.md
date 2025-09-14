@@ -1378,3 +1378,22 @@
 
     **Complexity** Time: O(v + e) Space: O(v + e) // same complexity with
     normal graph problem since we need to reach each vertices and edges once.
+
+### Longest consecitive sequence
+
+    _Default case_, if the input array size is 1 or less, that's the longest it
+    can get
+
+    **Solve**
+        1. instead of looping thru list, we convert list to set for quicker
+           lookup and less number of check we need to do since set doesn't
+           allow duplicates
+        2. for each number in set, we check if it's the starting number of some
+           consecutive sequences. (by checking num-1 is not in set) this to
+           help speed up the process and prevent TLE error
+        3. after we know that it's the starting number of sequence, we keeps
+           checking if we have next number until there's none, then check with
+           the result variable if it's exceeding previous range or not
+        4. then finally we return the longest range
+
+    **Complexity** Time: O(n) Space: O(n)
