@@ -1328,3 +1328,40 @@
     **Complexity** Time: O(m*n) Space: O(m*n) // we need to flows to all cells
     3 times
 
+### Remove nth node from end of the list
+
+    _Default case_, if the input node is null or n == 0 then it's invalid
+
+    **Solve**
+        1. we need 2 pointer to find the location to skip the nth node
+        2. 1st pointer is to move it n times. if after move, the pointer points
+           to null location, then the node we need to remove is head node. we
+           can early return head?.next
+        3. otherwise, we create new pointer at head, then move both pointer
+           until the 1st pointer next is null. the 2nd pointer will point at
+           exactly 1 node before the one to remove
+        4. then we can just skip next node and return it's head
+
+    **Complexity** Time: O(n) Space: O(1)
+
+### Top K Frequent word
+
+    _Default case_, if input array is empty or size is less than k then it's
+    invalid input
+
+    **Solve**
+        1. this is a max heap problem (when poll most frequent word pop out)
+        2. to be able to determine whether the word is more frequent we need 2
+           condition (lexicographical order)
+            - it's appear more often
+            - it's lexicographically more than it's comparator
+        3. to achieve this we can create max heap according to the requirements
+           above by inserting pair of word/frequency into the heap
+            - 1st check frequency
+            - then check lexicographical order by using
+              string1.compareTo(string2)
+        4. then build the map of word-->freq pair from input array.
+        5. push each pair into max heap, then as a result we can just poll top
+           k pair and add the word into result list
+
+    **Complexity** Time: O(nlogn) Space: O(n)
