@@ -1142,3 +1142,22 @@
            calculation
 
     **Complexity** Time: O(2^n) Space: O(n) // usual backtracking complexity
+
+### Word Search
+
+    _Default case_, if word is empty, return true. if board is empty return
+    false
+
+    **Solve**
+        1. one of the dfs question variant. we need to traverse through the
+           matrix to find the starting point (character == 1st index of word we
+           search). If found, we try to do dfs to traverse thru each index of
+           word. if we can make it to final index. then we found the word.
+           return true. else keeps searching thru next character in board
+        2. if finally after traversing entire matrix but still cannot build the
+           word, return false
+
+
+    **Complexity** Time: O(m*n*4^l) Space: O(l) // m*n == board size, l = word
+    length
+
