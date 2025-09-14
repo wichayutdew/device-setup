@@ -1105,3 +1105,20 @@
            pointer in inorder array
 
     **Complexity** Time:O(n) Space:O(n) //space of recursive stack
+
+### Container with most water
+
+    _Default case_, if the input array size is 1 or less, we cannot build
+    container
+
+    **Solve**
+        1. use 2 pointer to solve this issue. starting at left and right most
+           index with a result variable
+        2. while left < right pointer, keeps calculating the container size by
+           doing lower bound * index diff. if it's bigger than previous result,
+           replace it with current one
+        3. after that try move the index with lower bound to next index then do
+           the same calculation again. until finished and return the result
+           variable
+
+    **Complexity** Time: O(n) Space: O(1)
