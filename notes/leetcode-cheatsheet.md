@@ -1398,7 +1398,7 @@
 
     **Complexity** Time: O(n) Space: O(n)
 
-## Rotate array
+### Rotate array
     
     _Default case_, if k rotation is 0 or same as array size, or is a multiples
     of array size. then we don't need to do anything since it's creating same
@@ -1416,3 +1416,25 @@
             - entire array
     
     **Complexity** Time: O(n) Space: O(1)
+
+### Decode string
+
+    _Default case_, if string length is 1 or less, nothing to decode
+
+    **Solve**
+        1. we might be encounter the nested decode string so we need some stack
+           to handle that
+        2. this question splitted text into 4 variance
+            - digits --> when found, we just append the character into count
+              builder (in order to build int)
+            - [ --> once we reachs open bracket, we know that we need to store
+              latest count and string into a stack to give way for calculations
+              inside bracket.
+              ] --> once we found closing bracket, we know we need to append
+              the text we built during the bracket n amount of times
+            - else (normal character) --> append the whatever here into result
+              string
+        3. as we have utilities logic, we just loop thru each character and
+           calculate the final string
+
+    **Complexity** Time: O(n) Space: O(n)
