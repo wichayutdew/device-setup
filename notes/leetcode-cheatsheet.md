@@ -1076,3 +1076,32 @@
            iteration, just replace longest string into the result
 
     **Complexity** Time: O(n^2) Space : O(1)
+
+### Construct Binary Tree from Preorder and Inorder Traversal
+
+    _Default case_, if either of the input array is empty then we aren't able
+    to construct any tree
+
+    **Solve**
+        1. we need to understand the nature of preorder/inorder traversal first
+           to be able to answer this question. so the order (from tree) is like
+            - preorder: top --> down (left --> right). this will help us define
+              the root of each iteration as we are going top down
+            - inorder: left --> right (top --> down). this clearly define
+              information of which side of branch each node are on based off
+              the preorder value
+        2. now we need helper function to input starting index of preorder and
+           defind scope of inorder to build branches
+        3. helper function will stop if encountered with invalid condition,
+           e.g. preorder starting index out of bound, left pointer exceed right
+           pointer in inorder 
+        4. after that we create node based off value in preorder starting index
+        5. then we get the index of that value in inorder array, to be able to
+           specify scope of left and right branch
+        6. for left branch, we start at next preorder index, with scope from
+           left pointer to left of node index in inorder array
+        7. for right branch, we start at preorder + size of left side of the
+           node's branch + 1. and next pointer of node index until right
+           pointer in inorder array
+
+    **Complexity** Time:O(n) Space:O(n) //space of recursive stack
