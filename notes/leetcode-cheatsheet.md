@@ -1397,3 +1397,22 @@
         4. then finally we return the longest range
 
     **Complexity** Time: O(n) Space: O(n)
+
+## Rotate array
+    
+    _Default case_, if k rotation is 0 or same as array size, or is a multiples
+    of array size. then we don't need to do anything since it's creating same
+    result
+
+    **Solve**
+        1. idea is to find a pivot point and reverse the subarray per that
+           pivot and reverse the entire array. this will help do the rotation
+        2. to find pivot point, we do k modulo from array size to see how many
+           rotation we need to do. then we subtrac that from size of array to
+           get the pivot point
+        3. then we do 3 reversal.
+            - left most index until pivot point
+            - next to pivot point to right most idex
+            - entire array
+    
+    **Complexity** Time: O(n) Space: O(1)
