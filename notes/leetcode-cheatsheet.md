@@ -1060,3 +1060,19 @@
            we can return the result list
 
     **Complexity** Time: O(h) Space O(1)
+
+### Longest Palindromic Substring
+
+    _Default case_, if input string is 1 or les return that string
+
+    **Solve**,
+        1. idea is to loop thru each index and try build odd(1 char and then
+           palindrome to left and right) or even(entirely palindrome string)
+           from that certain index
+        2. so we need helper function to generate palindrome string, by
+           inputing starting index on left and right (to support building both
+           even/odd palindrome)
+        3. while we have result string, odd/even palindrome, at every
+           iteration, just replace longest string into the result
+
+    **Complexity** Time: O(n^2) Space : O(1)
