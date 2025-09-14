@@ -1188,3 +1188,31 @@
 
     **Complexity** Time: O(n) Space: O(n)
 
+### Task Scheduler
+
+    _Default case_, if we only have 1 task or each task doesn't need idle
+    period. return the tasks size that's the most minimal order
+
+    **Solve**
+        1. the question statement define that the task name only contains upper
+           case english letter, so we at least can define the scope somehow.
+        2. 1st we loop thru the input task to try sort the number of occurance
+           of each task alphabet.
+        3. once we sorted, we know that at index 25 (last character) is the
+           most frequent tasks we need to do.
+        4. we can based off that most frequent tasks and try fill other task in
+           between the idle gap we have. (the idle gap will be n * (most
+           frequent tasks -1)) the -1 is the last task we can put at the end.
+        5. now we loop from index 24 (2nd most frequent task) down to 0 (least
+           frequent task). for each iteration, we can reduce total number of
+           idle slot by filling in the tasks (do note that the 2nd/3rd/... most
+           frequent task, might have the same number of frequency) so we do
+           minOf to compare the frequency of most frequent task with other. if
+           the frequency is the same the most frequent task will have less
+           frequency cause we exclude the last task as it can always be put
+           last and it wouldn't affect the total number of tasks/idle period
+        6. finally, we check if we have idle period, if yes we need total
+           number of tasks + idle to finish everything. otherwise we don't
+           really need any idle period
+
+    **Complexity** Time: O(nlogn) Space: O(n)
