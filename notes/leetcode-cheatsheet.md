@@ -1550,3 +1550,14 @@
 
     **Complexity** Time: O(n) Space: O(n)
         
+### Kth Largest Element in an Array
+
+    _Default case_, if the size of input array is less than k means we cannot
+    find kth largest element
+
+    **Solve**
+        1. this is a maxHeap question. so we just create maxheap(a,b -> b-a) to
+           store all value in input array
+        2. then we poll from heap k-1 times, and return the last poll
+
+    **Complexity** Time: O(logn) Space: O(n)
