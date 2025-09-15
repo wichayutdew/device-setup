@@ -28,7 +28,7 @@ vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "<leader>qq", ":qa<CR>")
 vim.keymap.set("i", "jk", "<esc>")
-vim.keymap.set("n", "<leader>/", ":noh<CR>")
+vim.keymap.set("n", "//", ":noh<CR>")
 -- Windows Navigation
 vim.keymap.set("n", "<leader>wv", ":vsplit<CR>")
 vim.keymap.set("n", "<leader>wh", ":split<CR>")
@@ -81,6 +81,7 @@ vim.pack.add({
 	{ src = "https://github.com/nvim-mini/mini.pairs" },
 	{ src = "https://github.com/nvim-mini/mini.cursorword" },
 	--------------------- EXTRA ---------------------
+	{ src = "https://github.com/folke/flash.nvim" },
 	{ src = "https://github.com/tomasky/bookmarks.nvim" },
 	{ src = "https://github.com/sainnhe/gruvbox-material" },
 	{ src = "https://github.com/folke/noice.nvim" }, -- Better command line and messages
@@ -422,6 +423,16 @@ require("mini.pairs").setup()
 require("mini.cursorword").setup()
 
 -- Miscellaneous
+local flash = require("flash")
+flash.setup({
+	mode = {
+		search = {
+			enabled = false
+		}
+	}
+})
+vim.keymap.set("n", "<leader>/", flash.jump)
+
 require("noice").setup({ notify = { enabled = false } })
 require("lualine").setup({
 	options = {
