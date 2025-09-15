@@ -1438,3 +1438,45 @@
            calculate the final string
 
     **Complexity** Time: O(n) Space: O(n)
+
+### Contiguous Array
+
+    _Default case_, if the input array is empty then return 0
+
+    **Solve**
+        1. nice to know keyword, contagious means range in array that sums to 0
+        2. so this question is talking about range with sums of x, we will use
+           prefix sum to help.
+        3. idea is to keep adding sum variable (if found 1 -> +1 else -1). then
+           in each iteration we check if sum is 0, if yes the entire range from
+           idx 0 is contagious we store that candidate into some variable.
+        4. another way to find contagious array is to find some range in the
+           middle that sums to 0. we can do by subtracting some sum from idx0
+           til idx n from total sum. this is what prefix sum is made for.
+        5. that means for each iteration, if we found some sum in prefix sum
+           map. we check if it's longer than current longest range or not by
+           subtracting current idx with prefix sum idx
+        6. else, if there's nothing matched, we try adding the prefix sum and
+           current idx into the map
+
+    **Complexity** Time: O(n) Space: O(n)
+
+
+### Find K closest elements
+
+    _Default case_, if size of input array is less than k or k == 0 return
+    empty list
+
+    **Solve**
+        1. The question seems to be leaning towards heap question but actually
+           it's a 2 pointer questions
+        2. we just need to start from left and right index of array and try to
+           close the bound per the requirement in definition. the only
+           difference is we need to close the bound up until we have k elements
+        3. finally one we know the range, we just build a list according to
+           that range
+
+    **Complexity** Time: O(n) Space: O(1)
+
+
+
