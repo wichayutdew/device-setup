@@ -1530,3 +1530,23 @@
            merge each side together
 
     **Complexity** Time: O(nlogn) Space: O(n) // recursive stack space
+
+### Subarray sum equals k
+
+    _Default case_, if the input array is empty there's no possible sub array
+
+    **Solve**
+        1. this is a prefix sum question, so we can do it in 1 pass
+        2. the prefix sum will store the sum, and number of occurance from
+           previous pass in input table
+        3. for each iteration, we add value into sum, and check if sum is
+           equals to k or not, if yes we found 1 combination, then we check
+           again if we found prefix sum whose sum is equals to curSum - k, if
+           yes we can possibly create n more amount of times this kind of sub
+           array
+        4. and lastly in each interation, we need to add sum and occurence into
+           prefix sum map.
+        5. finally we will have n total amount of sub array in any sort order.
+
+    **Complexity** Time: O(n) Space: O(n)
+        
