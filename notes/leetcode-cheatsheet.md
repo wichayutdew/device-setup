@@ -1461,7 +1461,6 @@
 
     **Complexity** Time: O(n) Space: O(n)
 
-
 ### Find K closest elements
 
     _Default case_, if size of input array is less than k or k == 0 return
@@ -1478,5 +1477,23 @@
 
     **Complexity** Time: O(n) Space: O(1)
 
+### Add Two number
 
+    _Default case_, if both list are null return null, if either of it is null
+    return other one
 
+    **Solve**
+        1. solving method is exactly similar with normal number adding but in
+           linked list format. as the input is already reversed we can just
+           adding the value together and keep going to next node
+        2. to create new digits node we just add value in node1 and node2 with
+           some carry value. the value added in node is to be %10 (get the
+           ramainder) and we update carry this time /10 (to get the multiples
+           of 10)
+        3. once we create new node, just point next of the iterator node (from
+           temp head node created initially) then we move all pointers to next
+           nodes.
+        4. lastly we check if we need to add carry to last digit, if yes we can
+           do the same thing as step 3.
+
+    **Complexity** Time: O(n) Space: O(1)
