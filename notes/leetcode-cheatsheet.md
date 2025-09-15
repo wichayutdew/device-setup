@@ -1300,7 +1300,7 @@
     **Complexity** Time: O(n * nlogn) Space: O(n)
 
 ### Pacific Atlantic water flow
-    
+
     _Default case_, if the input matrix is empty then return empty list
 
     **Solve**
@@ -1399,7 +1399,7 @@
     **Complexity** Time: O(n) Space: O(n)
 
 ### Rotate array
-    
+
     _Default case_, if k rotation is 0 or same as array size, or is a multiples
     of array size. then we don't need to do anything since it's creating same
     result
@@ -1497,3 +1497,36 @@
            do the same thing as step 3.
 
     **Complexity** Time: O(n) Space: O(1)
+
+### Generate parentheses
+
+    _Default case_, if n is 0 return empty list, n is 1 return list of ()
+
+    **Solve**
+        1. This is another type of backtrack question. so we need backtrack
+           helper to solve this question
+        2. backtrack helper collects 3 things
+            - stringbuilder
+            - count of opening bracket
+            - ccount of closing bracket
+        3. in backtrack, if we found that length of string builder is == n*2,
+           we add that string in
+        4. otherwise, we check if count of opening parentheses is less than n
+           we add it and do recursive backtrack
+        5. we then check if closing bracket is less than opening, we add it and
+           do backtrack
+        6. return result as we backtrack from 0 bracket in temp string builder
+
+    **Complexity** Time: O(2^n) Space: O(n) // usual backtracking complexity
+
+### Sort List
+
+    _Default case_, if current node or next node is null then there's nothing
+    to sort
+
+    **Solve**
+        1. this is a merge sort question but in linkedlist format.
+        2. we need to find mid point and call sort on left and right side. then
+           merge each side together
+
+    **Complexity** Time: O(nlogn) Space: O(n) // recursive stack space
