@@ -1561,3 +1561,60 @@
         2. then we poll from heap k-1 times, and return the last poll
 
     **Complexity** Time: O(logn) Space: O(n)
+
+### Rotate Image
+
+    _Default case_, if matrix is empty, return
+
+    **Solve**
+        1. to rotate it we need to reverse the entire matrix horizontally
+           (start from top and bottom row and work way towards center) and
+           then transpose it (do start from row 0 to last row but starts from
+           col = row+1 to last col nested and swap row/col)
+
+    **Complexity** Time: O(m*n) Space: O(1)
+
+### Pow(x,n)
+
+    _Default case_, if power == 0 returns 1
+
+    **Solve**
+        1. we need math to help solve this issue. idea is x^n is (x*x)^(n/2)
+        2. since we know the math signature above we can create helper function
+           to handle even and odd power (always treat power value as long to
+           prevent overflow)
+            - even case we create recursive call stack for (x*x)^(n/2)
+            - odd case we crete recursive stack for value * even case(power-1)
+        3. then we defaulted the function as power ==0 return 1
+
+    **Complexity** Time: O(logn) Space: O(1)
+
+### Search a 2D matrix
+
+    _Default case_, if input matrix is empty return false
+
+    **Solve**
+        1. just do nested binary search 1st to determine the row then see if we
+           have a target value in that row or not
+
+    **Complexity** Time: O(log(m*n)) Space: O(1)
+
+### Largest Number
+
+    _Default case_, we can return the result early of input is empty or of size
+    1
+
+    **Solve**
+        1. This is another max heap question, so we need to create max heap
+           using string compareTo function (max means we often starts with 2nd
+           value compare to 1st) but this one we try to combine so num2+num1
+           compareTo num1+num2
+        2. we just adding the value into heap and poll it out to a string
+           builder as a result
+        3. 1 edge case before returning, if we found out that 1st index if
+           string is 0 then in the input 0 is biggest value, we return 0,
+           there's no need to return 00000000000. here we don't convert it to
+           int or long since the number might be too big and will overflow.
+           just checking 1st index is better
+
+    **Complexity** Time: O(nlogn), Space: O(n)
