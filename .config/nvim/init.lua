@@ -83,7 +83,7 @@ vim.pack.add({
 	--------------------- EXTRA ---------------------
 	{ src = "https://github.com/folke/flash.nvim" },
 	{ src = "https://github.com/tomasky/bookmarks.nvim" },
-	{ src = "https://github.com/sainnhe/gruvbox-material" },
+	{ src = "https://github.com/f4z3r/gruvbox-material.nvim" },
 	{ src = "https://github.com/folke/noice.nvim" }, -- Better command line and messages
 	{ src = "https://github.com/nvim-lualine/lualine.nvim" },
 	{ src = "https://github.com/lukas-reineke/indent-blankline.nvim" },
@@ -91,10 +91,16 @@ vim.pack.add({
 })
 
 -- Transparency and Colorscheme
-vim.cmd.colorscheme("gruvbox-material")
-vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
-vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "none" })
+require("gruvbox-material").setup({
+	italics = true,
+	contrast = "medium",
+	comments = {
+		italics = true,
+	},
+	background = {
+		transparent = true,
+	},
+})
 
 -- Run & Debug
 local dap = require("dap")
@@ -436,7 +442,7 @@ vim.keymap.set("n", "<leader>/", flash.jump)
 require("noice").setup({ notify = { enabled = false } })
 require("lualine").setup({
 	options = {
-		theme = "tomorrow_night",
+		theme = require("gruvbox-material.lualine").theme("medium"),
 	},
 })
 require("ibl").setup({})

@@ -1,5 +1,5 @@
 theme = light:Gruvbox Light Hard,dark:Gruvbox Dark Hard
 font-family = JetBrains Mono
 font-size = 16
-background-opacity = 0.7
-background-blur-radius = 20
+background-opacity = 0.9
+background-blur-radius = 30

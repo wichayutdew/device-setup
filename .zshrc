@@ -4,7 +4,9 @@ source <(/opt/homebrew/bin/brew shellenv)
 # ---- Starship ----
 eval "$(starship init zsh)"
 
-bindkey -v
+bindkey -v # vim mode
+setopt IGNORE_EOF # this is to prevent ctrl+d to close terminal
+
 # ---- Added by Toolbox App ----
 export PATH="$PATH:/Users/wphongphanpa/Library/Application\ Support/JetBrains/Toolbox/scripts"
 export PATH="$PATH:/Users/wphongphanpa/Library/Application Support/Coursier/bin"
