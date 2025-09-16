@@ -416,7 +416,7 @@ require("mini.surround").setup()
 require("mini.files").setup()
 vim.keymap.set("n", "<leader>e", function()
 	if not MiniFiles.close() then
-		MiniFiles.open()
+		MiniFiles.open(vim.api.nvim_buf_get_name(0), false)
 	end
 end)
 require("mini.pairs").setup()
@@ -427,9 +427,9 @@ local flash = require("flash")
 flash.setup({
 	mode = {
 		search = {
-			enabled = false
-		}
-	}
+			enabled = false,
+		},
+	},
 })
 vim.keymap.set("n", "<leader>/", flash.jump)
 
