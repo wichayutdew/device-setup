@@ -28,7 +28,7 @@ vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "<leader>qq", ":qa<CR>")
 vim.keymap.set("i", "jk", "<esc>")
-vim.keymap.set("n", "<leader>/", ":noh<CR>")
+vim.keymap.set("n", "//", ":noh<CR>")
 -- Windows Navigation
 vim.keymap.set("n", "<leader>wv", ":vsplit<CR>")
 vim.keymap.set("n", "<leader>wh", ":split<CR>")
@@ -81,8 +81,9 @@ vim.pack.add({
 	{ src = "https://github.com/nvim-mini/mini.pairs" },
 	{ src = "https://github.com/nvim-mini/mini.cursorword" },
 	--------------------- EXTRA ---------------------
+	{ src = "https://github.com/folke/flash.nvim" },
 	{ src = "https://github.com/tomasky/bookmarks.nvim" },
-	{ src = "https://github.com/sainnhe/gruvbox-material" },
+	{ src = "https://github.com/f4z3r/gruvbox-material.nvim" },
 	{ src = "https://github.com/folke/noice.nvim" }, -- Better command line and messages
 	{ src = "https://github.com/nvim-lualine/lualine.nvim" },
 	{ src = "https://github.com/lukas-reineke/indent-blankline.nvim" },
@@ -90,10 +91,16 @@ vim.pack.add({
 })
 
 -- Transparency and Colorscheme
-vim.cmd.colorscheme("gruvbox-material")
-vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
-vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "none" })
+require("gruvbox-material").setup({
+	italics = true,
+	contrast = "medium",
+	comments = {
+		italics = true,
+	},
+	background = {
+		transparent = true,
+	},
+})
 
 -- Run & Debug
 local dap = require("dap")
@@ -291,6 +298,24 @@ require("nvim-treesitter.configs").setup({
 
 vim.lsp.enable({ "lua_ls", "kotlin_language_server", "cucumber_language_server" })
 
+lspconfig.kotlin_language_server.setup({
+	settings = {
+		kotlin = {
+			jvmOptions = {
+				"-Xms512m", -- initial heap size
+				"-Xmx8G", -- Set max heap size to 4GB
+			},
+		},
+	},
+	root_dir = require("lspconfig.util").root_pattern(
+		"settings.gradle.kts",
+		"build.gradle.kts",
+		"settings.gradle",
+		"build.gradle",
+		".git"
+	),
+})
+
 vim.keymap.set("n", "ct", function()
 	require("treesitter-context").go_to_context(vim.v.count1)
 end, { silent = true })
@@ -415,17 +440,33 @@ require("mini.surround").setup()
 require("mini.files").setup()
 vim.keymap.set("n", "<leader>e", function()
 	if not MiniFiles.close() then
-		MiniFiles.open()
+		MiniFiles.open(vim.api.nvim_buf_get_name(0), false)
 	end
 end)
 require("mini.pairs").setup()
 require("mini.cursorword").setup()
 
 -- Miscellaneous
+vim.api.nvim_create_autocmd("TextYankPost", {
+	callback = function()
+		vim.highlight.on_yank()
+	end,
+})
+
+local flash = require("flash")
+flash.setup({
+	mode = {
+		search = {
+			enabled = false,
+		},
+	},
+})
+vim.keymap.set("n", "<leader>/", flash.jump)
+
 require("noice").setup({ notify = { enabled = false } })
 require("lualine").setup({
 	options = {
-		theme = "tomorrow_night",
+		theme = require("gruvbox-material.lualine").theme("medium"),
 	},
 })
 require("ibl").setup({})
@@ -488,9 +529,8 @@ require("leetcode").setup({
 	},
 })
 
-vim.keymap.set("n", "lff", ":Leet list<CR>")
-vim.keymap.set("n", "lde", ":Leet desc<CR>")
-vim.keymap.set("n", "ldd", ":Leet run<CR>")
-vim.keymap.set("n", "lrr", ":Leet submit<CR>")
-vim.keymap.set("n", "lre", ":Leet reset<CR>")
-vim.keymap.set("n", "lgx", ":Leet open<CR>")
+vim.keymap.set("n", "<leader>lf", ":Leet list<CR>")
+vim.keymap.set("n", "<leader>le", ":Leet desc<CR>")
+vim.keymap.set("n", "<leader>ld", ":Leet run<CR>")
+vim.keymap.set("n", "<leader>lr", ":Leet submit<CR>")
+vim.keymap.set("n", "<leader>lgx", ":Leet open<CR>")

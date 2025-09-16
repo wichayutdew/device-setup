@@ -1060,3 +1060,561 @@
            we can return the result list
 
     **Complexity** Time: O(h) Space O(1)
+
+### Longest Palindromic Substring
+
+    _Default case_, if input string is 1 or les return that string
+
+    **Solve**,
+        1. idea is to loop thru each index and try build odd(1 char and then
+           palindrome to left and right) or even(entirely palindrome string)
+           from that certain index
+        2. so we need helper function to generate palindrome string, by
+           inputing starting index on left and right (to support building both
+           even/odd palindrome)
+        3. while we have result string, odd/even palindrome, at every
+           iteration, just replace longest string into the result
+
+    **Complexity** Time: O(n^2) Space : O(1)
+
+### Construct Binary Tree from Preorder and Inorder Traversal
+
+    _Default case_, if either of the input array is empty then we aren't able
+    to construct any tree
+
+    **Solve**
+        1. we need to understand the nature of preorder/inorder traversal first
+           to be able to answer this question. so the order (from tree) is like
+            - preorder: top --> down (left --> right). this will help us define
+              the root of each iteration as we are going top down
+            - inorder: left --> right (top --> down). this clearly define
+              information of which side of branch each node are on based off
+              the preorder value
+        2. now we need helper function to input starting index of preorder and
+           defind scope of inorder to build branches
+        3. helper function will stop if encountered with invalid condition,
+           e.g. preorder starting index out of bound, left pointer exceed right
+           pointer in inorder 
+        4. after that we create node based off value in preorder starting index
+        5. then we get the index of that value in inorder array, to be able to
+           specify scope of left and right branch
+        6. for left branch, we start at next preorder index, with scope from
+           left pointer to left of node index in inorder array
+        7. for right branch, we start at preorder + size of left side of the
+           node's branch + 1. and next pointer of node index until right
+           pointer in inorder array
+
+    **Complexity** Time:O(n) Space:O(n) //space of recursive stack
+
+### Container with most water
+
+    _Default case_, if the input array size is 1 or less, we cannot build
+    container
+
+    **Solve**
+        1. use 2 pointer to solve this issue. starting at left and right most
+           index with a result variable
+        2. while left < right pointer, keeps calculating the container size by
+           doing lower bound * index diff. if it's bigger than previous result,
+           replace it with current one
+        3. after that try move the index with lower bound to next index then do
+           the same calculation again. until finished and return the result
+           variable
+
+    **Complexity** Time: O(n) Space: O(1)
+
+### Letter combinations of phone number
+
+    _Default case_, the input string is empty
+
+    **Solve**
+        1. this is another variant of backtrack problem, so backtrack helper
+           function is a must
+        2. first we need to create array of letters map to be reuse in
+           backtrack function
+        3. in backtrack function, we insert stringbuilder and current index of
+           digits. if stringbuilder length equals to digits length, add that
+           string into result
+        4. otherwise, we need to get all the letters combination from letter
+           map according to that digits index then do backtrack to add the
+           letter into string builder and call recursively to next digit
+        5. then we can return the result list as backtrack handles all the
+           calculation
+
+    **Complexity** Time: O(2^n) Space: O(n) // usual backtracking complexity
+
+### Word Search
+
+    _Default case_, if word is empty, return true. if board is empty return
+    false
+
+    **Solve**
+        1. one of the dfs question variant. we need to traverse through the
+           matrix to find the starting point (character == 1st index of word we
+           search). If found, we try to do dfs to traverse thru each index of
+           word. if we can make it to final index. then we found the word.
+           return true. else keeps searching thru next character in board
+        2. if finally after traversing entire matrix but still cannot build the
+           word, return false
+
+
+    **Complexity** Time: O(m*n*4^l) Space: O(l) // m*n == board size, l = word
+    length
+
+### Find all anagrams in a string
+
+    _Default case_, there's no default case for this question
+
+    **Solve**
+        1. this is a sliding window problem which utilize map as a helper
+        2. first we push all characters with number of occurance into a map. we
+           also create variable to keep track of total number of unique chars
+           we have in the map
+        3. then we create sliding window and loop thru string s. In each
+           iteration. we do 2 things.
+            - moving end pointer and keeps reducing the occurance number in
+              map. if the occurance reaches 0 we reduct the total of chars.
+            - another inner loop while we reachs total uniquq chars == 0, means
+              we probably found an anagram, but we only add the index if and
+              only if the size of start-->end pointer is equal to string p.
+            - then in the same while loop, we keeps incrementing start pointer
+              and adding value back into the map. once some certain character
+              occurances exceeds 0 then we increment totalUniqueCharacters
+              value means we lose the anagram feature in current window, so we
+              keeps exapanding/decreasing window till we reaches the end of
+              strign s
+        4. finally the result will consists of all starting index where we
+           found an anagram
+
+    **Complexity** Time: O(n) Space: O(n)
+
+### Task Scheduler
+
+    _Default case_, if we only have 1 task or each task doesn't need idle
+    period. return the tasks size that's the most minimal order
+
+    **Solve**
+        1. the question statement define that the task name only contains upper
+           case english letter, so we at least can define the scope somehow.
+        2. 1st we loop thru the input task to try sort the number of occurance
+           of each task alphabet.
+        3. once we sorted, we know that at index 25 (last character) is the
+           most frequent tasks we need to do.
+        4. we can based off that most frequent tasks and try fill other task in
+           between the idle gap we have. (the idle gap will be n * (most
+           frequent tasks -1)) the -1 is the last task we can put at the end.
+        5. now we loop from index 24 (2nd most frequent task) down to 0 (least
+           frequent task). for each iteration, we can reduce total number of
+           idle slot by filling in the tasks (do note that the 2nd/3rd/... most
+           frequent task, might have the same number of frequency) so we do
+           minOf to compare the frequency of most frequent task with other. if
+           the frequency is the same the most frequent task will have less
+           frequency cause we exclude the last task as it can always be put
+           last and it wouldn't affect the total number of tasks/idle period
+        6. finally, we check if we have idle period, if yes we need total
+           number of tasks + idle to finish everything. otherwise we don't
+           really need any idle period
+
+    **Complexity** Time: O(nlogn) Space: O(n)
+
+### Kth smallest element in BST
+
+    _Default case_, if k is 0 or root is null, then we cannot solve the
+    problem, return 0
+
+    **Solve**
+        1. this question is to teach us inorder traversal of bst. so we can
+           create a sorting helper function to do inorder traversal and return
+           the kth-1 index value from sorted list
+        2. to do inorder traversal we just create helper function to push node
+           value into list in the middle of 2 recursive call to left and right
+           branches
+
+    **Complexity** Time: O(h) Space: O(h) // recursion stack
+
+### Daily temperatures
+
+    _Default case_, if the temperatures size is 1 or less, we cannot get any
+    warmer, return array of 0 state that it can't be warmer
+
+    **Solve**
+        1. this is a stack question, so we 1st create a default result list of
+           value 0 stating that there's no warmer day for any index
+        2. then we loop thru each index keep adding the index number into the
+           stack. but for each index we reach, we keep checking while the stack
+           is not empty and we found out that current index's temperature is
+           actually hotter that the one on top of the stack.
+        3. that is when we know that for the previous unprocessed index, we
+           found the earliest hotter day. which is the day in the index.
+        4. then we just update the result list of that index to be number of
+           difference in days we are at and that initial date
+        5. finally, we return the result list
+
+    **Compleixty** Time: O(n) Space: O(n)
+
+### Gas station
+
+    _Default case_, if input array is empty then there's nothing to calculate
+
+    **Solve**
+        1. we wanted to find the starting point that allow us to do 1 full
+           circle, then we need to keep track of the valid starting point and
+           whether it's possible to go full circle or not (based off the gas in
+           tank and cost to go)
+        2. to determine starting point, we can just check if from point a to b
+           we can even use that gas amount to go. if not the starting point
+           might possibly be at point b+1
+        3. finally, before return the starting point we found, we first need to
+           check if we can go full circle from the total gas usage variable we
+           keep track since beginning
+
+    **Complexity** Time: O(n) Space: O(1)
+
+### Valid sudoku
+
+    _Default case_, if the board is empty then it's probably valid we cannot
+    check anything
+
+    **Solve**
+        1. we know from sudoku rule that we can have 1 number per
+           row/col/diagonally.
+        2. from this rule we can just use simple string set to keep track of
+           each value in each row/col/diagonal position. when we try to add
+           some value and it's exists in set, then the sudoku board is not
+           valid we can just return false
+        3. if we gone thru entire board then it's a valid board
+
+    **Complexity** Time: O(m*n) Space : O(m*n)
+
+### Group anagram
+
+    _Default case_, if the input is empty return empty list
+
+    **Solve**
+        1. idea of this question is easy, we create some map to store string in
+           group of sorted variance of itselves.
+        2. so we just loop thru each string, try to sort it and add itselves
+           into sorted groups.
+        3. then finally, we can just pick just values and convert into list
+
+    **Complexity** Time: O(n * nlogn) Space: O(n)
+
+### Pacific Atlantic water flow
+
+    _Default case_, if the input matrix is empty then return empty list
+
+    **Solve**
+        1. idea of the question is to return the coordinate(s) in matrix where
+           rain water flows to both pacific and atlantic ocean
+        2. so, we need 2 boolean matrices to store each coordinate that water
+           can flow back to either pacific or atlantic ocean respectively
+        3. the idea to check the water flow is one variance of dfs question. so
+           we need dfs helper function to do reverse check if water from each
+           ocean can reaches back to that certain cell.
+        4. in helper function, we do normal out of bound check, if the water is
+           already flows thru that coordinate, or if water aren't able to reach
+           that certain cell since the height of current coordinate is lower
+           than the surrounding cells
+        5. otherwise we mark the cell as reached
+        6. in main function, we loop thru each column, top and bottom row, to
+           see if pacific and atlantic ocean water can reach back to each cells
+        7. then in each rows, left and right most column, we do the same to
+           check ocean water can flow back or not
+        8. then finally we iterate thru the matrix. to see if both pacific and
+           atlantic reach boolean array are true. if yes we add that coordinate
+           into result list.
+        9. then return the result
+
+    **Complexity** Time: O(m*n) Space: O(m*n) // we need to flows to all cells
+    3 times
+
+### Remove nth node from end of the list
+
+    _Default case_, if the input node is null or n == 0 then it's invalid
+
+    **Solve**
+        1. we need 2 pointer to find the location to skip the nth node
+        2. 1st pointer is to move it n times. if after move, the pointer points
+           to null location, then the node we need to remove is head node. we
+           can early return head?.next
+        3. otherwise, we create new pointer at head, then move both pointer
+           until the 1st pointer next is null. the 2nd pointer will point at
+           exactly 1 node before the one to remove
+        4. then we can just skip next node and return it's head
+
+    **Complexity** Time: O(n) Space: O(1)
+
+### Top K Frequent word
+
+    _Default case_, if input array is empty or size is less than k then it's
+    invalid input
+
+    **Solve**
+        1. this is a max heap problem (when poll most frequent word pop out)
+        2. to be able to determine whether the word is more frequent we need 2
+           condition (lexicographical order)
+            - it's appear more often
+            - it's lexicographically more than it's comparator
+        3. to achieve this we can create max heap according to the requirements
+           above by inserting pair of word/frequency into the heap
+            - 1st check frequency
+            - then check lexicographical order by using
+              string1.compareTo(string2)
+        4. then build the map of word-->freq pair from input array.
+        5. push each pair into max heap, then as a result we can just poll top
+           k pair and add the word into result list
+
+    **Complexity** Time: O(nlogn) Space: O(n)
+
+### Course schedules II
+
+    _Default case_, if there's no prerequisites or only 1 course or less, just
+    build int array of number of courses in incremental order
+
+    **Solve**
+        1. this is just Course schedules question that want us to answer with
+           finished list instead of boolean
+        2. the entire logic is the same, just change the return type and value
+
+    **Complexity** Time: O(v + e) Space: O(v + e) // same complexity with
+    normal graph problem since we need to reach each vertices and edges once.
+
+### Longest consecitive sequence
+
+    _Default case_, if the input array size is 1 or less, that's the longest it
+    can get
+
+    **Solve**
+        1. instead of looping thru list, we convert list to set for quicker
+           lookup and less number of check we need to do since set doesn't
+           allow duplicates
+        2. for each number in set, we check if it's the starting number of some
+           consecutive sequences. (by checking num-1 is not in set) this to
+           help speed up the process and prevent TLE error
+        3. after we know that it's the starting number of sequence, we keeps
+           checking if we have next number until there's none, then check with
+           the result variable if it's exceeding previous range or not
+        4. then finally we return the longest range
+
+    **Complexity** Time: O(n) Space: O(n)
+
+### Rotate array
+
+    _Default case_, if k rotation is 0 or same as array size, or is a multiples
+    of array size. then we don't need to do anything since it's creating same
+    result
+
+    **Solve**
+        1. idea is to find a pivot point and reverse the subarray per that
+           pivot and reverse the entire array. this will help do the rotation
+        2. to find pivot point, we do k modulo from array size to see how many
+           rotation we need to do. then we subtrac that from size of array to
+           get the pivot point
+        3. then we do 3 reversal.
+            - left most index until pivot point
+            - next to pivot point to right most idex
+            - entire array
+    
+    **Complexity** Time: O(n) Space: O(1)
+
+### Decode string
+
+    _Default case_, if string length is 1 or less, nothing to decode
+
+    **Solve**
+        1. we might be encounter the nested decode string so we need some stack
+           to handle that
+        2. this question splitted text into 4 variance
+            - digits --> when found, we just append the character into count
+              builder (in order to build int)
+            - [ --> once we reachs open bracket, we know that we need to store
+              latest count and string into a stack to give way for calculations
+              inside bracket.
+              ] --> once we found closing bracket, we know we need to append
+              the text we built during the bracket n amount of times
+            - else (normal character) --> append the whatever here into result
+              string
+        3. as we have utilities logic, we just loop thru each character and
+           calculate the final string
+
+    **Complexity** Time: O(n) Space: O(n)
+
+### Contiguous Array
+
+    _Default case_, if the input array is empty then return 0
+
+    **Solve**
+        1. nice to know keyword, contagious means range in array that sums to 0
+        2. so this question is talking about range with sums of x, we will use
+           prefix sum to help.
+        3. idea is to keep adding sum variable (if found 1 -> +1 else -1). then
+           in each iteration we check if sum is 0, if yes the entire range from
+           idx 0 is contagious we store that candidate into some variable.
+        4. another way to find contagious array is to find some range in the
+           middle that sums to 0. we can do by subtracting some sum from idx0
+           til idx n from total sum. this is what prefix sum is made for.
+        5. that means for each iteration, if we found some sum in prefix sum
+           map. we check if it's longer than current longest range or not by
+           subtracting current idx with prefix sum idx
+        6. else, if there's nothing matched, we try adding the prefix sum and
+           current idx into the map
+
+    **Complexity** Time: O(n) Space: O(n)
+
+### Find K closest elements
+
+    _Default case_, if size of input array is less than k or k == 0 return
+    empty list
+
+    **Solve**
+        1. The question seems to be leaning towards heap question but actually
+           it's a 2 pointer questions
+        2. we just need to start from left and right index of array and try to
+           close the bound per the requirement in definition. the only
+           difference is we need to close the bound up until we have k elements
+        3. finally one we know the range, we just build a list according to
+           that range
+
+    **Complexity** Time: O(n) Space: O(1)
+
+### Add Two number
+
+    _Default case_, if both list are null return null, if either of it is null
+    return other one
+
+    **Solve**
+        1. solving method is exactly similar with normal number adding but in
+           linked list format. as the input is already reversed we can just
+           adding the value together and keep going to next node
+        2. to create new digits node we just add value in node1 and node2 with
+           some carry value. the value added in node is to be %10 (get the
+           ramainder) and we update carry this time /10 (to get the multiples
+           of 10)
+        3. once we create new node, just point next of the iterator node (from
+           temp head node created initially) then we move all pointers to next
+           nodes.
+        4. lastly we check if we need to add carry to last digit, if yes we can
+           do the same thing as step 3.
+
+    **Complexity** Time: O(n) Space: O(1)
+
+### Generate parentheses
+
+    _Default case_, if n is 0 return empty list, n is 1 return list of ()
+
+    **Solve**
+        1. This is another type of backtrack question. so we need backtrack
+           helper to solve this question
+        2. backtrack helper collects 3 things
+            - stringbuilder
+            - count of opening bracket
+            - ccount of closing bracket
+        3. in backtrack, if we found that length of string builder is == n*2,
+           we add that string in
+        4. otherwise, we check if count of opening parentheses is less than n
+           we add it and do recursive backtrack
+        5. we then check if closing bracket is less than opening, we add it and
+           do backtrack
+        6. return result as we backtrack from 0 bracket in temp string builder
+
+    **Complexity** Time: O(2^n) Space: O(n) // usual backtracking complexity
+
+### Sort List
+
+    _Default case_, if current node or next node is null then there's nothing
+    to sort
+
+    **Solve**
+        1. this is a merge sort question but in linkedlist format.
+        2. we need to find mid point and call sort on left and right side. then
+           merge each side together
+
+    **Complexity** Time: O(nlogn) Space: O(n) // recursive stack space
+
+### Subarray sum equals k
+
+    _Default case_, if the input array is empty there's no possible sub array
+
+    **Solve**
+        1. this is a prefix sum question, so we can do it in 1 pass
+        2. the prefix sum will store the sum, and number of occurance from
+           previous pass in input table
+        3. for each iteration, we add value into sum, and check if sum is
+           equals to k or not, if yes we found 1 combination, then we check
+           again if we found prefix sum whose sum is equals to curSum - k, if
+           yes we can possibly create n more amount of times this kind of sub
+           array
+        4. and lastly in each interation, we need to add sum and occurence into
+           prefix sum map.
+        5. finally we will have n total amount of sub array in any sort order.
+
+    **Complexity** Time: O(n) Space: O(n)
+        
+### Kth Largest Element in an Array
+
+    _Default case_, if the size of input array is less than k means we cannot
+    find kth largest element
+
+    **Solve**
+        1. this is a maxHeap question. so we just create maxheap(a,b -> b-a) to
+           store all value in input array
+        2. then we poll from heap k-1 times, and return the last poll
+
+    **Complexity** Time: O(logn) Space: O(n)
+
+### Rotate Image
+
+    _Default case_, if matrix is empty, return
+
+    **Solve**
+        1. to rotate it we need to reverse the entire matrix horizontally
+           (start from top and bottom row and work way towards center) and
+           then transpose it (do start from row 0 to last row but starts from
+           col = row+1 to last col nested and swap row/col)
+
+    **Complexity** Time: O(m*n) Space: O(1)
+
+### Pow(x,n)
+
+    _Default case_, if power == 0 returns 1
+
+    **Solve**
+        1. we need math to help solve this issue. idea is x^n is (x*x)^(n/2)
+        2. since we know the math signature above we can create helper function
+           to handle even and odd power (always treat power value as long to
+           prevent overflow)
+            - even case we create recursive call stack for (x*x)^(n/2)
+            - odd case we crete recursive stack for value * even case(power-1)
+        3. then we defaulted the function as power ==0 return 1
+
+    **Complexity** Time: O(logn) Space: O(1)
+
+### Search a 2D matrix
+
+    _Default case_, if input matrix is empty return false
+
+    **Solve**
+        1. just do nested binary search 1st to determine the row then see if we
+           have a target value in that row or not
+
+    **Complexity** Time: O(log(m*n)) Space: O(1)
+
+### Largest Number
+
+    _Default case_, we can return the result early of input is empty or of size
+    1
+
+    **Solve**
+        1. This is another max heap question, so we need to create max heap
+           using string compareTo function (max means we often starts with 2nd
+           value compare to 1st) but this one we try to combine so num2+num1
+           compareTo num1+num2
+        2. we just adding the value into heap and poll it out to a string
+           builder as a result
+        3. 1 edge case before returning, if we found out that 1st index if
+           string is 0 then in the input 0 is biggest value, we return 0,
+           there's no need to return 00000000000. here we don't convert it to
+           int or long since the number might be too big and will overflow.
+           just checking 1st index is better
+
+    **Complexity** Time: O(nlogn), Space: O(n)

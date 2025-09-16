@@ -4,7 +4,9 @@ source <(/opt/homebrew/bin/brew shellenv)
 # ---- Starship ----
 eval "$(starship init zsh)"
 
-bindkey -v
+bindkey -v # vim mode
+setopt IGNORE_EOF # this is to prevent ctrl+d to close terminal
+
 # ---- Added by Toolbox App ----
 export PATH="$PATH:/Users/wphongphanpa/Library/Application\ Support/JetBrains/Toolbox/scripts"
 export PATH="$PATH:/Users/wphongphanpa/Library/Application Support/Coursier/bin"
@@ -14,6 +16,7 @@ source <(zoxide init --cmd cd zsh)
 
 # ---- Direct usage to asdf location ----
 . /opt/homebrew/opt/asdf/libexec/asdf.sh
+. ~/.asdf/plugins/java/set-java-home.zsh
 
 # ---- Eza (better ls) -----
 alias ls="eza --color=always --long --git --no-filesize --icons=always --no-time --no-user --no-permissions"
