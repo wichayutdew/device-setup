@@ -16,6 +16,7 @@ source <(zoxide init --cmd cd zsh)
 
 # ---- Direct usage to asdf location ----
 . /opt/homebrew/opt/asdf/libexec/asdf.sh
+. ~/.asdf/plugins/java/set-java-home.zsh
 
 # ---- Eza (better ls) -----
 alias ls="eza --color=always --long --git --no-filesize --icons=always --no-time --no-user --no-permissions"

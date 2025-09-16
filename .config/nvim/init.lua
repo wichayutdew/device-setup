@@ -298,6 +298,24 @@ require("nvim-treesitter.configs").setup({
 
 vim.lsp.enable({ "lua_ls", "kotlin_language_server", "cucumber_language_server" })
 
+lspconfig.kotlin_language_server.setup({
+	settings = {
+		kotlin = {
+			jvmOptions = {
+				"-Xms512m", -- initial heap size
+				"-Xmx8G", -- Set max heap size to 4GB
+			},
+		},
+	},
+	root_dir = require("lspconfig.util").root_pattern(
+		"settings.gradle.kts",
+		"build.gradle.kts",
+		"settings.gradle",
+		"build.gradle",
+		".git"
+	),
+})
+
 vim.keymap.set("n", "ct", function()
 	require("treesitter-context").go_to_context(vim.v.count1)
 end, { silent = true })
@@ -429,6 +447,12 @@ require("mini.pairs").setup()
 require("mini.cursorword").setup()
 
 -- Miscellaneous
+vim.api.nvim_create_autocmd("TextYankPost", {
+	callback = function()
+		vim.highlight.on_yank()
+	end,
+})
+
 local flash = require("flash")
 flash.setup({
 	mode = {
