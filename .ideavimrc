@@ -1,7 +1,3 @@
-" .ideavimrc is a configuration file for IdeaVim plugin. It uses
-"   the same commands as the original .vimrc configuration.
-" You can find a list of commands here: https://jb.gg/h38q75
-" Find more examples here: https://jb.gg/share-ideavimrc
 set scrolloff=5
 set incsearch
 set relativenumber
@@ -13,16 +9,13 @@ set smartcase = true
 set which-key
 set notimeout
 
-set mini-ai
-
 " --- Enable IdeaVim plugins https://jb.gg/ideavim-plugins
 " Highlight copied text
 Plug 'machakann/vim-highlightedyank'
-" Commentary plugin
-Plug 'tpope/vim-commentary'
 " Sneak (search by 2 letters)
 Plug 'tpope/vim-surround'
 Plug 'preservim/nerdtree'
+set mini-ai
 
 
 " set <leader> to <space>
@@ -34,6 +27,8 @@ nnoremap Y "+y
 vnoremap Y "+y
 map <C-d> <C-d>zz
 map <C-u> <C-u>zz
+map j jzz
+map k kzz
 map n nzzzv
 map N Nzzzv
 vnoremap p "_dP
@@ -47,29 +42,29 @@ nmap <leader>ci <Action>(OptimizeImports)
 nmap <leader>ca <Action>(ShowIntentionActions)
 
 nmap rn <Action>(RenameElement)
-nmap rR <Action>(Refactorings.QuickListPopupAction)
 
 nmap ge <Action>(ShowErrorDescription)
 nmap gi <Action>(GotoImplementation)
 nmap gd <Action>(GotoDeclaration)
 nmap K <Action>(ShowHoverInfo)
+nmap <leader>ca <Action>(Refactorings.QuickListPopupAction)
+
 nmap gT <Action>(GotoTest)
+
 nmap <leader>s <Action>(ToggleBookmark)
 nmap <leader>S <Action>(ShowBookmarks)
 
 nmap <leader>dd <Action>(ChooseDebugConfiguration)
-nmap <leader>rr <Action>(ChooseRunConfiguration)
-nmap <leader>rR <action>(stop)
 nmap <leader>dD <Action>(Stop)
-nmap <leader>bb <Action>(ToggleLineBreakpoint)
+nmap <leader>b <Action>(ToggleLineBreakpoint)
 nmap <leader>bc <Action>(Debugger.RemoveAllBreakpoints)
-nmap <leader>bB <Action>(ViewBreakpoints)
+nmap <leader>B <Action>(ViewBreakpoints)
 nmap <leader>br <Action>(Resume)
 
 nmap <leader>ff <Action>(GotoFile)
 nmap <leader>fs <Action>(FindInPath)
-
 nmap <leader>fb <Action>(RecentFiles)
+
 nmap <leader>ws <Action>(SplitHorizontally)
 nmap <leader>wv <Action>(SplitVertically)
 map <leader>zz <Action>(Vcs.RollbackChangedLines)
