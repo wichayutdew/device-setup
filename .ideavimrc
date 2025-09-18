@@ -14,6 +14,7 @@ set notimeout
 Plug 'machakann/vim-highlightedyank'
 " Sneak (search by 2 letters)
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
 Plug 'preservim/nerdtree'
 set mini-ai
 
@@ -42,12 +43,13 @@ nmap <leader>ci <Action>(OptimizeImports)
 nmap <leader>ca <Action>(ShowIntentionActions)
 
 nmap rn <Action>(RenameElement)
+nmap rR <Action>(Refactorings.QuickListPopupAction)
 
 nmap ge <Action>(ShowErrorDescription)
 nmap gi <Action>(GotoImplementation)
 nmap gd <Action>(GotoDeclaration)
 nmap K <Action>(ShowHoverInfo)
-nmap <leader>ca <Action>(Refactorings.QuickListPopupAction)
+nmap <leader>ca <Action>(ShowIntentionActions)
 
 nmap gT <Action>(GotoTest)
 
