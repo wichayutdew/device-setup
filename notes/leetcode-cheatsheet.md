@@ -1619,7 +1619,7 @@
 
     **Complexity** Time: O(nlogn), Space: O(n)
 
-Reverse Integer
+### Reverse Integer
 
     _Default case_, if value is > -10 and < 10 then return it. cannot reverse
     it
@@ -1637,7 +1637,7 @@ Reverse Integer
 
     **Complexity** Time: O(n) Space O(1)
 
-Set Matrix Zeroes
+### Set Matrix Zeroes
 
      _Default case_, if matrix is empty return
 
@@ -1653,3 +1653,39 @@ Set Matrix Zeroes
            row0/col0 as zero if we need to
 
     **Complexity** Time: O(m*n) Space O(1)
+
+### Reorder List
+
+    _Default case_, if the list size is 2 or less the result will be the same
+
+    **Solve**
+        1. this question combines multiple linked list modification e.g. split
+           at mid, reverse, combination
+        2. so the idea is to follow those method and get the result.
+            - Split node at mid point, use slow/fast pointer and split the node
+              at slow pointer and return head of second half
+            - reverse, just do normal linked list reverse with prev node and
+              iterator. to the 2nd splitted half
+            - combination, this is the trickiest part, we need to do criss
+              cross combination e.g.
+              /*
+              list1 pointer: p1 r1
+              list 1 :       1  2  3
+              node linkage : v^ v^  
+              list 2 :       5  4
+              list2 pointer: p2 r2
+
+              legends: 
+                v^ == node connection
+                p == pointer
+                r == right pointer
+              */
+              to achieve this we need 2 pointer to point to each list and keeps
+              appending the pointer per list 
+              we will do this until pointer at list 2 points to null. each
+              iteration, what we need to do is store temp value of right
+              pointer of both list, then link next of p1 to p2, and p2 to r1.
+              then move pointer p1/p2 to r1/r2
+              e.g. from above example we will get 1,5,2,4,3 as a result
+
+    **Complexity** Time: O(n) Space: O(1)
