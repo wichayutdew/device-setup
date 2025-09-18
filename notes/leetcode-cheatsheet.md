@@ -1618,3 +1618,38 @@
            just checking 1st index is better
 
     **Complexity** Time: O(nlogn), Space: O(n)
+
+Reverse Integer
+
+    _Default case_, if value is > -10 and < 10 then return it. cannot reverse
+    it
+
+    **Solve**
+        1. always handle this question with positive number, just log variable
+           if the input is negative
+        2. use % to get digit of each iteration and keep /= 10 to reduce the
+           size to keeps getting digit
+        3. then each iteration keeps checking if the accumulated result is
+           overflowing by checking if it's > max Int - digits or < min Int +
+           digits
+        4. after loop thru all the digits, just return positive/negative value
+           accordingly
+
+    **Complexity** Time: O(n) Space O(1)
+
+Set Matrix Zeroes
+
+     _Default case_, if matrix is empty return
+
+     **Solve**
+        1. we use row0 and col0 to mark if the entire row/col needs to be
+           marked as 0
+        2. so 1st step is to have a boolean mark whether we should also mark
+           row0 or col0 as zero as well in last step
+        3. then we start looking from row1/col1 onwards by checking at
+           col0/row0 whether that certain row/col needs to be marked as zero,
+           if so do the mark
+        4. last step, we check from boolean we created initially to mark
+           row0/col0 as zero if we need to
+
+    **Complexity** Time: O(m*n) Space O(1)
