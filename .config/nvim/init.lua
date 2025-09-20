@@ -210,31 +210,27 @@ lspconfig.lua_ls.setup({
 	capabilities = lsp_capabilities,
 })
 
-local function gradle_crossbuild_root_dir(fname)
-	local util = require("lspconfig.util")
-	-- Gradle-only patterns for cross-build projects
-	local patterns = {
-		"settings.gradle.kts",
-		"settings.gradle",
-		"build.gradle.kts",
-		"build.gradle",
-		".git",
-	}
-
-	return util.root_pattern(unpack(patterns))(fname)
-end
 -- Kotlin
 lspconfig.kotlin_language_server.setup({
 	capabilities = lsp_capabilities,
-	root_dir = gradle_crossbuild_root_dir,
+	root_dir = function(fname)
+		local util = require("lspconfig.util")
+		-- Gradle-only patterns for cross-build projects
+		local patterns = {
+			"settings.gradle.kts",
+			"settings.gradle",
+			"build.gradle.kts",
+			"build.gradle",
+			".git",
+		}
+
+		return util.root_pattern(unpack(patterns))(fname)
+	end,
 	settings = {
 		kotlin = {
 			jvmOptions = {
 				"-Xms1g",
 				"-Xmx8g",
-				-- Critical for Gradle cross-compilation
-				"-Dkotlin.compiler.execution.strategy=in-process",
-				"-Dkotlin.incremental=false", -- Disable incremental compilation
 			},
 			indexing = {
 				enabled = true,
@@ -251,51 +247,6 @@ lspconfig.kotlin_language_server.setup({
 		},
 		workspaceFolders = true,
 	},
-	on_attach = function(client, bufnr)
-		print("Kotlin LSP attached - Root:", client.config.root_dir)
-
-		-- Enhanced go-to-definition for Gradle cross-build
-		vim.keymap.set("n", "gd", function()
-			vim.lsp.buf.definition({
-				on_list = function(options)
-					if options and options.items then
-						local filtered_items = {}
-						local class_files = {}
-
-						for _, item in ipairs(options.items) do
-							local filename = item.filename or ""
-
-							-- In Gradle cross-build, aggressively filter out build directories
-							if
-								filename:match("build/classes/")
-								or filename:match("build/tmp/")
-								or filename:match("%.class$")
-							then
-								table.insert(class_files, item)
-							else
-								table.insert(filtered_items, item)
-							end
-						end
-
-						if #filtered_items > 0 then
-							options.items = filtered_items
-							vim.fn.setqflist({}, " ", options)
-							if #filtered_items == 1 then
-								vim.cmd("cfirst")
-							else
-								vim.cmd("copen")
-							end
-						elseif #class_files > 0 then
-							print("Only compiled classes found. Try running './gradlew clean' and restart LSP")
-							print("Compiled files:", #class_files)
-						else
-							print("No definitions found")
-						end
-					end
-				end,
-			})
-		end, { buffer = bufnr, desc = "Go to definition (source only)" })
-	end,
 })
 -- Scala
 vim.api.nvim_create_autocmd("FileType", {
@@ -307,22 +258,11 @@ vim.api.nvim_create_autocmd("FileType", {
 			showImplicitArguments = true,
 			showInferredType = true,
 			bloopSbtAlreadyInstalled = true,
-			excludedPackages = {
-				-- Exclude common Kotlin packages from Scala indexing
-				"kotlin.*",
-				"kotlinx.*",
-			},
 		}
 		metals_config.init_options.statusBarProvider = "on"
 		metals_config.capabilities = lsp_capabilities
-		metals_config.root_dir = gradle_crossbuild_root_dir(vim.api.nvim_buf_get_name(0))
 		metals_config.on_attach = function(_, _)
 			require("metals").setup_dap()
-			print("Metals attached - Root:", client.config.root_dir)
-
-			vim.keymap.set("n", "gd", function()
-				vim.lsp.buf.definition()
-			end, { buffer = bufnr, desc = "Go to definition (Scala)" })
 
 			vim.keymap.set("n", "<leader>mc", function()
 				require("telescope").extensions.metals.commands()
