@@ -1689,3 +1689,102 @@
               e.g. from above example we will get 1,5,2,4,3 as a result
 
     **Complexity** Time: O(n) Space: O(1)
+
+### Cheapest Flights Within K Stops
+
+    _Default case, if source == destination, no need to pay. if there's no
+    flight, then we can't reach destination
+    
+    **Solve**
+        1. this is one variant of graph question that needs BFS traversal. and
+           not DFS. why, BFS respect the traversal by level order (equals to
+           number of stops in our case) which satisfy our use case. unlike DFS,
+           it do depth first, so it cannot compare the cost between each method
+           in the same number of hop as optimized as what BFS did
+        2. So, first we need to build a graph of location -> pair of
+           destination, cost
+        3. after we have a graph, we need create a queue to support BFS
+           traversal, in the queue we still store list of 3 int value,
+           location, stops, and cost to go there. then we initiate queue with
+           source information (location src, stops -1, cost 0)
+        4. another list we need to create is to store cheapest way to go to
+           each location from source location
+        5. in BFS traversal, we start from looking at the 1st value in queue,
+           and see if number of stops exceed K or the cost is more expensive
+           than what we've been from other route, if one of this satisfied, we
+           skip this current location since it doesn't contribute to finding an
+           answer
+        6. but otherwise, we found another cheaper way to go to a certain
+           location (that we don't know if it's a destination or not), then we
+           keep adding more possible stops from current location that it can go
+           from previous graph we've created
+        7. we keep doing the same thing in BFS. then finally once we wanted to
+           answer, we first need to check if we ever reach destination by
+           checking if the cost to go is still the default interger max or not,
+           if it is then return -1(means, it's not possible to go) otherwise
+           return the cheapest cost we stored so far
+
+    **Complexity** Time: O(v + e) Space: O(v + e)
+
+### All Nodes Distance K in Binary Tree
+
+    _Default case_, if there is no tree or no target node. return empty list,
+    if distance to check is 0 return list of target value
+
+    **Solve**
+        1. this is one of the graph question disguise as tree, so we need to
+           convert tree to graph by link each node to it's parent and
+           left/right child. we can do this by create helper function which
+           will try to fill on global graph we created (map of node, to all
+           it's neighbor) by receiving certain node with it's parent, if
+           parent/left child/right child exists, put linkage into the graph
+        2. Once we have a graph then we can just do BFS traversal (BFS works
+           better for this question since we can basically kill the traversal
+           early if it's traverse over the distance we set up), to do BFS we
+           can just have 1 queue with another set of visited node.
+        3. For each traversal, we keeps checking if the node is null or visited
+           or distance is exceed K. then we can skip the iteration since it
+           doesn't contribute to builing answer
+        4. if we pass that initial check, we can check if the current level
+           (queue will holds pair of node and distance) is the distance we
+           wanted to collect the value or not, if yes just add that node value
+           into the result list
+        5. after that we mark node as visited and add all it's neighbor into
+           queue with level+1
+    
+    **Complexity** Time: O(n) Space: O(n) where n is total number of nodes of
+    original tree
+
+### 3Sum Closest
+
+    _Default case_, if the array size is 3 then that's the closest sum
+
+    **Solve**
+        1. first initiate the closest sum by summing 1st 2nd and last index
+           value
+        2. then to make time complexity low we need to sort the array and then
+           the questio will just be 3 sum question
+        3. follow normal 3 sum question, and keeps updating closest sum
+           variable if new sum is closer to target (done by checking absolute
+           value off diff)
+        4. to move pointer, do normal check, if sum < target move left else
+           move right
+
+    **Complexity** Time: O(nlogn + n^2) Space: O(1)
+
+
+### Find minimum in rotated sorted array
+
+    _Default case_, if the list size is 1 return the only value
+
+    **Solve**
+        1. this is normal binary search, kinda easier version of Search in
+           rotated sorted array since we just implement the first part of that
+           question
+        2. we do normal binary search but only until l<r. but when we found
+           mid, we check if it's bigger than last value, if yes then min will
+           be right of that index, otherwise min might be that index or index
+           to the left
+        3. keeps doing until finally we return nums[l]
+
+    **Complexity** Time:O(logn) Space: O(1)
