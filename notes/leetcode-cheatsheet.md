@@ -1772,6 +1772,87 @@
 
     **Complexity** Time: O(nlogn + n^2) Space: O(1)
 
+### Rotate List
+
+    _Default case_, if k == 0 or linkedlist has size = 1 or less. return head
+
+    **Solve**
+        1. First try to find the tail of list and also a length of linkedlist
+        2. once found length, do kMod to see if we need to rotate or not.
+        3. if we really need to rotate then first make the list cycle by put
+           next of tail to head
+        4. then we will know where to cut the linkage and return new head by
+           finding the pivot
+        5. pivot can be found from total length - kmod, then we repeat the tail
+           that amount of times
+        6. new head is the node next to tail, cut the link and return that
+
+    **Complexity** Time: O(n) Space : O(1)
+
+### Basic Calculator
+
+    _Default case_, if trim string gets empty return 0. if trim string get
+    length 1 return that char - '0'
+
+    **Solve**
+        1. we need to loop thru all the characters, while keeping track of 3
+           main variable result, curValue, sign. when found these character
+            - '+' -> we need to add signed curValue to result
+            - '-' -> we need to also add signed curValue to result
+            - else -> we just keeps adding number to curValue
+        2. to add all the remaining value in curValue we can simply add + sign
+           at the end of string to trigger adding last number into result
+           variable
+        3. but the question state that '()' are also a valid character and we
+           need to respect math operation where all number in side nees to be
+           sum first then we can sum it out to external numbers
+        4. So, we need to add condition to above list of condition before else
+            - '(' -> we need to store result and sign we calculated so far (at
+              this point the curValue will be 0 anyways since we just pass
+              either + or - sign) then we edit the result and sign variable to
+              default value waiting to store what ever result we will get
+              inside the bracket
+            - ')' -> this act as a trigger to do add curValue into result
+              variable. then clean up sign and curValue to default state. and
+              we need to convert the sign of this bracketed result we got from
+              the sign value we stored previously. and then we can do another
+              sum of bracketed result with the result we stored in stack to
+              finally get the result up until current point
+        5. keep going until finally we can return the result variable
+
+    **Complexity** Time: O(n) Space: O(n) worst case we store everything in
+    stack if we have nested bracket case
+
+### Basic Calculator II
+
+    _Default case_, if trim string gets empty return 0. if trim string get
+    length 1 return that char - '0'
+
+    **Solve**
+        1. we need to loop thru all the characters, while keeping track of 3
+           main variable result stack, curValue, literal sign. when found these
+           character
+            - ' ' -> whitespace ignore and keep going
+            - digits -> we just keeps adding number to curValue
+            - else -> this question handle the calculation quite differently
+              than previous basic calculator, where the sign we stored is the
+              sign before the curValue, so, when we need to do math just check
+              the sign and do following
+                - '+' -> just push curValue into stack
+                - '-' -> push negative value into stack
+                - '*' -> since matematic operation prioritize * and /, we need
+                  to pop last value in stack to multiply with curValue and push
+                  it back
+                - '/' -> same with * we pop last value and do division with
+                  curValue and push it bac
+                then we just update sign to the current location and refresh
+                curValue to wait for next sign
+        2. to add all the remaining value in curValue we can simply add + sign
+           at the end of string to trigger adding last number into result
+           variable
+        3. keep going until finally we can return the result.sum()
+
+    **Complexity** Time: O(n) Space: O(n)
 
 ### Find minimum in rotated sorted array
 
