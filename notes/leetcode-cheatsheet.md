@@ -272,7 +272,7 @@
     same Space: O(n) // size of magazine
 
 ### Climbing Stairs
-    
+
     _Default case_, if n <= 2 we can just return n since that's all the
     possible ways we know
     
@@ -286,7 +286,6 @@
            staircase
 
     **Compleity**: Time:O(n) Space:O(n)
-
 
 ### Longest Palindrome
 
@@ -1143,7 +1142,7 @@
     **Complexity** Time: O(n^2) Space : O(1)
 
 ### Unique paths
-    
+
     _Default case_, if input m or n is 0 then it's not a complete matrix return
     0. if input m or n is 1, then there is always 1 possible way to move to
     finish
@@ -1566,6 +1565,40 @@
 
     **Complexity** Time: O(n) Space: O(1)
 
+### Jump game
+
+    _Default case_, if array size is 1 there is no need to jump
+
+    **Solve**
+        1. we can start from last index and work way back to see if we can
+           somehow reach index 0
+        2. keep track of current index we are at (starting from last index)
+        3. for each iteration from last index -1 down to 0 check if we can jump
+           from that index to current index. if yes move cur index back
+        4. finally check if cur index is 0 or not
+
+    **Complexity** Time: O(n) Space: O(1)
+
+### Jump game II
+    
+    _Default case_, if array size is 1 there is no need to jump
+
+    **Solve**
+        1. this question doesn't solve the same way as previous question. we
+           need to keep track of the index we are at, maximum index we can
+           reach for any point of index we passed, and number of jump we made
+        2. for each iteration, we keeps finding the maximum index we can go by
+           checking how far we can jump
+        3. once we iterate to the index we are at currently, we jump as far as
+           possible and increment jump count
+        4. after jump we check if we have reached last index or not, if yes we
+           return jump count
+        5. actually the answer should be returned in the loop since question
+           state that we can always jump to last index. but to not make
+           compiler error we return number of jump at the very last
+
+    **Complexity** Time: O(n) Space: O(1)
+
 ### Add Two number
 
     _Default case_, if both list are null return null, if either of it is null
@@ -1861,6 +1894,22 @@
 
     **Complexity** Time: O(nlogn + n^2) Space: O(1)
 
+### Find minimum in rotated sorted array
+
+    _Default case_, if the list size is 1 return the only value
+
+    **Solve**
+        1. this is normal binary search, kinda easier version of Search in
+           rotated sorted array since we just implement the first part of that
+           question
+        2. we do normal binary search but only until l<r. but when we found
+           mid, we check if it's bigger than last value, if yes then min will
+           be right of that index, otherwise min might be that index or index
+           to the left
+        3. keeps doing until finally we return nums[l]
+
+    **Complexity** Time:O(logn) Space: O(1)
+
 ### Rotate List
 
     _Default case_, if k == 0 or linkedlist has size = 1 or less. return head
@@ -1942,22 +1991,6 @@
         3. keep going until finally we can return the result.sum()
 
     **Complexity** Time: O(n) Space: O(n)
-
-### Find minimum in rotated sorted array
-
-    _Default case_, if the list size is 1 return the only value
-
-    **Solve**
-        1. this is normal binary search, kinda easier version of Search in
-           rotated sorted array since we just implement the first part of that
-           question
-        2. we do normal binary search but only until l<r. but when we found
-           mid, we check if it's bigger than last value, if yes then min will
-           be right of that index, otherwise min might be that index or index
-           to the left
-        3. keeps doing until finally we return nums[l]
-
-    **Complexity** Time:O(logn) Space: O(1)
 
 ### Insert Delete GetRandom O(1)
 
