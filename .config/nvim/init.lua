@@ -41,7 +41,6 @@ vim.pack.add({
 	{ src = "https://github.com/MunifTanjim/nui.nvim" }, -- required by leetcode nvim and other packages
 	{ src = "https://github.com/tree-sitter/tree-sitter-html" }, -- required by leetcode nvim
 	{ src = "https://github.com/nvim-neotest/nvim-nio" }, -- required by neotest
-	{ src = "https://github.com/3rd/image.nvim" }, -- make image render possible
 	--------------------- LSP ---------------------
 	{ src = "https://github.com/neovim/nvim-lspconfig" },
 	{ src = "https://github.com/scalameta/nvim-metals" },
@@ -80,8 +79,9 @@ vim.pack.add({
 	{ src = "https://github.com/nvim-mini/mini.cursorword" },
 	{ src = "https://github.com/nvim-mini/mini.diff" },
 	{ src = "https://github.com/nvim-mini/mini.clue" },
+	{ src = "https://github.com/nvim-mini/mini.jump" },
+	{ src = "https://github.com/nvim-mini/mini.jump2d" },
 	--------------------- EXTRA ---------------------
-	{ src = "https://github.com/folke/flash.nvim" },
 	{ src = "https://github.com/tomasky/bookmarks.nvim" },
 	{ src = "https://github.com/f4z3r/gruvbox-material.nvim" },
 	{ src = "https://github.com/folke/noice.nvim" }, -- Better command line and messages
@@ -502,6 +502,8 @@ require("mini.clue").setup({
 		delay = 100,
 	},
 })
+require("mini.jump").setup()
+require("mini.jump2d").setup()
 
 -- Miscellaneous
 vim.api.nvim_create_autocmd("TextYankPost", {
@@ -509,16 +511,6 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 		vim.highlight.on_yank()
 	end,
 })
-
-local flash = require("flash")
-flash.setup({
-	mode = {
-		search = {
-			enabled = false,
-		},
-	},
-})
-vim.keymap.set("n", "<leader>/", flash.jump, { desc = "Toggle flash jump UI" })
 
 require("noice").setup({ notify = { enabled = false } })
 require("lualine").setup({
@@ -529,32 +521,6 @@ require("lualine").setup({
 require("ibl").setup({})
 
 -- leetcode
-require("image").setup({
-	backend = "kitty",
-	processor = "magick_cli",
-	integrations = {
-		markdown = {
-			enabled = true,
-			clear_in_insert_mode = false,
-			download_remote_images = true,
-			filetypes = { "markdown", "vimwiki" },
-		},
-		neorg = {
-			enabled = false,
-		},
-		typst = {
-			enabled = false,
-		},
-		html = {
-			enabled = false,
-		},
-		css = {
-			enabled = false,
-		},
-	},
-	hijack_file_patterns = { "*.png", "*.jpg", "*.jpeg", "*.gif", "*.webp", "*.avif" }, -- render image files as images when opened
-})
-
 require("leetcode").setup({
 	arg = "leetcode.nvim",
 	lang = "kotlin",
@@ -601,7 +567,7 @@ require("leetcode").setup({
 		focus_testcases = "H",
 		focus_result = "L",
 	},
-	image_support = true,
+	image_support = false,
 	theme = {
 		["alt"] = {
 			bg = "#FFFFFF",
