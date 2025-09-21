@@ -215,6 +215,11 @@ require("mason-tool-installer").setup({
 		"cucumber_language_server",
 		"reformat-gherkin",
 		"markdownlint",
+		"jsonls",
+		"jsonlint",
+		"yaml-language-server",
+		"yamllint",
+		"marksman",
 	},
 })
 require("render-markdown").setup({
@@ -363,7 +368,7 @@ vim.diagnostic.config({
 })
 
 require("nvim-treesitter.configs").setup({
-	ensure_installed = { "lua", "kotlin", "html", "scala" },
+	ensure_installed = { "lua", "kotlin", "html", "scala", "markdown", "yaml", "toml", "json" },
 	highlight = { enable = true },
 })
 vim.lsp.enable({ "lua_ls", "kotlin_language_server", "cucumber_language_server" })
@@ -375,6 +380,8 @@ require("conform").setup({
 		kotlin = { "spotless_gradle" },
 		markdown = { "markdownlint" },
 		gherkin = { "reformat-gherkin" },
+		yaml = { "yamllint" },
+		json = { "jsonlinkt" },
 	},
 })
 
