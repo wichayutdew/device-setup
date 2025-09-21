@@ -92,13 +92,26 @@ vim.pack.add({
 -- Transparency and Colorscheme
 require("gruvbox-material").setup({
 	italics = true,
-	contrast = "medium",
+	contrast = "soft",
 	comments = {
 		italics = true,
 	},
 	background = {
 		transparent = true,
 	},
+	customize = function(g, o)
+		if g == "Comment" then
+			o.fg = "#a8a8a8"
+		end
+		if g == "LineNr" then
+			o.fg = "#bababa"
+		end
+		if g == "CursorLineNr" then
+			o.fg = "#FF8200"
+			o.bold = true
+		end
+		return o
+	end,
 })
 
 -- Run & Debug
