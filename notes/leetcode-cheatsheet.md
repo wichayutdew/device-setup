@@ -271,6 +271,23 @@
     **Complexity** Time: O(2n) // worst if magazine and ransomNote size is the
     same Space: O(n) // size of magazine
 
+### Climbing Stairs
+    
+    _Default case_, if n <= 2 we can just return n since that's all the
+    possible ways we know
+    
+    **Solve**
+        1. we will use Dynamic programming to solve this question.
+        2. we know for a fact that n = 0 -> n = 2 we have n number of ways to
+           climb stair, so we can just initiate dp array with that information
+        3. for n = 3 onwards, we will use previous knowledge to solve meaning,
+           for 3 we can just combine ways of climbing of n= 1 and n= 2. then
+           going forward we can just redo this and get the result of n
+           staircase
+
+    **Compleity**: Time:O(n) Space:O(n)
+
+
 ### Longest Palindrome
 
     _Default case_, if the input string is length of 0 or 1 then it's
@@ -780,6 +797,36 @@
     **Complexity** Time: O(v + e) Space: O(v + e) // same complexity with
     normal graph problem since we need to reach each vertices and edges once.
 
+### Coin Change
+
+    _Default case_ if amount is 0 then we don't need any coin. if there's no
+    coin, then we can't produce result
+
+    **Solve**
+        1. We will use dynamic programming with memiozation to solve this
+           question. first create dp list to store number of least coins uses
+           for each total amount up to amount+1 (to prevent index out of bound)
+           then default it at max integer means we still don't know if we are
+           able to build that total amount from the coins we have. but we know
+           that to build 0, we need 0 coin
+        2. then for each coin, we wanted to know from it's value up to the
+           amount, can this coin help reduce the number of coins uses at any
+           certain amount in db array
+        3. in each coin iteration, we need to have nested loop to see if this
+           coin will be benefit. by checking if we replace this coin value in
+           any x amount we pass thru, will it result in less coins used or not
+        4. e.g. for coin value 1 -> we loop from 1..amount(let's say 5), in
+           each amount n loop we check if we can build n-coinValue e.g.
+           dp(3-1=2) means we can use that number of coins to build value 2 +
+           this coin of value 1. we check that to build this will it result in
+           less coin used rather that the knowledge we have at dp[3]. if it
+           helps we replace the number of coin used
+        5. finally, we check before return that dp[amount] is not max int, if
+           it is then we cannot build that amount from value of coins we have,
+           return -1 else return dp value that we found so far
+
+        **Complexity** Time: O(coins size * amount) Space:O(amount)
+
 ### Product of array except self
 
     _Default case_, if the input array size is 1 or less then just return it
@@ -1094,6 +1141,30 @@
            iteration, just replace longest string into the result
 
     **Complexity** Time: O(n^2) Space : O(1)
+
+### Unique paths
+    
+    _Default case_, if input m or n is 0 then it's not a complete matrix return
+    0. if input m or n is 1, then there is always 1 possible way to move to
+    finish
+
+    **Solve**
+        1. this is a dynamic programming question with help of memoization. so
+           we need to create matrix to store number of possible move at each
+           cells
+        2. we will use top down approach to solve this by question
+        3. we know for a fact that from first row/column, we only have one way
+           to move forward, which is either go down or go right. then in DP
+           matrix we can initialized that fact.
+        4. then we can start from row/col index 1, then work the way towards
+           last row/column where finish line is at
+        5. for each iteration, in that certain cell, we know that to get here,
+           we can either comes from top or left cell. then the possible ways to
+           get here will be sum of the way to get to top cell and left cell
+        6. finally, at the finish line we will have all the possible ways to
+           get to that point. return that value
+
+    **Complexity** Time: O(m*n) Space: O(m*n)
 
 ### Construct Binary Tree from Preorder and Inorder Traversal
 
