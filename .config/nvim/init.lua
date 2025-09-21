@@ -71,14 +71,13 @@ vim.pack.add({
 	{ src = "https://github.com/codymikol/neotest-kotlin" },
 	--------------------- FZF ---------------------
 	{ src = "https://github.com/nvim-telescope/telescope.nvim" },
-	--------------------- GIT ---------------------
-	{ src = "https://github.com/lewis6991/gitsigns.nvim" }, -- For Git revert, Changes mark on left side
 	--------------------- MINI ---------------------
 	{ src = "https://github.com/nvim-mini/mini.surround" }, -- Surroundings like parentheses, quotes, etc.
 	{ src = "https://github.com/echasnovski/mini.ai" }, -- e.g. q as " ' and b as ( [ {
 	{ src = "https://github.com/nvim-mini/mini.files" },
 	{ src = "https://github.com/nvim-mini/mini.pairs" },
 	{ src = "https://github.com/nvim-mini/mini.cursorword" },
+	{ src = "https://github.com/nvim-mini/mini.diff" },
 	--------------------- EXTRA ---------------------
 	{ src = "https://github.com/folke/flash.nvim" },
 	{ src = "https://github.com/tomasky/bookmarks.nvim" },
@@ -226,19 +225,6 @@ lspconfig.lua_ls.setup({
 -- Kotlin
 lspconfig.kotlin_language_server.setup({
 	capabilities = lsp_capabilities,
-	root_dir = function(fname)
-		local util = require("lspconfig.util")
-		-- Gradle-only patterns for cross-build projects
-		local patterns = {
-			"settings.gradle.kts",
-			"settings.gradle",
-			"build.gradle.kts",
-			"build.gradle",
-			".git",
-		}
-
-		return util.root_pattern(unpack(patterns))(fname)
-	end,
 	settings = {
 		kotlin = {
 			jvmOptions = {
@@ -471,13 +457,18 @@ require("bookmarks").setup({
 })
 vim.keymap.set("n", "<leader>S", ":Telescope bookmarks list<CR>")
 
--- Git integration
-vim.keymap.set({ "n", "v" }, "<leader>zz", ":Gitsigns reset_hunk<CR>")
-
 -- Mini
 require("mini.ai").setup()
 require("mini.surround").setup()
 require("mini.files").setup()
+require("mini.diff").setup({
+	view = {
+		style = "sign"
+	},
+	mappings = {
+		reset = "<leader>zz"
+	}
+})
 vim.keymap.set("n", "<leader>e", function()
 	if not MiniFiles.close() then
 		MiniFiles.open(vim.api.nvim_buf_get_name(0), false)
