@@ -41,6 +41,7 @@ vim.pack.add({
 	{ src = "https://github.com/MunifTanjim/nui.nvim" }, -- required by leetcode nvim and other packages
 	{ src = "https://github.com/tree-sitter/tree-sitter-html" }, -- required by leetcode nvim
 	{ src = "https://github.com/nvim-neotest/nvim-nio" }, -- required by neotest
+	{ src = "https://github.com/3rd/image.nvim" }, -- make image render possible
 	--------------------- LSP ---------------------
 	{ src = "https://github.com/neovim/nvim-lspconfig" },
 	{ src = "https://github.com/scalameta/nvim-metals" },
@@ -491,7 +492,7 @@ require("mini.clue").setup({
 		require("mini.clue").gen_clues.builtin_completion(),
 	},
 	window = {
-		delay = 100
+		delay = 100,
 	},
 })
 
@@ -521,6 +522,32 @@ require("lualine").setup({
 require("ibl").setup({})
 
 -- leetcode
+require("image").setup({
+	backend = "kitty",
+	processor = "magick_cli",
+	integrations = {
+		markdown = {
+			enabled = true,
+			clear_in_insert_mode = false,
+			download_remote_images = true,
+			filetypes = { "markdown", "vimwiki" },
+		},
+		neorg = {
+			enabled = false,
+		},
+		typst = {
+			enabled = false,
+		},
+		html = {
+			enabled = false,
+		},
+		css = {
+			enabled = false,
+		},
+	},
+	hijack_file_patterns = { "*.png", "*.jpg", "*.jpeg", "*.gif", "*.webp", "*.avif" }, -- render image files as images when opened
+})
+
 require("leetcode").setup({
 	arg = "leetcode.nvim",
 	lang = "kotlin",
@@ -567,7 +594,7 @@ require("leetcode").setup({
 		focus_testcases = "H",
 		focus_result = "L",
 	},
-	image_support = false,
+	image_support = true,
 	theme = {
 		["alt"] = {
 			bg = "#FFFFFF",
