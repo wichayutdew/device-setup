@@ -98,9 +98,6 @@ alt-shift-2 = 'move-node-to-workspace 2 --focus-follows-window'
 alt-shift-3 = 'move-node-to-workspace 3 --focus-follows-window'
 alt-shift-4 = 'move-node-to-workspace 4 --focus-follows-window'
 
-# See: https://nikitabobko.github.io/AeroSpace/commands#workspace
-# alt-shift-cmd-tab = 'workspace next --wrap-around'
-
 # See: https://nikitabobko.github.io/AeroSpace/commands#mode
 alt-b = 'mode window'
 alt-r = 'mode resize'
@@ -110,6 +107,7 @@ alt-a = 'mode apps'
 [mode.window.binding]
 # See: https://nikitabobko.github.io/AeroSpace/commands#layout
 esc = ['mode main']
+q = ['mode main']
 space = ['layout tiles horizontal vertical', 'mode main']
 # See: https://nikitabobko.github.io/AeroSpace/commands#focus
 h = ['focus left','mode main']
@@ -127,6 +125,7 @@ shift-l = ['move right','mode main']
 
 [mode.resize.binding]
 esc = ['mode main']
+q = ['mode main']
 # See: https://nikitabobko.github.io/AeroSpace/commands#resize
 minus = 'resize smart -50'
 equal = 'resize smart +50'
@@ -134,14 +133,15 @@ equal = 'resize smart +50'
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
 [mode.service.binding]
 esc = ['reload-config', 'mode main']
+q = ['reload-config', 'mode main']
 r = ['flatten-workspace-tree', 'mode main'] # reset layout
 f = ['layout floating tiling', 'mode main'] # Toggle between floating and tiling layout
 backspace = ['close-all-windows-but-current', 'mode main']
 
 [mode.apps.binding]
 esc = ['mode main']
+q = ['mode main']
 c = ['exec-and-forget open -a /Applications/Ghostty.app', 'mode main']
-# m = ['exec-and-forget open -a /Applications/Slack.app', 'mode main']
 b = ['exec-and-forget open -a /Applications/Zen.app', 'mode main']
 p = ['exec-and-forget open -a /Applications/1Password.app', 'mode main']
 
