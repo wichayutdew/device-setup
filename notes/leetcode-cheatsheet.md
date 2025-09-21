@@ -569,7 +569,7 @@
 ## Medium
 
 ### Maximum Subarray
-    
+
     _Default case_ , if input array size is 1 or less just sum that.
 
     **Solve**
@@ -1887,3 +1887,51 @@
         3. keeps doing until finally we return nums[l]
 
     **Complexity** Time:O(logn) Space: O(1)
+
+### Insert Delete GetRandom O(1)
+
+    _Default case_, there is no default caes as the question is a data
+    structure question
+    
+
+    **Solve**
+        1. to achieve O(1) Time compleixty we need to have 2 data structure to
+           holds the value, list and map
+        2. list store what ever value we get from insert. map stored relative
+           index in list where we insert that value. ultimately for insert and
+           delete we use map to achieve O(1), list is to satisfy the getRandom
+           function
+        3. for each function, we implement it like this
+            - insert ->> we insert what ever value into list and add
+              value->index correlation into map. always do initial check if we
+              have inserted the value before and return false if we have done
+              so
+            - delete ->> this is a bit more tricky, 1st we checked if we don't
+              have value to remove just return false. otherwise, we need to
+              first remove the value from the map then store the index in list
+              that we removed. then we try remove last value in list, (if it's
+              equals to val to be delete then that's that)
+              but if not, then we need to replace that removed value back into
+              the index of value we intended to remove. then we remap the
+              value->index relationship in map accordingly
+            - getRandom ->> we can just utilize 'kotlin.random.Random.nextInt'
+              to get random index in the list to return
+
+    **Complexity** Time:O(1) Space:O(n)
+
+### Non-overlapping Intervals
+
+    _Default case_, if the input size is 1 or less there's no need to repace
+    anything
+
+    **Solve**
+        1. this is another variant of merge intervals insert intervals question
+        2. to solve this we need to sort input array by value at index 1
+        3. then we create 2 variable to store result and current max value
+           (default at index 1 value of first value in intervals)
+        4. for each iteration from index 1, keeps checking if we need to remove
+           certain value by checking if index 0 value of that interval is less
+           than curMax or not. else we just update curMax by checking the
+           current value with value of index 1 in current interval
+
+    **Complexity** Time: O(nlogn + n) Space: O(1)
