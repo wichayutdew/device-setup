@@ -271,6 +271,23 @@
     **Complexity** Time: O(2n) // worst if magazine and ransomNote size is the
     same Space: O(n) // size of magazine
 
+### Climbing Stairs
+    
+    _Default case_, if n <= 2 we can just return n since that's all the
+    possible ways we know
+    
+    **Solve**
+        1. we will use Dynamic programming to solve this question.
+        2. we know for a fact that n = 0 -> n = 2 we have n number of ways to
+           climb stair, so we can just initiate dp array with that information
+        3. for n = 3 onwards, we will use previous knowledge to solve meaning,
+           for 3 we can just combine ways of climbing of n= 1 and n= 2. then
+           going forward we can just redo this and get the result of n
+           staircase
+
+    **Compleity**: Time:O(n) Space:O(n)
+
+
 ### Longest Palindrome
 
     _Default case_, if the input string is length of 0 or 1 then it's
@@ -568,6 +585,24 @@
 
 ## Medium
 
+### Maximum Subarray
+
+    _Default case_ , if input array size is 1 or less just sum that.
+
+    **Solve**
+        1. This is example of kadane's algorithm. which needs us to store 2
+           sum, current and total. current refresh everytime it is negative,
+           total keeps checking whether to replace itself with current if
+           current exceed the total
+        2. so we start with total as 1st index and curren as 0. then we try to
+           update current to exceed total while refreshing the sub array that
+           is negative
+        3. in each iteration, we check if current <0 then refresh current, then
+           add number at index and compare if we should update total
+        4. finally we can update total
+
+    **Complexity** Time:O(n) Space:O(1)
+
 ### Insert Interval
 
     _Default case_, if newInterval is empty, there's nothing to add, if
@@ -761,6 +796,36 @@
 
     **Complexity** Time: O(v + e) Space: O(v + e) // same complexity with
     normal graph problem since we need to reach each vertices and edges once.
+
+### Coin Change
+
+    _Default case_ if amount is 0 then we don't need any coin. if there's no
+    coin, then we can't produce result
+
+    **Solve**
+        1. We will use dynamic programming with memiozation to solve this
+           question. first create dp list to store number of least coins uses
+           for each total amount up to amount+1 (to prevent index out of bound)
+           then default it at max integer means we still don't know if we are
+           able to build that total amount from the coins we have. but we know
+           that to build 0, we need 0 coin
+        2. then for each coin, we wanted to know from it's value up to the
+           amount, can this coin help reduce the number of coins uses at any
+           certain amount in db array
+        3. in each coin iteration, we need to have nested loop to see if this
+           coin will be benefit. by checking if we replace this coin value in
+           any x amount we pass thru, will it result in less coins used or not
+        4. e.g. for coin value 1 -> we loop from 1..amount(let's say 5), in
+           each amount n loop we check if we can build n-coinValue e.g.
+           dp(3-1=2) means we can use that number of coins to build value 2 +
+           this coin of value 1. we check that to build this will it result in
+           less coin used rather that the knowledge we have at dp[3]. if it
+           helps we replace the number of coin used
+        5. finally, we check before return that dp[amount] is not max int, if
+           it is then we cannot build that amount from value of coins we have,
+           return -1 else return dp value that we found so far
+
+        **Complexity** Time: O(coins size * amount) Space:O(amount)
 
 ### Product of array except self
 
@@ -1076,6 +1141,30 @@
            iteration, just replace longest string into the result
 
     **Complexity** Time: O(n^2) Space : O(1)
+
+### Unique paths
+    
+    _Default case_, if input m or n is 0 then it's not a complete matrix return
+    0. if input m or n is 1, then there is always 1 possible way to move to
+    finish
+
+    **Solve**
+        1. this is a dynamic programming question with help of memoization. so
+           we need to create matrix to store number of possible move at each
+           cells
+        2. we will use top down approach to solve this by question
+        3. we know for a fact that from first row/column, we only have one way
+           to move forward, which is either go down or go right. then in DP
+           matrix we can initialized that fact.
+        4. then we can start from row/col index 1, then work the way towards
+           last row/column where finish line is at
+        5. for each iteration, in that certain cell, we know that to get here,
+           we can either comes from top or left cell. then the possible ways to
+           get here will be sum of the way to get to top cell and left cell
+        6. finally, at the finish line we will have all the possible ways to
+           get to that point. return that value
+
+    **Complexity** Time: O(m*n) Space: O(m*n)
 
 ### Construct Binary Tree from Preorder and Inorder Traversal
 
@@ -1618,3 +1707,302 @@
            just checking 1st index is better
 
     **Complexity** Time: O(nlogn), Space: O(n)
+
+### Reverse Integer
+
+    _Default case_, if value is > -10 and < 10 then return it. cannot reverse
+    it
+
+    **Solve**
+        1. always handle this question with positive number, just log variable
+           if the input is negative
+        2. use % to get digit of each iteration and keep /= 10 to reduce the
+           size to keeps getting digit
+        3. then each iteration keeps checking if the accumulated result is
+           overflowing by checking if it's > max Int - digits or < min Int +
+           digits
+        4. after loop thru all the digits, just return positive/negative value
+           accordingly
+
+    **Complexity** Time: O(n) Space O(1)
+
+### Set Matrix Zeroes
+
+     _Default case_, if matrix is empty return
+
+     **Solve**
+        1. we use row0 and col0 to mark if the entire row/col needs to be
+           marked as 0
+        2. so 1st step is to have a boolean mark whether we should also mark
+           row0 or col0 as zero as well in last step
+        3. then we start looking from row1/col1 onwards by checking at
+           col0/row0 whether that certain row/col needs to be marked as zero,
+           if so do the mark
+        4. last step, we check from boolean we created initially to mark
+           row0/col0 as zero if we need to
+
+    **Complexity** Time: O(m*n) Space O(1)
+
+### Reorder List
+
+    _Default case_, if the list size is 2 or less the result will be the same
+
+    **Solve**
+        1. this question combines multiple linked list modification e.g. split
+           at mid, reverse, combination
+        2. so the idea is to follow those method and get the result.
+            - Split node at mid point, use slow/fast pointer and split the node
+              at slow pointer and return head of second half
+            - reverse, just do normal linked list reverse with prev node and
+              iterator. to the 2nd splitted half
+            - combination, this is the trickiest part, we need to do criss
+              cross combination e.g.
+              /*
+              list1 pointer: p1 r1
+              list 1 :       1  2  3
+              node linkage : v^ v^  
+              list 2 :       5  4
+              list2 pointer: p2 r2
+
+              legends: 
+                v^ == node connection
+                p == pointer
+                r == right pointer
+              */
+              to achieve this we need 2 pointer to point to each list and keeps
+              appending the pointer per list 
+              we will do this until pointer at list 2 points to null. each
+              iteration, what we need to do is store temp value of right
+              pointer of both list, then link next of p1 to p2, and p2 to r1.
+              then move pointer p1/p2 to r1/r2
+              e.g. from above example we will get 1,5,2,4,3 as a result
+
+    **Complexity** Time: O(n) Space: O(1)
+
+### Cheapest Flights Within K Stops
+
+    _Default case, if source == destination, no need to pay. if there's no
+    flight, then we can't reach destination
+    
+    **Solve**
+        1. this is one variant of graph question that needs BFS traversal. and
+           not DFS. why, BFS respect the traversal by level order (equals to
+           number of stops in our case) which satisfy our use case. unlike DFS,
+           it do depth first, so it cannot compare the cost between each method
+           in the same number of hop as optimized as what BFS did
+        2. So, first we need to build a graph of location -> pair of
+           destination, cost
+        3. after we have a graph, we need create a queue to support BFS
+           traversal, in the queue we still store list of 3 int value,
+           location, stops, and cost to go there. then we initiate queue with
+           source information (location src, stops -1, cost 0)
+        4. another list we need to create is to store cheapest way to go to
+           each location from source location
+        5. in BFS traversal, we start from looking at the 1st value in queue,
+           and see if number of stops exceed K or the cost is more expensive
+           than what we've been from other route, if one of this satisfied, we
+           skip this current location since it doesn't contribute to finding an
+           answer
+        6. but otherwise, we found another cheaper way to go to a certain
+           location (that we don't know if it's a destination or not), then we
+           keep adding more possible stops from current location that it can go
+           from previous graph we've created
+        7. we keep doing the same thing in BFS. then finally once we wanted to
+           answer, we first need to check if we ever reach destination by
+           checking if the cost to go is still the default interger max or not,
+           if it is then return -1(means, it's not possible to go) otherwise
+           return the cheapest cost we stored so far
+
+    **Complexity** Time: O(v + e) Space: O(v + e)
+
+### All Nodes Distance K in Binary Tree
+
+    _Default case_, if there is no tree or no target node. return empty list,
+    if distance to check is 0 return list of target value
+
+    **Solve**
+        1. this is one of the graph question disguise as tree, so we need to
+           convert tree to graph by link each node to it's parent and
+           left/right child. we can do this by create helper function which
+           will try to fill on global graph we created (map of node, to all
+           it's neighbor) by receiving certain node with it's parent, if
+           parent/left child/right child exists, put linkage into the graph
+        2. Once we have a graph then we can just do BFS traversal (BFS works
+           better for this question since we can basically kill the traversal
+           early if it's traverse over the distance we set up), to do BFS we
+           can just have 1 queue with another set of visited node.
+        3. For each traversal, we keeps checking if the node is null or visited
+           or distance is exceed K. then we can skip the iteration since it
+           doesn't contribute to builing answer
+        4. if we pass that initial check, we can check if the current level
+           (queue will holds pair of node and distance) is the distance we
+           wanted to collect the value or not, if yes just add that node value
+           into the result list
+        5. after that we mark node as visited and add all it's neighbor into
+           queue with level+1
+    
+    **Complexity** Time: O(n) Space: O(n) where n is total number of nodes of
+    original tree
+
+### 3Sum Closest
+
+    _Default case_, if the array size is 3 then that's the closest sum
+
+    **Solve**
+        1. first initiate the closest sum by summing 1st 2nd and last index
+           value
+        2. then to make time complexity low we need to sort the array and then
+           the questio will just be 3 sum question
+        3. follow normal 3 sum question, and keeps updating closest sum
+           variable if new sum is closer to target (done by checking absolute
+           value off diff)
+        4. to move pointer, do normal check, if sum < target move left else
+           move right
+
+    **Complexity** Time: O(nlogn + n^2) Space: O(1)
+
+### Rotate List
+
+    _Default case_, if k == 0 or linkedlist has size = 1 or less. return head
+
+    **Solve**
+        1. First try to find the tail of list and also a length of linkedlist
+        2. once found length, do kMod to see if we need to rotate or not.
+        3. if we really need to rotate then first make the list cycle by put
+           next of tail to head
+        4. then we will know where to cut the linkage and return new head by
+           finding the pivot
+        5. pivot can be found from total length - kmod, then we repeat the tail
+           that amount of times
+        6. new head is the node next to tail, cut the link and return that
+
+    **Complexity** Time: O(n) Space : O(1)
+
+### Basic Calculator
+
+    _Default case_, if trim string gets empty return 0. if trim string get
+    length 1 return that char - '0'
+
+    **Solve**
+        1. we need to loop thru all the characters, while keeping track of 3
+           main variable result, curValue, sign. when found these character
+            - '+' -> we need to add signed curValue to result
+            - '-' -> we need to also add signed curValue to result
+            - else -> we just keeps adding number to curValue
+        2. to add all the remaining value in curValue we can simply add + sign
+           at the end of string to trigger adding last number into result
+           variable
+        3. but the question state that '()' are also a valid character and we
+           need to respect math operation where all number in side nees to be
+           sum first then we can sum it out to external numbers
+        4. So, we need to add condition to above list of condition before else
+            - '(' -> we need to store result and sign we calculated so far (at
+              this point the curValue will be 0 anyways since we just pass
+              either + or - sign) then we edit the result and sign variable to
+              default value waiting to store what ever result we will get
+              inside the bracket
+            - ')' -> this act as a trigger to do add curValue into result
+              variable. then clean up sign and curValue to default state. and
+              we need to convert the sign of this bracketed result we got from
+              the sign value we stored previously. and then we can do another
+              sum of bracketed result with the result we stored in stack to
+              finally get the result up until current point
+        5. keep going until finally we can return the result variable
+
+    **Complexity** Time: O(n) Space: O(n) worst case we store everything in
+    stack if we have nested bracket case
+
+### Basic Calculator II
+
+    _Default case_, if trim string gets empty return 0. if trim string get
+    length 1 return that char - '0'
+
+    **Solve**
+        1. we need to loop thru all the characters, while keeping track of 3
+           main variable result stack, curValue, literal sign. when found these
+           character
+            - ' ' -> whitespace ignore and keep going
+            - digits -> we just keeps adding number to curValue
+            - else -> this question handle the calculation quite differently
+              than previous basic calculator, where the sign we stored is the
+              sign before the curValue, so, when we need to do math just check
+              the sign and do following
+                - '+' -> just push curValue into stack
+                - '-' -> push negative value into stack
+                - '*' -> since matematic operation prioritize * and /, we need
+                  to pop last value in stack to multiply with curValue and push
+                  it back
+                - '/' -> same with * we pop last value and do division with
+                  curValue and push it bac
+                then we just update sign to the current location and refresh
+                curValue to wait for next sign
+        2. to add all the remaining value in curValue we can simply add + sign
+           at the end of string to trigger adding last number into result
+           variable
+        3. keep going until finally we can return the result.sum()
+
+    **Complexity** Time: O(n) Space: O(n)
+
+### Find minimum in rotated sorted array
+
+    _Default case_, if the list size is 1 return the only value
+
+    **Solve**
+        1. this is normal binary search, kinda easier version of Search in
+           rotated sorted array since we just implement the first part of that
+           question
+        2. we do normal binary search but only until l<r. but when we found
+           mid, we check if it's bigger than last value, if yes then min will
+           be right of that index, otherwise min might be that index or index
+           to the left
+        3. keeps doing until finally we return nums[l]
+
+    **Complexity** Time:O(logn) Space: O(1)
+
+### Insert Delete GetRandom O(1)
+
+    _Default case_, there is no default caes as the question is a data
+    structure question
+    
+
+    **Solve**
+        1. to achieve O(1) Time compleixty we need to have 2 data structure to
+           holds the value, list and map
+        2. list store what ever value we get from insert. map stored relative
+           index in list where we insert that value. ultimately for insert and
+           delete we use map to achieve O(1), list is to satisfy the getRandom
+           function
+        3. for each function, we implement it like this
+            - insert ->> we insert what ever value into list and add
+              value->index correlation into map. always do initial check if we
+              have inserted the value before and return false if we have done
+              so
+            - delete ->> this is a bit more tricky, 1st we checked if we don't
+              have value to remove just return false. otherwise, we need to
+              first remove the value from the map then store the index in list
+              that we removed. then we try remove last value in list, (if it's
+              equals to val to be delete then that's that)
+              but if not, then we need to replace that removed value back into
+              the index of value we intended to remove. then we remap the
+              value->index relationship in map accordingly
+            - getRandom ->> we can just utilize 'kotlin.random.Random.nextInt'
+              to get random index in the list to return
+
+    **Complexity** Time:O(1) Space:O(n)
+
+### Non-overlapping Intervals
+
+    _Default case_, if the input size is 1 or less there's no need to repace
+    anything
+
+    **Solve**
+        1. this is another variant of merge intervals insert intervals question
+        2. to solve this we need to sort input array by value at index 1
+        3. then we create 2 variable to store result and current max value
+           (default at index 1 value of first value in intervals)
+        4. for each iteration from index 1, keeps checking if we need to remove
+           certain value by checking if index 0 value of that interval is less
+           than curMax or not. else we just update curMax by checking the
+           current value with value of index 1 in current interval
+
+    **Complexity** Time: O(nlogn + n) Space: O(1)

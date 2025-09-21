@@ -11,12 +11,10 @@ brew install --cask raycast
 brew install --cask shottr
 brew install --cask 1password
 brew install --cask 1password-cli
-brew install --cask notion
 brew install --cask lookaway
 brew install --cask hiddenbar
 brew install --cask spotify
 brew install --cask appcleaner
-brew install --cask betterdisplay
 brew install --cask raindropio
 brew install --cask zen
 ```
@@ -36,6 +34,8 @@ brew install --cask karabiner-elemets
 brew install goku
 brew install koekeishiya/formulae/yabai
 brew install koekeishiya/formulae/skhd
+
+to run 'gokuw'
 ```
 
 # Development tools
@@ -74,6 +74,7 @@ brew install rg
 brew install git
 brew install tmux
 brew install tpm
+brew install imagemagick -- support image rendering in neovim
 ```
 
 ## Commands
