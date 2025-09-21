@@ -15,8 +15,8 @@ vim.opt.smartcase = true
 vim.opt.cursorline = true
 
 -- Basic Keymap
-vim.keymap.set("n", "<leader>re", ":w | :so<CR>")
-vim.keymap.set("n", "<leader>ww", ":bd<CR>")
+vim.keymap.set("n", "<leader>re", ":w | :so<CR>", { desc = "Resource nvim config" })
+vim.keymap.set("n", "<leader>ww", ":bd<CR>", { desc = "Close buffer" })
 vim.keymap.set({ "n", "v", "x" }, "Y", '"+y')
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
@@ -26,12 +26,12 @@ vim.keymap.set("n", "i", "zzi")
 vim.keymap.set("n", "a", "zza")
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
-vim.keymap.set("n", "<leader>qq", ":qa<CR>")
+vim.keymap.set("n", "<leader>qq", ":qa<CR>", { desc = "Exit Neovim" })
 vim.keymap.set("i", "jk", "<esc>")
 vim.keymap.set("n", "//", ":noh<CR>")
 -- Windows Navigation
-vim.keymap.set("n", "<leader>wv", ":vsplit<CR>")
-vim.keymap.set("n", "<leader>wh", ":split<CR>")
+vim.keymap.set("n", "<leader>wv", ":vsplit<CR>", { desc = "Split vertically" })
+vim.keymap.set("n", "<leader>wh", ":split<CR>", { desc = "Split horizontally" })
 
 -- Package Manager
 vim.pack.add({
@@ -78,6 +78,7 @@ vim.pack.add({
 	{ src = "https://github.com/nvim-mini/mini.pairs" },
 	{ src = "https://github.com/nvim-mini/mini.cursorword" },
 	{ src = "https://github.com/nvim-mini/mini.diff" },
+	{ src = "https://github.com/nvim-mini/mini.clue" },
 	--------------------- EXTRA ---------------------
 	{ src = "https://github.com/folke/flash.nvim" },
 	{ src = "https://github.com/tomasky/bookmarks.nvim" },
@@ -189,11 +190,16 @@ dap.listeners.before.launch.dapui_config = function()
 end
 require("nvim-dap-virtual-text").setup({})
 
-vim.keymap.set("n", "<leader>bb", dap.toggle_breakpoint)
-vim.keymap.set("n", "<leader>bc", dap.clear_breakpoints)
-vim.keymap.set("n", "<leader>bB", require("telescope").extensions.dap.list_breakpoints)
-vim.keymap.set("n", "<leader>db", dapui.toggle)
-vim.keymap.set("n", "<leader>dd", dap.continue)
+vim.keymap.set("n", "<leader>bb", dap.toggle_breakpoint, { desc = "Toggle breakpoint" })
+vim.keymap.set("n", "<leader>bc", dap.clear_breakpoints, { desc = "Clear all breakpoints" })
+vim.keymap.set(
+	"n",
+	"<leader>bB",
+	require("telescope").extensions.dap.list_breakpoints,
+	{ desc = "List all breakpoints" }
+)
+vim.keymap.set("n", "<leader>db", dapui.toggle, { desc = "Toggle debug UI" })
+vim.keymap.set("n", "<leader>dd", dap.continue, { desc = "Debug continue" })
 
 ---------------------- LSP (Syntax Highlight) ---------------------
 require("mason").setup()
@@ -342,7 +348,6 @@ local sign = function(opts)
 		numhl = "",
 	})
 end
-
 sign({ name = "DiagnosticSignError", text = "✘" })
 sign({ name = "DiagnosticSignWarn", text = "▲" })
 sign({ name = "DiagnosticSignHint", text = "⚑" })
@@ -381,10 +386,10 @@ neotest.setup({
 })
 vim.keymap.set("n", "<leader>tt", function()
 	neotest.run.run(vim.fn.expand("%"))
-end)
-vim.keymap.set("n", "<leader>ts", neotest.run.stop)
-vim.keymap.set("n", "<leader>to", neotest.summary.toggle)
-vim.keymap.set("n", "<leader>tp", neotest.output_panel.toggle)
+end, { desc = "Run test" })
+vim.keymap.set("n", "<leader>ts", neotest.run.stop, { desc = "Stop test" })
+vim.keymap.set("n", "<leader>to", neotest.summary.toggle, { desc = "Toggle test summary panel" })
+vim.keymap.set("n", "<leader>tp", neotest.output_panel.toggle, { desc = "Toggle test output panel" })
 -- Telescope
 require("telescope").setup({
 	defaults = {
@@ -452,10 +457,10 @@ require("bookmarks").setup({
 	save_file = vim.fn.expand("$HOME/.bookmarks"),
 	on_attach = function(_)
 		local bm = require("bookmarks")
-		vim.keymap.set("n", "<leader>s", bm.bookmark_toggle)
+		vim.keymap.set("n", "<leader>s", bm.bookmark_toggle, { desc = "Add bookmark" })
 	end,
 })
-vim.keymap.set("n", "<leader>S", ":Telescope bookmarks list<CR>")
+vim.keymap.set("n", "<leader>S", ":Telescope bookmarks list<CR>", { desc = "List all bookmarks" })
 
 -- Mini
 require("mini.ai").setup()
@@ -463,19 +468,31 @@ require("mini.surround").setup()
 require("mini.files").setup()
 require("mini.diff").setup({
 	view = {
-		style = "sign"
+		style = "sign",
 	},
 	mappings = {
-		reset = "<leader>zz"
-	}
+		reset = "<leader>zz",
+	},
 })
 vim.keymap.set("n", "<leader>e", function()
 	if not MiniFiles.close() then
 		MiniFiles.open(vim.api.nvim_buf_get_name(0), false)
 	end
-end)
+end, { desc = "Open file tree" })
 require("mini.pairs").setup()
 require("mini.cursorword").setup()
+require("mini.clue").setup({
+	triggers = {
+		{ mode = "n", keys = "<Leader>" },
+		{ mode = "x", keys = "<Leader>" },
+	},
+	clues = {
+		require("mini.clue").gen_clues.builtin_completion(),
+	},
+	window = {
+		delay = 100
+	},
+})
 
 -- Miscellaneous
 vim.api.nvim_create_autocmd("TextYankPost", {
@@ -492,7 +509,7 @@ flash.setup({
 		},
 	},
 })
-vim.keymap.set("n", "<leader>/", flash.jump)
+vim.keymap.set("n", "<leader>/", flash.jump, { desc = "Toggle flash jump UI" })
 
 require("noice").setup({ notify = { enabled = false } })
 require("lualine").setup({
@@ -560,8 +577,8 @@ require("leetcode").setup({
 	},
 })
 
-vim.keymap.set("n", "<leader>lf", ":Leet list<CR>")
-vim.keymap.set("n", "<leader>le", ":Leet desc<CR>")
-vim.keymap.set("n", "<leader>ld", ":Leet run<CR>")
-vim.keymap.set("n", "<leader>lr", ":Leet submit<CR>")
-vim.keymap.set("n", "<leader>lgx", ":Leet open<CR>")
+vim.keymap.set("n", "<leader>lf", ":Leet list<CR>", { desc = "List all Leetcode question" })
+vim.keymap.set("n", "<leader>le", ":Leet desc<CR>", { desc = "Toggle question description" })
+vim.keymap.set("n", "<leader>ld", ":Leet run<CR>", { desc = "Run test" })
+vim.keymap.set("n", "<leader>lr", ":Leet submit<CR>", { desc = "Submit question" })
+vim.keymap.set("n", "<leader>lgx", ":Leet open<CR>", { desc = "Open question in browser" })
