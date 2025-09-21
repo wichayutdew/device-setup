@@ -568,6 +568,24 @@
 
 ## Medium
 
+### Maximum Subarray
+    
+    _Default case_ , if input array size is 1 or less just sum that.
+
+    **Solve**
+        1. This is example of kadane's algorithm. which needs us to store 2
+           sum, current and total. current refresh everytime it is negative,
+           total keeps checking whether to replace itself with current if
+           current exceed the total
+        2. so we start with total as 1st index and curren as 0. then we try to
+           update current to exceed total while refreshing the sub array that
+           is negative
+        3. in each iteration, we check if current <0 then refresh current, then
+           add number at index and compare if we should update total
+        4. finally we can update total
+
+    **Complexity** Time:O(n) Space:O(1)
+
 ### Insert Interval
 
     _Default case_, if newInterval is empty, there's nothing to add, if
