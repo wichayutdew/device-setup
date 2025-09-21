@@ -39,7 +39,6 @@ vim.pack.add({
 	{ src = "https://github.com/nvim-lua/plenary.nvim" }, -- Required by many plugins
 	{ src = "https://github.com/nvim-neotest/nvim-nio" }, -- Required by neotest
 	{ src = "https://github.com/MunifTanjim/nui.nvim" }, -- required by leetcode nvim and other packages
-	{ src = "https://github.com/nvim-tree/nvim-web-devicons" }, -- add icons
 	{ src = "https://github.com/tree-sitter/tree-sitter-html" }, -- required by leetcode nvim
 	{ src = "https://github.com/nvim-neotest/nvim-nio" }, -- required by neotest
 	--------------------- LSP ---------------------
@@ -72,6 +71,7 @@ vim.pack.add({
 	--------------------- FZF ---------------------
 	{ src = "https://github.com/nvim-telescope/telescope.nvim" },
 	--------------------- MINI ---------------------
+	{ src = "https://github.com/nvim-mini/mini.icons" }, -- add icons
 	{ src = "https://github.com/nvim-mini/mini.surround" }, -- Surroundings like parentheses, quotes, etc.
 	{ src = "https://github.com/echasnovski/mini.ai" }, -- e.g. q as " ' and b as ( [ {
 	{ src = "https://github.com/nvim-mini/mini.files" },
@@ -463,6 +463,7 @@ require("bookmarks").setup({
 vim.keymap.set("n", "<leader>S", ":Telescope bookmarks list<CR>", { desc = "List all bookmarks" })
 
 -- Mini
+require("mini.icons").setup()
 require("mini.ai").setup()
 require("mini.surround").setup()
 require("mini.files").setup()
