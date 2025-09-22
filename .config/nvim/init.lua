@@ -210,7 +210,7 @@ require("mason-tool-installer").setup({
 	ensure_installed = {
 		"lua_ls",
 		"stylua",
-		"kotlin_language_server",
+		"kotlin_lsp",
 		"kotlin-debug-adapter",
 		"ktlint",
 		"cucumber_language_server",
@@ -218,7 +218,7 @@ require("mason-tool-installer").setup({
 		"markdownlint",
 		"jsonls",
 		"jsonlint",
-		"yaml-language-server",
+		"yamlls",
 		"yamllint",
 		"marksman",
 	},
@@ -232,39 +232,35 @@ local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
 -- Lua
 vim.lsp.config("lua_ls", {
 	capabilities = lsp_capabilities,
+	filetypes = { "lua" },
 })
-
 -- Kotlin
-vim.lsp.config("kotlin_language_server", {
+vim.lsp.config("kotlin_lsp", {
 	capabilities = lsp_capabilities,
 	filetypes = { "kotlin", "kt", "kts" },
 })
-
 -- Scala
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = { "scala", "sbt" },
 	callback = function()
 		local metals_config = require("metals").bare_config()
-
-		metals_config.settings = {
-			showImplicitArguments = true,
-			showInferredType = true,
-			bloopSbtAlreadyInstalled = true,
-		}
-		metals_config.init_options.statusBarProvider = "on"
 		metals_config.capabilities = lsp_capabilities
 		metals_config.on_attach = function(_, _)
 			require("metals").setup_dap()
-
 			vim.keymap.set("n", "<leader>mc", function()
 				require("telescope").extensions.metals.commands()
 			end, { buffer = bufnr, desc = "Metals commands" })
 		end
-
 		require("metals").initialize_or_attach(metals_config)
 	end,
 	group = vim.api.nvim_create_augroup("nvim-metals", { clear = true }),
 })
+
+require("nvim-treesitter.configs").setup({
+	ensure_installed = { "lua", "kotlin", "html", "scala", "markdown", "yaml", "toml", "json" },
+	highlight = { enable = true },
+})
+vim.lsp.enable({ "lua_ls", "kotlin_lsp", "cucumber_language_server", "jsonls", "yamlls" })
 
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
 require("luasnip.loaders.from_vscode").lazy_load()
@@ -344,13 +340,6 @@ vim.diagnostic.config({
 		source = "always",
 	},
 })
-
-require("nvim-treesitter.configs").setup({
-	ensure_installed = { "lua", "kotlin", "html", "scala", "markdown", "yaml", "toml", "json" },
-	highlight = { enable = true },
-})
-vim.lsp.enable({ "lua_ls", "kotlin_language_server", "cucumber_language_server" })
-
 -- Formatter
 require("conform").setup({
 	formatters_by_ft = {
