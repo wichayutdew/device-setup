@@ -40,7 +40,6 @@ vim.pack.add({
 	{ src = "https://github.com/nvim-neotest/nvim-nio" }, -- Required by neotest
 	{ src = "https://github.com/MunifTanjim/nui.nvim" }, -- required by leetcode nvim and other packages
 	{ src = "https://github.com/tree-sitter/tree-sitter-html" }, -- required by leetcode nvim
-	{ src = "https://github.com/nvim-neotest/nvim-nio" }, -- required by neotest
 	--------------------- LSP ---------------------
 	{ src = "https://github.com/neovim/nvim-lspconfig" },
 	{ src = "https://github.com/scalameta/nvim-metals" },
@@ -124,40 +123,41 @@ dap.adapters.kotlin = {
 	options = { auto_continue_if_many_stopped = false },
 }
 
-local function get_kotlin_subproject()
-	local file = vim.fn.expand("%:p")
-	local workspace = vim.fn.getcwd()
-	local rel = file:sub(#workspace + 2) -- +2 to skip the trailing slash
-	local subproject = rel:match("([^/]+)/")
-	if subproject then
-		return workspace .. "/" .. subproject
-	else
-		return workspace
-	end
-end
-
-local function get_kotlin_main_class()
-	local file = vim.fn.expand("%:p")
-	local rel = file:match("src.*/kotlin/(.*)%.kt$")
-	if rel then
-		return rel:gsub("/", ".") .. "Kt"
-	end
-	return vim.fn.input("Main class (e.g. org.example.AppKt): ")
-end
-
-require("dap").configurations.kotlin = {
+dap.configurations.kotlin = {
 	{
 		type = "kotlin",
 		request = "launch",
-		name = "Launch current Kotlin file",
-		mainClass = get_kotlin_main_class,
-		cwd = get_kotlin_subproject,
-		projectRoot = get_kotlin_subproject,
-		classPaths = function()
-			local subproject = get_kotlin_subproject()
-			return { subproject .. "/build/classes/kotlin/main" }
+		name = "Launch Kotlin App",
+		mainClass = function()
+			local fname = vim.api.nvim_buf_get_name(0)
+			local lines = vim.api.nvim_buf_get_lines(0, 0, 20, false)
+			local package_name = ""
+			for _, line in ipairs(lines) do
+				local pkg = line:match("^%s*package%s+([%w%.]+)")
+				if pkg then
+					package_name = pkg
+					break
+				end
+			end
+			local class_name = fname:match("([^/]+)%.kt$")
+			local main_class = class_name .. "Kt"
+			if package_name ~= "" then
+				main_class = package_name .. "." .. main_class
+			end
+			return main_class
 		end,
-		args = {},
+		projectRoot = function()
+			local fname = vim.api.nvim_buf_get_name(0)
+			local dir = vim.fs.dirname(fname)
+			local root = vim.fs.find(
+				{ "build.gradle.kts", "build.gradle" },
+				{ path = dir, upward = true, stop = vim.env.HOME }
+			)[1]
+			if root then
+				return vim.fs.dirname(root)
+			end
+			return vim.uv.cwd()
+		end,
 	},
 }
 
@@ -212,6 +212,7 @@ require("mason-tool-installer").setup({
 		"stylua",
 		"kotlin_language_server",
 		"kotlin-debug-adapter",
+		"ktlint",
 		"cucumber_language_server",
 		"reformat-gherkin",
 		"markdownlint",
@@ -236,28 +237,9 @@ vim.lsp.config("lua_ls", {
 -- Kotlin
 vim.lsp.config("kotlin_language_server", {
 	capabilities = lsp_capabilities,
-	settings = {
-		kotlin = {
-			jvmOptions = {
-				"-Xms1g",
-				"-Xmx8g",
-			},
-			indexing = {
-				enabled = true,
-			},
-			sourcePath = {
-				enabled = true,
-			},
-		},
-	},
-	init_options = {
-		preferences = {
-			includeDecompiled = false,
-			includeLibrarySources = true,
-		},
-		workspaceFolders = true,
-	},
+	filetypes = { "kotlin", "kt", "kts" },
 })
+
 -- Scala
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = { "scala", "sbt" },
@@ -373,7 +355,7 @@ vim.lsp.enable({ "lua_ls", "kotlin_language_server", "cucumber_language_server" 
 require("conform").setup({
 	formatters_by_ft = {
 		lua = { "stylua" },
-		kotlin = { "spotless_gradle" },
+		kotlin = { "ktlint", "spotless_gradle" },
 		markdown = { "markdownlint" },
 		gherkin = { "reformat-gherkin" },
 		yaml = { "yamllint" },
@@ -383,14 +365,15 @@ require("conform").setup({
 
 local neotest = require("neotest")
 neotest.setup({
-	running = {
-		strategy = "dap",
-	},
 	adapters = { require("neotest-kotlin") },
 })
+
 vim.keymap.set("n", "<leader>tt", function()
 	neotest.run.run(vim.fn.expand("%"))
 end, { desc = "Run test" })
+vim.keymap.set("n", "<leader>td", function()
+	neotest.run.run({ strategy = "dap" })
+end, { desc = "Debug test" })
 vim.keymap.set("n", "<leader>ts", neotest.run.stop, { desc = "Stop test" })
 vim.keymap.set("n", "<leader>to", neotest.summary.toggle, { desc = "Toggle test summary panel" })
 vim.keymap.set("n", "<leader>tp", neotest.output_panel.toggle, { desc = "Toggle test output panel" })
