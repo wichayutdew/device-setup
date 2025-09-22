@@ -489,13 +489,11 @@
     a palindrome
 
     **Solve**
-        1. create another reversed linked list from input
-        2. then just keep comparing 2 linked list, if some node aren't similar
-        then return false
-        3. if reachs tail, then both are identical, then it's palindrome,
-        return true
-
-    **Complexity** Time: O(n) Space: O(n)
+        1. find middle of the linkedlist by slow/fast pointer
+        2. once found reverse the 2nd half of the list
+        3. after reverse, we start from from and back and traverse to middle
+           node, if we found different value, return false
+    **Complexity** Time: O(n) Space: O(1)
 
 ### Move Zeroes
 
@@ -526,7 +524,7 @@
 
     **Complexity** Time: O(h) Space: O(1)
 
-## Palindrome Number
+### Palindrome Number
 
     _Default case_, check if size <= 1, if yes it's palindrome
 
