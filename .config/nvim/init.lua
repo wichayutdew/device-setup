@@ -226,16 +226,15 @@ require("render-markdown").setup({
 	completions = { lsp = { enabled = true } },
 })
 ---------------------- Code Completion ---------------------
-local lspconfig = require("lspconfig")
 local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 -- Lua
-lspconfig.lua_ls.setup({
+vim.lsp.config("lua_ls", {
 	capabilities = lsp_capabilities,
 })
 
 -- Kotlin
-lspconfig.kotlin_language_server.setup({
+vim.lsp.config("kotlin_language_server", {
 	capabilities = lsp_capabilities,
 	settings = {
 		kotlin = {
@@ -323,8 +322,6 @@ cmp.setup({
 		end,
 	},
 	mapping = {
-		["<Up>"] = cmp.mapping.select_prev_item(select_opts),
-		["<Down>"] = cmp.mapping.select_next_item(select_opts),
 		["<CR>"] = cmp.mapping.confirm({ select = false }),
 		["<Tab>"] = cmp.mapping(function(fallback)
 			local col = vim.fn.col(".") - 1
@@ -337,7 +334,6 @@ cmp.setup({
 				cmp.complete()
 			end
 		end, { "i", "s" }),
-
 		["<S-Tab>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				cmp.select_prev_item(select_opts)
