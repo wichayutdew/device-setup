@@ -433,6 +433,21 @@
 
     **Complexity** Time: O(n) Space: O(1)
 
+### Integer to Roman
+
+    _Default case_, if the input int is 0 then just return empty string
+
+    **Solve**
+        1. we need to create a list of pair of value to roman numeral sorted
+           from biggest down to smallest e.g. 1000 -> M, 900 -> CM, ..., 1 -> I
+        2. then we just follow each pair, try to decrease the input value as
+           much as possible until we cannot decrease the value from that index,
+           then we move to next index. in each iteration, just add the roman
+           numeral to string builder.
+        3. finally return the string we built
+
+    **Complexity**: Time: O(n) Space:O(1)
+
 ### Backspace string compare
 
     _Default case_, there is no default case apart from actually clean both
