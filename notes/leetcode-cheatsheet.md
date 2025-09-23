@@ -541,13 +541,17 @@
 
 ### Palindrome Number
 
-    _Default case_, check if size <= 1, if yes it's palindrome
+    _Default case_, if x is negative or x is not 0 but %10 == 0, we can never
+    build palindrome number since -ve sign, and e.g. 100,200,...
 
     **Solve**
-        1. convert int input to string and do similar method to normal
-           palindrome
-        2. create variable to keep track of left and right pointer and keeps
-           checking if character is similar or not, if not return false
+        1. create reverse value of int just like what we do for some basic
+           caculator question. crate some variable and do var = var*10 + x%10,
+           then divide x by 10, keep doing this until x is less than that var
+        2. then just verify if both int are equals (basically what we left is
+           1st half and 2nd half(reversed) of int) or if the input is odd
+           length we divide var by 10 (basically just dont care the middle
+           value)
 
     **Complexity** Time: O(n) Space: O(1)
 
