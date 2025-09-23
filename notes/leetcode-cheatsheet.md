@@ -1089,7 +1089,7 @@
 
     **Complexity** Time : O(nlogn) Space: O(n)
 
-## Spiral matrix
+### Spiral matrix
 
     _Default case_, if the matrix is empty just return empty list
 
