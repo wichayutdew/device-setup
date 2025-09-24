@@ -3,12 +3,7 @@
 
 # except these directories
 !/.config
-/.config/configstore
 /.config/github-copilot
-/.config/jgit
-/.config/karabiner
-/.config/op
-/.config/raycast
 !/notes
 !/.1password
 
