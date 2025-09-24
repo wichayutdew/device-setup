@@ -29,8 +29,13 @@
 # More examples can be found here:
 #  https://developer.1password.com/docs/ssh/agent/config
 [[ssh-keys]]
+item = "wichayutdew SSH"
 vault = "Personal"
 
  [[ssh-keys]]
- item = "GitHub"
+ item = "automated-enzumeii SSH"
  vault = "Enzumeii (Dew)"
+
+ [[ssh-keys]]
+ item = "wphongphanpa SSH"
+ vault = "Work"
