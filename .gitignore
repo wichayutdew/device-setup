@@ -9,8 +9,8 @@
 /.config/karabiner
 /.config/op
 /.config/raycast
-/.config/thefuck
 !/notes
+!/.1password
 
 # except these files
 !.asdfrc
@@ -19,3 +19,4 @@
 !.gitconfig
 !.ideavimrc
 !README.md
+
