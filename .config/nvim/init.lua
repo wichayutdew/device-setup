@@ -73,6 +73,7 @@ vim.pack.add({
 	--------------------- TESTING ---------------------
 	{ src = "https://github.com/nvim-neotest/neotest" },
 	{ src = "https://github.com/codymikol/neotest-kotlin" },
+	{ src = "https://github.com/stevanmilic/neotest-scala" },
 	--------------------- FZF ---------------------
 	{ src = "https://github.com/nvim-telescope/telescope.nvim" },
 	--------------------- MINI ---------------------
@@ -107,10 +108,10 @@ require("gruvbox-material").setup({
 	},
 	customize = function(g, o)
 		if g == "Comment" then
-			o.fg = "#a8a8a8"
+			o.fg = "#8A8A8A"
 		end
 		if g == "LineNr" then
-			o.fg = "#bababa"
+			o.fg = "#8A8A8A"
 		end
 		if g == "CursorLineNr" then
 			o.fg = "#FF8200"
@@ -235,14 +236,14 @@ require("render-markdown").setup({
 ---------------------- Code Completion ---------------------
 local ufo = require("ufo")
 ufo.setup({
-    provider_selector = function(_, _,_)
-        return {'treesitter', 'indent'}
-    end
+	provider_selector = function(_, _, _)
+		return { "treesitter", "indent" }
+	end,
 })
 vim.keymap.set("n", "zR", ufo.openAllFolds)
 vim.keymap.set("n", "zM", ufo.closeAllFolds)
-vim.keymap.set('n', 'zr', ufo.openFoldsExceptKinds)
-vim.keymap.set('n', 'zm', ufo.closeFoldsWith)
+vim.keymap.set("n", "zr", ufo.openFoldsExceptKinds)
+vim.keymap.set("n", "zm", ufo.closeFoldsWith)
 
 -- Lua
 local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
@@ -370,14 +371,15 @@ require("conform").setup({
 
 local neotest = require("neotest")
 neotest.setup({
-	adapters = { require("neotest-kotlin") },
+	running = { strategy = "dap" },
+	adapters = {
+		require("neotest-kotlin"),
+		require("neotest-scala")({ runner = "sbt", framework = "scalatest" }),
+	},
 })
 
 vim.keymap.set("n", "<leader>tt", function()
 	neotest.run.run(vim.fn.expand("%"))
-end, { desc = "Run test" })
-vim.keymap.set("n", "<leader>td", function()
-	neotest.run.run({ strategy = "dap" })
 end, { desc = "Debug test" })
 vim.keymap.set("n", "<leader>ts", neotest.run.stop, { desc = "Stop test" })
 vim.keymap.set("n", "<leader>to", neotest.summary.toggle, { desc = "Toggle test summary panel" })
