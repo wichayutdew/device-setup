@@ -1931,7 +1931,7 @@
 
     _Default case_, if k == 0 or linkedlist has size = 1 or less. return head
 
-    **Solve**
+    **Solve 1st method**
         1. First try to find the tail of list and also a length of linkedlist
         2. once found length, do kMod to see if we need to rotate or not.
         3. if we really need to rotate then first make the list cycle by put
@@ -1941,6 +1941,17 @@
         5. pivot can be found from total length - kmod, then we repeat the tail
            that amount of times
         6. new head is the node next to tail, cut the link and return that
+
+    **Solve 2nd method**
+        1. do 1 loop to get length of linked list
+        2. from length, do kMod to find new head position. if kMod == 0 means
+           we rotate for k times and endup with same head
+        3. then do pointer to find new tail position, 1st pointer run kMod
+           times. then run both pointer until next to 1st pointer is null
+        4. purpose of 1st pointer is to make linkedlist cyclic by connecting to
+           head
+        5. purpose of 2nd pointer is to stop at new tail. so we just return
+           next value while cutting the tail
 
     **Complexity** Time: O(n) Space : O(1)
 
