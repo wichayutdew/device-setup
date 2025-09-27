@@ -671,7 +671,8 @@
         2. then we just offer what ever we have in points to heap.
         3. to get k closest point, we just poll heap k amount of times
 
-    **Complexity** Time: O(logn) // normal heap time complexity, Space: O(n)
+    **Complexity** Time: O(n + log(n)) // (normal heap time complexity is
+    log(n) but heapify is O(n)), Space: O(n)
 
 ### Longest substring without repeating character
 
