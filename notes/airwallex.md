@@ -1,8 +1,9 @@
 # Introduction
 - Senior software engineer with 4 years of experience working in global company
   with highly scalable application mostly on JVM framework. Latest experience
-  is Agoda. joined around 3 years ago under a team called "Activities" sells
-  tours and activity tickets. e.g. USS day pass, join in tour, esims, etc.
+  is Agoda. joined around 3 years ago under a team called "Activities"
+  responsible for the sales of tours and activity tickets. e.g. USS day passs
+  join in tour, esims, etc.
 
 # Memorable projects (Good) - Pricing Module
 - The first product which I own most of the implementation make it the most
@@ -36,7 +37,7 @@
   fortunate to have such a supportive teammates which making cross team works
   so much easier.
 
-# Memorable projects (Can be improved)
+# Memorable projects (Can be improved) - Price breakdown
 - continuing from the Pricing module project where we clean up the backend
   logic of pricing calculations and measurements, we need to cleaning up the UI
   component to show wrong price breakdown to customer. In short, the breakdown
@@ -56,9 +57,11 @@
   opportunity to learn/discuss with them.
 
 # Why leaving Agoda
-- No harsh feeling, people here are very open and collaborative. As stated
-  above, it's the ceiling of this country, so if I want to grow further I would
-  need to jump to other countries where the ceiling is higher
+- I have no harsh feelings about my current situation; in fact, I find that
+  the people here are very open and collaborative. However, I believe that to
+  progress my career, it's essential to challenge myself in a more competitive
+  environment. I see Airwallex and Singapore as an excellent opportunity for
+  growth and advancement in my career.
 
 # Q&A
 - How did Airwallex ship products, is it A/B experiment, how we determine the
