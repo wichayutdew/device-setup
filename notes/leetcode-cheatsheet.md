@@ -1294,6 +1294,23 @@
 
     **Complexity** Time: O(n) Space: O(n)
 
+### Minimun Heights Tree
+    
+    _Default case_ if n == 1 return list of 0, that's the only possible answer
+
+    **Solve**
+        1. the idea of this question is to build a bi-directional graph along
+           with the list that holds the degree of the node. (degree means the
+           link it have)
+        2. then after we have this, we uses queue to do BFS by keeps
+           eliminating the leaves (then use graph to reduce the degrees of each
+           eliminated node neighbors) until we only have 1-2 nodes(we keep
+           track of how many node is left via another variable) (this needs
+           mathematic explianation, just rememeber the value)
+        3. that 1 or 2 node(s) are the answer to this question
+
+    **Complexity** Time: O(n) Space: O(n)
+
 ### Task Scheduler
 
     _Default case_, if we only have 1 task or each task doesn't need idle
