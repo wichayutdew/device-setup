@@ -1,11 +1,9 @@
 # Install Homebrew
-
 ```zsh
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
 # Productivity tools
-
 ```zsh
 brew install --cask raycast
 brew install --cask shottr
@@ -41,7 +39,6 @@ unmap B
 ```
 
 # Screen customization
-
 ```zsh
 brew tap FelixKratz/formulae
 brew install borders
@@ -49,31 +46,27 @@ brew install --cask aerospace
 ```
 
 # Keyboard biding
-
 ```zsh
 brew install --cask karabiner-elemets
 brew install goku
 brew install koekeishiya/formulae/yabai
 brew install koekeishiya/formulae/skhd
 
-to run 'gokuw'
+to run 'goku or gokuw to keep polling for change'
 ```
 
 # Development tools
-
 ```zsh
 brew install --cask postman
 brew install --cask ghostty
 ```
 
 # Coding language version control
-
 ```zsh
 brew install asdf
 ```
 
 # asdf syntax
-
 ```zsh
 asdf plugin add neovim (java,python,poetry,nodejs,yarn,etc.)
 asdf install neovim latest
@@ -82,24 +75,19 @@ asdf list
 ```
 
 # Terminal essential
-
-
 ```zsh
-brew install starship
-brew install carapace
-brew install zoxide
+brew install starship -- terminal colorizer
+brew install zoxide -- better cd
 brew install bat
-brew install eza
+brew install eza -- better ls
 brew install fd
-brew install rg
+brew install rg -- ripgrep better grep
 brew install git
-brew install tmux
-brew install tpm
-brew install imagemagick -- support image rendering in neovim
+brew install tmux -- terminal window management
+brew install tpm -- tmux plugin manager
 ```
 
-## Commands
-
+# Commands
 `touch ..` --> Create file
 `mkdir ..` --> Create folder
 `rm ...` --> delete file
