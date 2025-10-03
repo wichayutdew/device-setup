@@ -44,7 +44,6 @@ vim.pack.add({
 	{ src = "https://github.com/nvim-neotest/nvim-nio" }, -- Required by neotest
 	{ src = "https://github.com/MunifTanjim/nui.nvim" }, -- required by leetcode nvim and other packages
 	{ src = "https://github.com/tree-sitter/tree-sitter-html" }, -- required by leetcode nvim
-	{ src = "https://github.com/kevinhwang91/promise-async" }, -- required by ufo
 	--------------------- LSP ---------------------
 	{ src = "https://github.com/neovim/nvim-lspconfig" },
 	{ src = "https://github.com/scalameta/nvim-metals" },
@@ -63,7 +62,6 @@ vim.pack.add({
 	{ src = "https://github.com/zbirenbaum/copilot.lua" },
 	{ src = "https://github.com/zbirenbaum/copilot-cmp" },
 	{ src = "https://github.com/MeanderingProgrammer/render-markdown.nvim" }, -- render markdown
-	{ src = "https://github.com/kevinhwang91/nvim-ufo" }, -- code folding
 	--------------------- DEBUGGING ---------------------
 	{ src = "https://github.com/mfussenegger/nvim-dap" },
 	{ src = "https://github.com/jay-babu/mason-nvim-dap.nvim" },
@@ -234,17 +232,6 @@ require("render-markdown").setup({
 	completions = { lsp = { enabled = true } },
 })
 ---------------------- Code Completion ---------------------
-local ufo = require("ufo")
-ufo.setup({
-	provider_selector = function(_, _, _)
-		return { "treesitter", "indent" }
-	end,
-})
-vim.keymap.set("n", "zR", ufo.openAllFolds)
-vim.keymap.set("n", "zM", ufo.closeAllFolds)
-vim.keymap.set("n", "zr", ufo.openFoldsExceptKinds)
-vim.keymap.set("n", "zm", ufo.closeFoldsWith)
-
 -- Lua
 local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
 vim.lsp.config("lua_ls", {
