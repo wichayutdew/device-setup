@@ -108,20 +108,20 @@ alt-a = 'mode apps'
 # See: https://nikitabobko.github.io/AeroSpace/commands#layout
 esc = ['mode main']
 q = ['mode main']
-space = ['layout tiles horizontal vertical', 'mode main']
+space = 'layout tiles horizontal vertical'
 # See: https://nikitabobko.github.io/AeroSpace/commands#focus
-h = ['focus left','mode main']
-j = ['focus down','mode main']
-k = ['focus up'  ,'mode main']
-l = ['focus right','mode main']
-tab = ['focus dfs-next --boundaries-action wrap-around-the-workspace', 'mode main']
-f = ['fullscreen', 'mode main']
-shift-f = ['layout floating', 'mode main']
+h = 'focus left'
+j = 'focus down'
+k = 'focus up'  
+l = 'focus right'
+tab = 'focus dfs-next --boundaries-action wrap-around-the-workspace'
+f = 'fullscreen'
+shift-f = 'layout floating'
 # See: https://nikitabobko.github.io/AeroSpace/commands#move
-shift-h = ['move left','mode main']
-shift-j = ['move down','mode main']
-shift-k = ['move up'  ,'mode main']
-shift-l = ['move right','mode main']
+shift-h = 'move left'
+shift-j = 'move down'
+shift-k = 'move up'  
+shift-l = 'move right'
 
 [mode.resize.binding]
 esc = ['mode main']
