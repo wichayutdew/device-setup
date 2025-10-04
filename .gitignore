@@ -5,6 +5,8 @@
 !/.config
 /.config/github-copilot
 /.config/raycast
+/.config/jgit
+/.config/karabiner
 !/notes
 !/.1password
 

@@ -3,8 +3,62 @@
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
-# Productivity tools
+# Move from zsh to fish
 ```zsh
+brew install fish
+echo /opt/homebrew/bin/fish | sudo tee -a /etc/shells
+chsh -s /opt/homebrew/bin/fish
+# restart terminal
+fish_add_path "/opt/homebrew/bin/"
+```
+
+# Coding language version control
+```fish
+brew install asdf
+```
+
+# asdf syntax
+```fish
+asdf plugin add neovim (java,python,poetry,nodejs,yarn,etc.)
+asdf install neovim latest
+asdf set -u neovim {latest}
+asdf list
+```
+
+# Terminal essential
+```fish
+brew install git
+brew install fzf
+brew install starship -- terminal colorizer
+brew install zoxide -- better cd
+brew install eza -- better ls
+brew install tmux -- terminal window management
+brew install tpm -- tmux plugin manager
+```
+
+# Screen customization
+```fish
+brew tap FelixKratz/formulae
+brew install borders
+brew install --cask aerospace
+```
+
+# Keyboard biding
+```fish
+brew install --cask karabiner-elemets
+brew install goku
+
+# to run 'goku or gokuw to keep polling for change'
+```
+
+# Development tools
+```fish
+brew install --cask postman
+brew install --cask ghostty
+```
+
+# Productivity tools
+```fish
 brew install --cask raycast
 brew install --cask shottr
 brew install --cask 1password
@@ -36,55 +90,6 @@ unmap gt
 unmap gT
 unmap b
 unmap B
-```
-
-# Screen customization
-```zsh
-brew tap FelixKratz/formulae
-brew install borders
-brew install --cask aerospace
-```
-
-# Keyboard biding
-```zsh
-brew install --cask karabiner-elemets
-brew install goku
-brew install koekeishiya/formulae/yabai
-brew install koekeishiya/formulae/skhd
-
-to run 'goku or gokuw to keep polling for change'
-```
-
-# Development tools
-```zsh
-brew install --cask postman
-brew install --cask ghostty
-```
-
-# Coding language version control
-```zsh
-brew install asdf
-```
-
-# asdf syntax
-```zsh
-asdf plugin add neovim (java,python,poetry,nodejs,yarn,etc.)
-asdf install neovim latest
-asdf set -u neovim {latest}
-asdf list
-```
-
-# Terminal essential
-```zsh
-brew install starship -- terminal colorizer
-brew install zoxide -- better cd
-brew install bat
-brew install eza -- better ls
-brew install fd
-brew install rg -- ripgrep better grep
-brew install git
-brew install tmux -- terminal window management
-brew install tpm -- tmux plugin manager
 ```
 
 # Commands
