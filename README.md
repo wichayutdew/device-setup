@@ -28,7 +28,11 @@ asdf list
 # Terminal essential
 ```fish
 brew install git
-brew install fzf
+brew install yazi -- terminal file explorer
+brew install fzf -- fuzzy finder
+brew install ripgrep -- grep for nvim telescope
+brew install jq -- yazi json previewer and json tools
+brew install poppler -- yazi pdf viewer
 brew install starship -- terminal colorizer
 brew install zoxide -- better cd
 brew install eza -- better ls
