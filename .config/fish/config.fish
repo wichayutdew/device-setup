@@ -23,13 +23,12 @@ function ff
     aerospace list-windows --all | fzf --bind 'enter:execute(bash -c "aerospace focus --window-id {1}")+abort'
 end
 
-# ---- EXPORT ----
+# ---- YAZI OPEN IN NVIM ----
 set -gx EDITOR 'nvim'
 
 # ---- ALIASES ----
 alias ls 'eza --color=always --long --git --icons=always --no-time --no-user'
 alias soy-health-check 'watch -n 2 curl -m 1 -sS 127.0.0.1:2501/version'
-alias local-search 'cd repositories/activities-local-vault; docker-compose -f local-vault.yml up -d; docker-compose -f local-dragonflydb.yml up -d; cd'
 alias lg 'lazygit'
 alias vi 'nvim'
 alias leet 'nvim leetcode.nvim'
