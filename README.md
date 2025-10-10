@@ -1,9 +1,8 @@
 # Device Setup
   - Starts with `cd .config`
-  - run `bash brew_fish.sh`
+  - run `bash setup.sh`
   - restart terminal to make Fish default sh
-  - run `fish dependencies.fish`
-  - adding all the necessary language framework e.g. java21, python3.13
+  - run `fish add_brew_to_fish.fish`
 
 # Browser Extension
 - Vimium keymap
@@ -25,10 +24,3 @@ unmap gT
 unmap b
 unmap B
 ```
-
-# Commands
-`touch ..` --> Create file
-`mkdir ..` --> Create folder
-`rm ...` --> delete file
-`rm -r ..` --> delete folder
-`mv $SOURCE $DESTINATION` --> move/rename file
