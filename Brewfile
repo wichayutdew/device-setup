@@ -11,6 +11,7 @@ cask 'karabiner-elements'
 
 # Library Management
 brew 'asdf'
+brew 'coursier'
 
 # CLI Essentials
 brew 'git'
@@ -25,14 +26,20 @@ brew 'yazi'
 brew 'tmux'
 brew 'tpm'
 brew 'fastfetch'
+brew 'lazygit'
+brew 'lazydocker'
 
 # shell
 brew 'fish'
 
-
 # Development
 cask 'postman'
 cask 'ghostty'
+cask 'orbstack'
+
+# Agoda essentials
+brew 'devstack'
+cask 'jetbrains-toolbox'
 
 # Productivity
 cask 'raycast'

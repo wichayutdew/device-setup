@@ -38,6 +38,9 @@ asdf install python 3.12.0
 asdf install python 3.13.0
 asdf set -u python 3.13.0
 
+echo "========== Install Scala Metals =========="
+cs install metals
+
 asdf plugin add yarn || true
 asdf install yarn 1.22.22
 
