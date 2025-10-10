@@ -3,14 +3,17 @@
 # Screen customisation
 tap 'FelixKratz/formulae'
 brew 'borders'
+tap 'nikitabobko/tap'
 cask 'aerospace'
 
 # Keyboard Remapper
+tap 'yqrashawn/goku'
 brew 'goku'
 cask 'karabiner-elements'
 
 # Library Management
 brew 'asdf'
+tap 'coursier/formulas'
 brew 'coursier'
 
 # CLI Essentials
@@ -38,7 +41,10 @@ cask 'ghostty'
 cask 'orbstack'
 
 # Agoda essentials
+tap 'devops/tap'
 brew 'devstack'
+tap 'metalbear-co/mirrord'
+brew 'mirrord'
 cask 'jetbrains-toolbox'
 
 # Productivity
