@@ -1,79 +1,9 @@
-# Install Homebrew
-```zsh
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-```
-
-# Move from zsh to fish
-```zsh
-brew install fish
-echo /opt/homebrew/bin/fish | sudo tee -a /etc/shells
-chsh -s /opt/homebrew/bin/fish
-# restart terminal
-fish_add_path "/opt/homebrew/bin/"
-```
-
-# Coding language version control
-```fish
-brew install asdf
-```
-
-# asdf syntax
-```fish
-asdf plugin add neovim (java,python,poetry,nodejs,yarn,etc.)
-asdf install neovim latest
-asdf set -u neovim {latest}
-asdf list
-```
-
-# Terminal essential
-```fish
-brew install git
-brew install yazi -- terminal file explorer
-brew install fzf -- fuzzy finder
-brew install ripgrep -- grep for nvim telescope
-brew install jq -- yazi json previewer and json tools
-brew install poppler -- yazi pdf viewer
-brew install starship -- terminal colorizer
-brew install zoxide -- better cd
-brew install eza -- better ls
-brew install tmux -- terminal window management
-brew install tpm -- tmux plugin manager
-```
-
-# Screen customization
-```fish
-brew tap FelixKratz/formulae
-brew install borders
-brew install --cask aerospace
-```
-
-# Keyboard biding
-```fish
-brew install --cask karabiner-elemets
-brew install goku
-
-# to run 'goku or gokuw to keep polling for change'
-```
-
-# Development tools
-```fish
-brew install --cask postman
-brew install --cask ghostty
-```
-
-# Productivity tools
-```fish
-brew install --cask raycast
-brew install --cask shottr
-brew install --cask 1password
-brew install --cask 1password-cli
-brew install --cask lookaway
-brew install --cask hiddenbar
-brew install --cask spotify
-brew install --cask appcleaner
-brew install --cask raindropio
-brew install --cask zen
-```
+# Device Setup
+  - Starts with `cd .config`
+  - run `bash brew_fish.sh`
+  - restart terminal to make Fish default sh
+  - run `fish dependencies.fish`
+  - adding all the necessary language framework e.g. java21, python3.13
 
 # Browser Extension
 - Vimium keymap
