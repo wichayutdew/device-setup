@@ -8,7 +8,7 @@
       "left": 0,
       "right": 2
     },
-    "printRemaining": true,
+    "printRemaining": false,
     "preserveAspectRatio": false,
     "recache": false,
     "position": "left",
@@ -21,7 +21,7 @@
     "stat": false,
     "pipe": false,
     "showErrors": false,
-    "disableLinewrap": false,
+    "disableLinewrap": true,
     "hideCursor": true,
     "separator": " -> ",
     "brightColor": true,
