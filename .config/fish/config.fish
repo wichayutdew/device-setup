@@ -44,4 +44,4 @@ alias so 'source ~/.config/fish/config.fish'
 # This won't be added again if you remove it.
 source ~/.orbstack/shell/init2.fish 2>/dev/null || :
 
-neofetch
+fastfetch
