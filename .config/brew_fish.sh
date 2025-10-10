@@ -11,5 +11,6 @@ fi
 
 # --- Install Fish shell and set as default ---
 brew install fish
+brew install neofetch
 echo "/opt/homebrew/bin/fish" | sudo tee -a /etc/shells
 chsh -s /opt/homebrew/bin/fish
