@@ -41,7 +41,7 @@ vim.keymap.set("n", "<leader>wh", ":split<CR>", { desc = "Split horizontally" })
 vim.pack.add({
 	--------------------- PRE-REQUISUTES ---------------------
 	{ src = "https://github.com/nvim-lua/plenary.nvim" }, -- Required by many plugins
-	{ src = "https://github.com/nvim-neotest/nvim-nio" }, -- Required by neotest
+	{ src = "https://github.com/nvim-neotest/nvim-nio" }, -- Required by nvim-dap-ui
 	{ src = "https://github.com/MunifTanjim/nui.nvim" }, -- required by leetcode nvim and other packages
 	{ src = "https://github.com/tree-sitter/tree-sitter-html" }, -- required by leetcode nvim
 	--------------------- LSP ---------------------
@@ -68,10 +68,6 @@ vim.pack.add({
 	{ src = "https://github.com/theHamsta/nvim-dap-virtual-text" },
 	{ src = "https://github.com/rcarriga/nvim-dap-ui" },
 	{ src = "https://github.com/nvim-telescope/telescope-dap.nvim" },
-	--------------------- TESTING ---------------------
-	{ src = "https://github.com/nvim-neotest/neotest" },
-	{ src = "https://github.com/codymikol/neotest-kotlin" },
-	{ src = "https://github.com/stevanmilic/neotest-scala" },
 	--------------------- FZF ---------------------
 	{ src = "https://github.com/nvim-telescope/telescope.nvim" },
 	--------------------- MINI ---------------------
@@ -356,21 +352,6 @@ require("conform").setup({
 	},
 })
 
-local neotest = require("neotest")
-neotest.setup({
-	running = { strategy = "dap" },
-	adapters = {
-		require("neotest-kotlin"),
-		require("neotest-scala")({ runner = "sbt", framework = "scalatest" }),
-	},
-})
-
-vim.keymap.set("n", "<leader>tt", function()
-	neotest.run.run(vim.fn.expand("%"))
-end, { desc = "Debug test" })
-vim.keymap.set("n", "<leader>ts", neotest.run.stop, { desc = "Stop test" })
-vim.keymap.set("n", "<leader>to", neotest.summary.toggle, { desc = "Toggle test summary panel" })
-vim.keymap.set("n", "<leader>tp", neotest.output_panel.toggle, { desc = "Toggle test output panel" })
 -- Telescope
 require("telescope").setup({
 	defaults = {
@@ -412,7 +393,6 @@ local builtin = require("telescope.builtin")
 vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Telescope list buffers" })
 vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Telescope find files" })
 vim.keymap.set("n", "<leader>fs", builtin.live_grep, { desc = "Telescope live grep" })
-vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Telescope buffers" })
 vim.keymap.set("n", "<leader>cf", function()
 	require("conform").format({
 		lsp_fallback = true,
