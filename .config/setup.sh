@@ -1,15 +1,8 @@
 #!/usr/bin/env bash
 set -e
 
-if ! command -v brew &>/dev/null; then
-  echo "========== Installing Homebrew... =========="
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-else
-  echo "========== Homebrew already installed. =========="
-fi
-
 echo "========== Installing Homebrew bundle =========="
-brew bundle --file ~/Brewfile
+brew bundle --file ~/.config/Brewfile
 
 echo "========== Installing Languages Framework =========="
 asdf plugin add gradle || true
