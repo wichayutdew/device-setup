@@ -17,7 +17,6 @@ tap 'coursier/formulas'
 brew 'coursier'
 
 # CLI Essentials
-brew 'git'
 brew 'fzf'
 brew 'ripgrep'
 brew 'jq'
@@ -50,8 +49,6 @@ cask 'jetbrains-toolbox'
 # Productivity
 cask 'raycast'
 cask 'shottr'
-cask '1password'
-cask '1password-cli'
 cask 'lookaway'
 cask 'hiddenbar'
 cask 'spotify'
