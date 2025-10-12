@@ -1,3 +1,9 @@
+# Prerequisites to clone the repo
+  ```bash
+    brew install --cask 1password
+    brew install --cask 1password-cli
+  ```
+
 # Device Setup
   - Starts with `cd .config`
   - run `bash setup.sh`
