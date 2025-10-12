@@ -1,5 +1,7 @@
 # Prerequisites to clone the repo
   ```bash
+    xcode-select --install
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     brew install --cask 1password
     brew install --cask 1password-cli
   ```
