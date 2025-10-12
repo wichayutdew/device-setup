@@ -5,8 +5,10 @@
     brew install --cask 1password
     brew install --cask 1password-cli
   ```
+  - Login to 1Password and 1Password CLI, then clone this Reop
 
 # Device Setup
+  
   - Starts with `cd .config`
   - run `bash setup.sh`
   - restart terminal to make Fish default sh
