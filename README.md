@@ -8,11 +8,15 @@
   - Login to 1Password and 1Password CLI, then clone this Reop
 
 # Device Setup
-  
   - Starts with `cd .config`
   - run `bash setup.sh`
   - restart terminal to make Fish default sh
   - run `fish add_brew_to_fish.fish`
+
+# Device config
+  - cmd+` = change language
+  - cmd+space = Raycast
+  - Hot corner bottom right = show desktop
 
 # Browser Extension
 - Vimium keymap
