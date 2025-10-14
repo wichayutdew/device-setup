@@ -27,12 +27,10 @@ end
 set -gx EDITOR 'nvim'
 
 # ---- ALIASES ----
-unalias vi
-unalias vim
 alias vi 'nvim'
 alias ls 'eza --color=always --long --git --icons=always --no-time --no-user'
-alias soy-health-check 'watch -n 2 curl -m 1 -sS 127.0.0.1:2501/version'
 alias lg 'lazygit'
+alias ld 'lazydocker'
 alias leet 'nvim leetcode.nvim'
 alias tm 'tmux'
 alias cdi 'zi'
@@ -41,8 +39,8 @@ alias yz 'yazi'
 alias cfg 'nvim ~/.config/fish/config.fish'
 alias so 'source ~/.config/fish/config.fish'
 
-# Added by OrbStack: command-line tools and integration
-# This won't be added again if you remove it.
+# ---- Agoda Specific ----
 source ~/.orbstack/shell/init2.fish 2>/dev/null || :
+alias soy-health-check 'watch -n 2 curl -m 1 -sS 127.0.0.1:2501/version'
 
 fastfetch
