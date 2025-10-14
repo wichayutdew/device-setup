@@ -1,7 +1,7 @@
 ;; Tutorial https://github.com/yqrashawn/GokuRakuJoudo/blob/master/tutorial.md#command-a-to-control-1
 {
  :devices {
-           :macbook-keyboard [{:vendor_id 1452 :product_id 835}]
+           :macbook-keyboard [{:is_built_in_keyboard true}]
            }
  :main, [
          {

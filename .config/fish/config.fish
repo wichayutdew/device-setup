@@ -27,16 +27,18 @@ end
 set -gx EDITOR 'nvim'
 
 # ---- ALIASES ----
+unalias vi
+unalias vim
+alias vi 'nvim'
 alias ls 'eza --color=always --long --git --icons=always --no-time --no-user'
 alias soy-health-check 'watch -n 2 curl -m 1 -sS 127.0.0.1:2501/version'
 alias lg 'lazygit'
-alias vi 'nvim'
 alias leet 'nvim leetcode.nvim'
 alias tm 'tmux'
 alias cdi 'zi'
 alias cd 'z'
 alias yz 'yazi'
-alias cfg 'vi ~/.config/fish/config.fish'
+alias cfg 'nvim ~/.config/fish/config.fish'
 alias so 'source ~/.config/fish/config.fish'
 
 # Added by OrbStack: command-line tools and integration

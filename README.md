@@ -1,11 +1,9 @@
 # Prerequisites to clone the repo
   ```bash
-    xcode-select --install
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     brew install --cask 1password
-    brew install --cask 1password-cli
   ```
-  - Login to 1Password and 1Password CLI, then clone this Reop
+  - Login to 1Password, then clone this Repo
 
 # Device Setup
   - Starts with `cd .config`

@@ -8,7 +8,7 @@ cask 'aerospace'
 
 # Keyboard Remapper
 tap 'yqrashawn/goku'
-brew 'goku'
+brew 'yqrashawn/goku/goku'
 cask 'karabiner-elements'
 
 # Library Management
@@ -38,15 +38,13 @@ brew 'fish'
 cask 'postman'
 cask 'ghostty'
 cask 'orbstack'
+cask 'font-jetbrains-mono'
 
 # Agoda essentials
-tap 'devops/tap'
-brew 'devstack'
-tap 'metalbear-co/mirrord'
-brew 'mirrord'
-cask 'jetbrains-toolbox'
+brew 'metalbear-co/mirrord/mirrord'
 
 # Productivity
+cask 'logi-options+'
 cask 'raycast'
 cask 'shottr'
 cask 'lookaway'
