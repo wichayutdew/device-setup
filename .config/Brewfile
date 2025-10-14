@@ -27,7 +27,6 @@ brew 'eza'
 brew 'yazi'
 brew 'tmux'
 brew 'tpm'
-brew 'fastfetch'
 brew 'lazygit'
 brew 'lazydocker'
 

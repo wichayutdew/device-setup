@@ -42,5 +42,3 @@ alias so 'source ~/.config/fish/config.fish'
 # ---- Agoda Specific ----
 source ~/.orbstack/shell/init2.fish 2>/dev/null || :
 alias soy-health-check 'watch -n 2 curl -m 1 -sS 127.0.0.1:2501/version'
-
-fastfetch
