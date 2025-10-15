@@ -44,6 +44,7 @@ brew 'metalbear-co/mirrord/mirrord'
 
 # Productivity
 cask 'logi-options+'
+cask 'monitorcontrol'
 cask 'raycast'
 cask 'shottr'
 cask 'lookaway'
