@@ -87,20 +87,20 @@ outer.right =      10
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
 [mode.main.binding]
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace
-alt-a = 'workspace 1'
-alt-s = 'workspace 2'
-alt-d = 'workspace 3'
+alt-s = 'workspace 1'
+alt-d = 'workspace 2'
+alt-f = 'workspace 3'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
-alt-shift-a = 'move-node-to-workspace 1 --focus-follows-window'
-alt-shift-s = 'move-node-to-workspace 2 --focus-follows-window'
-alt-shift-d = 'move-node-to-workspace 3 --focus-follows-window'
+alt-shift-s = 'move-node-to-workspace 1 --focus-follows-window'
+alt-shift-d = 'move-node-to-workspace 2 --focus-follows-window'
+alt-shift-f = 'move-node-to-workspace 3 --focus-follows-window'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#mode
 alt-b = 'mode window'
 alt-r = 'mode resize'
 alt-semicolon = 'mode service'
-alt-p = 'mode apps'
+alt-a = 'mode apps'
 
 [mode.window.binding]
 # See: https://nikitabobko.github.io/AeroSpace/commands#layout
