@@ -10,6 +10,7 @@ cask 'aerospace'
 tap 'yqrashawn/goku'
 brew 'yqrashawn/goku/goku'
 cask 'karabiner-elements'
+cask 'vial'
 
 # Library Management
 brew 'asdf'
