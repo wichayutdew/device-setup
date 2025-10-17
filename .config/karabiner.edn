@@ -27,10 +27,10 @@
                   ]
           }
          {
-          :des "Super key" 
+          :des "Meh key" 
           :rules [
-                  ;; fn -> command + option + shift
-                  [:##fn :!SOleft_command :macbook-keyboard]
+                  ;; fn -> control + option + shift
+                  [:##fn :!SOleft_control :macbook-keyboard]
                   ]
           }
          ]
