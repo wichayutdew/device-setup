@@ -539,6 +539,17 @@
 
     **Complexity** Time: O(h) Space: O(1)
 
+### Missing Number
+    **Solve**
+        1. Need a bit of math to solve this. since we know the list size and
+           constraint that in the list there should only be number 0..n (and
+           missing 1 of the number)
+        2. What we can do is use math operation `n * (n+1)/2` to find the
+           expected sum in case we don't have any missing number and subtract
+           by the actual sum in the input, that's the missing number
+
+    **Complexity** Time:O(1) Space:O(1)
+
 ### Palindrome Number
 
     _Default case_, if x is negative or x is not 0 but %10 == 0, we can never
