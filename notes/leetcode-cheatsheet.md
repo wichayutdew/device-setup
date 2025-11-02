@@ -691,27 +691,11 @@
     repeating character
 
     **Solve**
-        1. This is a sliding windows question, so start off 2 pointer at index
-           0. and another variable to keep track of longest non-repeating
-           character
-        2. To confirm we don't have repeating character we need to have map of
-           key = character, value = occurance
-        3. while end pointer doesn't reach last index, we keep adding the
-           character we found into the map
-        4. before we put any value into the map we keep checking if map already
-           contains that character or not. if it does, we need to increment the
-           start pointer to ultimately move the pointer beyond the point where
-           we have repeating character
-        5. while moving start pointer, we keep decrementing the value in map up
-           until we don't have any left, so we remove that key from map. we do
-           all this while also moving the start pointer as well.
-        6. now finally we are sure that we don't really have repeating
-           character, we add the 1st occurance of that character into the map
-           and check if this current length of substring between start/end
-           pointer is the longest non repeating substring or not.
-        7. finally once we reaches end of string, the longest variable will
-           sure to be fiiled with the longest non repeating substring so we can
-           return that value
+        sliding windows question using set/map to check for duplicated char
+        Before incrementing end pointer check if set already exists, if yes
+        move the start pointer until we remove that char.
+        then we can add the char into set and move end pointer and calculate
+        whether the current substring (from start to end) is the longest or not
 
     **Complexity** Time: O(n) Space: O(n)
 
