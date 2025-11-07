@@ -33,7 +33,14 @@
 | Backspace string compare | Stack | create helper function to do backspace action using stack, if # found and stack is not empty then pop out, check if both stack size are equal, then compare character by character if it's matched | O(n) | O(n) |
 | Same tree | Tree | compare node value (then recursively call to left/right child) | O(h) | O(h) |
 | Longest Common Prefix | Array | use 1st element in array as a baseline, keep checking for each character in each elements in list if the any of it doesn't matched then return substring of 1st string up until that previous index, otherwise that 1st string will be the longest common prefix | O(m*n) {size of 1st string * size of elements list} | O(1) |
-
+| Palindrome Linked List | Linked List | use slow/fast pointer to split the middle then reverse 2nd half and keep compare node by node til 2nd half reaches null | O(n) | O(1) |
+| Move Zeroes | Array | keep one pointer and only moves if we assign non zero into index, then keep adding zero until last index | O(n) | O(1) |
+| Symmetric Tree | Tree | create helper to accept 2 node and check if it's similar, then recursive traversal for mirror check e.g. left.left==right.right, left.right==right.left | O(h) | O(h) {recursive stack} |
+| Missing Number | Math | question state that input is 0->n so we can use math to solve cause sum of 0->n is n*(n+1)/2, then we just sum input array and return difference between math result and actual sum | O(n) {.sum() takes n} | O(1) |
+| Palindrome number | Math | (default case, if negative non palindrome, 0>9 palindrome, divisible by 10 non palindrome) try to use math to split number into 2 half e.g. num2 = num2*10 + num1%10 then num1 /= 10, keep doing this til num1 < num2, num2 will be the one with possibly the longer side (odd palindrome) so we need to check whether num1 == num2 or num1 == num2/10 | O(n) | O(1) |
+| Convert sorted array to binary tree | Binary Search | similar idea to binary search, create helper method to accept left,rignt pointer to array, then find mid point and keep recursively call same method to build left and right child | O(logn) | O(1) |
+| Subtree of Another tree | Tree | create helper method to receive 2 node and keep comparing each node and recursively check left/right child as well, then we keep check for the entire tree if we can find exact similar anywhere in the tree that looks like subTree or not | O(h) | O(1) |
+| Squares of Sorted Array | Array - Two pointer | do two pointer left and right and keep adding square of bigger number to the last position of new array, then keep minimizing the window until left/right pointer touch (or new array size is equals to original array) | O(n) | O(1) |
 
 # Medium
 | Question | DSA/Algo | Summary | Time | Space |
