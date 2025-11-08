@@ -61,4 +61,8 @@
 | Validate Binary Search Tree | Tree | create helper function to collect node, and lower/upper bound of what value should be (in Long to prevent overflow) and tree traversal to check if entire tree is in bound | O(h) | O(1) |
 | Number of Island | Matrix - DFS | traverse matrix and increment count if 1 found, then drown that island with DFS | O(row * col) | O(1) |
 | Rotting Oranges | Matrix -DFS | 2 pass, 1st do DFS to rot all other adjacent cells, then find max minutes but if fresh orange is found return -1 (caveat, we need to -2 minutes from result in cell since we will start from 2 and increment the minutes from there) | O(row*col) | O(1) |
-
+| Search in rotate sorted array | Binary Search | use binary search to find index of lowest number, then select side to do binary search again to find the target | O(logn) | O(1) |
+| Combination sum | Backtrack | create backtrack helper to accept temp array and current idx (when do recursion donot increment index cause it allow same number twice) each itertion, checks the temp array sum and add if matched | x | x |
+| Permutations | Backtrack | backtrack and always start from index 0, add temp array to result if the size equals to input, and only add to temp if doesn't exists | x | x |
+| Merge Intervals | Array | Sort input by idx 0, then keep track of min/max, only add into new result if next interval index 0 is greater than max, the do last add | O(nlogn) {due to sort} | O(1) |
+| LCA of Binary Tree | Tree | idea of LCA is lowest we can go knowing that both p and q are lower, then if root is p or q then that's lowest we can go, we consider that a base case, if we don't hit base case, then we do recursive to see left/right child if it hits that condition, and ultimately if both child hits either p/q then that means we are at LCA, otherwise of one side return null means that side doesn't contains p and q at all, we test our luck at other side | O(h) | O(h) |
