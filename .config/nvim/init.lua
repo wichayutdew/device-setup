@@ -41,7 +41,6 @@ vim.keymap.set("n", "<leader>wh", ":split<CR>", { desc = "Split horizontally" })
 vim.pack.add({
 	--------------------- PRE-REQUISUTES ---------------------
 	{ src = "https://github.com/nvim-lua/plenary.nvim" }, -- Required by many plugins
-	{ src = "https://github.com/nvim-neotest/nvim-nio" }, -- Required by nvim-dap-ui
 	{ src = "https://github.com/MunifTanjim/nui.nvim" }, -- required by leetcode nvim and other packages
 	{ src = "https://github.com/tree-sitter/tree-sitter-html" }, -- required by leetcode nvim
 	--------------------- LSP ---------------------
@@ -62,12 +61,6 @@ vim.pack.add({
 	{ src = "https://github.com/zbirenbaum/copilot.lua" },
 	{ src = "https://github.com/zbirenbaum/copilot-cmp" },
 	{ src = "https://github.com/MeanderingProgrammer/render-markdown.nvim" }, -- render markdown
-	--------------------- DEBUGGING ---------------------
-	{ src = "https://github.com/mfussenegger/nvim-dap" },
-	{ src = "https://github.com/jay-babu/mason-nvim-dap.nvim" },
-	{ src = "https://github.com/theHamsta/nvim-dap-virtual-text" },
-	{ src = "https://github.com/rcarriga/nvim-dap-ui" },
-	{ src = "https://github.com/nvim-telescope/telescope-dap.nvim" },
 	--------------------- FZF ---------------------
 	{ src = "https://github.com/nvim-telescope/telescope.nvim" },
 	--------------------- MINI ---------------------
@@ -115,104 +108,14 @@ require("gruvbox-material").setup({
 	end,
 })
 
--- Run & Debug
-local dap = require("dap")
--- kotlin dap
-dap.adapters.kotlin = {
-	type = "executable",
-	command = "kotlin-debug-adapter",
-	options = { auto_continue_if_many_stopped = false },
-}
-
-dap.configurations.kotlin = {
-	{
-		type = "kotlin",
-		request = "launch",
-		name = "Launch Kotlin App",
-		mainClass = function()
-			local fname = vim.api.nvim_buf_get_name(0)
-			local lines = vim.api.nvim_buf_get_lines(0, 0, 20, false)
-			local package_name = ""
-			for _, line in ipairs(lines) do
-				local pkg = line:match("^%s*package%s+([%w%.]+)")
-				if pkg then
-					package_name = pkg
-					break
-				end
-			end
-			local class_name = fname:match("([^/]+)%.kt$")
-			local main_class = class_name .. "Kt"
-			if package_name ~= "" then
-				main_class = package_name .. "." .. main_class
-			end
-			return main_class
-		end,
-		projectRoot = function()
-			local fname = vim.api.nvim_buf_get_name(0)
-			local dir = vim.fs.dirname(fname)
-			local root = vim.fs.find(
-				{ "build.gradle.kts", "build.gradle" },
-				{ path = dir, upward = true, stop = vim.env.HOME }
-			)[1]
-			if root then
-				return vim.fs.dirname(root)
-			end
-			return vim.uv.cwd()
-		end,
-	},
-}
-
--- scala dap
-dap.configurations.scala = {
-	{
-		type = "scala",
-		request = "launch",
-		name = "RunOrTest",
-		metals = {
-			runType = "runOrTestFile",
-		},
-	},
-	{
-		type = "scala",
-		request = "launch",
-		name = "Test Target",
-		metals = {
-			runType = "testTarget",
-		},
-	},
-}
-
-local dapui = require("dapui")
-dapui.setup({})
-dap.listeners.before.attach.dapui_config = function()
-	dapui.open()
-end
-dap.listeners.before.launch.dapui_config = function()
-	dapui.open()
-end
-require("nvim-dap-virtual-text").setup({})
-
-vim.keymap.set("n", "<leader>bb", dap.toggle_breakpoint, { desc = "Toggle breakpoint" })
-vim.keymap.set("n", "<leader>bc", dap.clear_breakpoints, { desc = "Clear all breakpoints" })
-vim.keymap.set(
-	"n",
-	"<leader>bB",
-	require("telescope").extensions.dap.list_breakpoints,
-	{ desc = "List all breakpoints" }
-)
-vim.keymap.set("n", "<leader>db", dapui.toggle, { desc = "Toggle debug UI" })
-vim.keymap.set("n", "<leader>dd", dap.continue, { desc = "Debug continue" })
-
 ---------------------- LSP (Syntax Highlight) ---------------------
 require("mason").setup()
-require("mason-nvim-dap").setup()
 require("mason-lspconfig").setup()
 require("mason-tool-installer").setup({
 	ensure_installed = {
 		"lua_ls",
 		"stylua",
 		"kotlin_lsp",
-		"kotlin-debug-adapter",
 		"ktlint",
 		"cucumber_language_server",
 		"reformat-gherkin",
@@ -246,7 +149,6 @@ vim.api.nvim_create_autocmd("FileType", {
 		local metals_config = require("metals").bare_config()
 		metals_config.capabilities = lsp_capabilities
 		metals_config.on_attach = function(_, _)
-			require("metals").setup_dap()
 			vim.keymap.set("n", "<leader>mc", function()
 				require("telescope").extensions.metals.commands()
 			end, { buffer = bufnr, desc = "Metals commands" })
@@ -388,7 +290,6 @@ require("telescope").setup({
 require("telescope").load_extension("ui-select")
 require("telescope").load_extension("bookmarks")
 require("telescope").load_extension("lsp_handlers")
-require("telescope").load_extension("dap")
 local builtin = require("telescope.builtin")
 vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Telescope list buffers" })
 vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Telescope find files" })
@@ -534,5 +435,3 @@ require("leetcode").setup({
 vim.keymap.set("n", "<leader>lf", ":Leet list<CR>", { desc = "List all Leetcode question" })
 vim.keymap.set("n", "<leader>le", ":Leet desc<CR>", { desc = "Toggle question description" })
 vim.keymap.set("n", "<leader>ld", ":Leet run<CR>", { desc = "Run test" })
-vim.keymap.set("n", "<leader>lr", ":Leet submit<CR>", { desc = "Submit question" })
-vim.keymap.set("n", "<leader>lgx", ":Leet open<CR>", { desc = "Open question in browser" })
