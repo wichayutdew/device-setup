@@ -435,3 +435,4 @@ require("leetcode").setup({
 vim.keymap.set("n", "<leader>lf", ":Leet list<CR>", { desc = "List all Leetcode question" })
 vim.keymap.set("n", "<leader>le", ":Leet desc<CR>", { desc = "Toggle question description" })
 vim.keymap.set("n", "<leader>ld", ":Leet run<CR>", { desc = "Run test" })
+vim.keymap.set("n", "<leader>lr", ":Leet Submit<CR>", { desc = "Submit" })
