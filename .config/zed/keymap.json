@@ -10,7 +10,8 @@
   {
     "context": "Editor",
     "bindings": {
-      "space w w": "pane::CloseActiveItem"
+      "space w w": "pane::CloseActiveItem",
+      "space z z": "git::Restore"
     }
   },
   // Clipboard - yank to system clipboard
@@ -61,7 +62,9 @@
     "bindings": {
       "space f b": "tab_switcher::Toggle",
       "space f f": "file_finder::Toggle",
-      "space f s": "workspace::NewSearch"
+      "space f s": "workspace::NewSearch",
+      "space e": "workspace::ToggleRightDock",
+      "space r": "workspace::ToggleLeftDock"
     }
   },
   // LSP actions
@@ -69,15 +72,23 @@
     "context": "Editor && vim_mode == normal",
     "bindings": {
       "space c f": "editor::Format",
+      "space c i": "editor::OrganizeImports",
       "space c a": "editor::ToggleCodeActions",
+      "space g x": "editor::CopyPermalinkToLine",
       "r n": "editor::Rename"
     }
   },
-  // File panel (netrw)
   {
-    "context": "Editor && vim_mode == normal && vim_operator == none && !VimWaiting",
+    "context": "Editor && (showing_code_actions || showing_completions)",
     "bindings": {
-      "space e": "workspace::ToggleRightDock"
+      "tab": "editor::ContextMenuNext",
+      "shift-tab": "editor::ContextMenuPrevious"
+    }
+  },
+  {
+    "context": "AgentPanel && not_editing",
+    "bindings": {
+      "space r": "workspace::ToggleLeftDock"
     }
   },
   {

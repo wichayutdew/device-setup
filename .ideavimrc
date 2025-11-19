@@ -38,7 +38,6 @@ vnoremap p "_dP
 nmap <leader>e :NERDTreeToggle<CR>
 " -- Map IDE actions to IdeaVim -- https://jb.gg/abva4t
 nmap <leader>cf <Action>(ReformatCode)
-nmap <leader>cF <Action>(com.github.lipiridi.spotless.applier.actions.ReformatFileAction)
 nmap <leader>ci <Action>(OptimizeImports)
 nmap <leader>ca <Action>(ShowIntentionActions)
 

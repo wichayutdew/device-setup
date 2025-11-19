@@ -8,10 +8,24 @@
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
   "base_keymap": "JetBrains",
-  "disable_ai": true,
+  "disable_ai": false,
   "agent": {
-    "button": false,
-    "model_parameters": []
+    "default_profile": "ask",
+    "default_model": {
+      "provider": "copilot_chat",
+      "model": "claude-sonnet-4.5"
+    },
+    "dock": "left",
+    "single_file_review": true,
+    "play_sound_when_agent_done": true,
+    "use_modifier_to_send": true,
+    "always_allow_tool_actions": false,
+    "button": true,
+    "model_parameters": [
+      {
+        "temperature": 0.5
+      }
+    ]
   },
   "collaboration_panel": {
     "button": false
@@ -91,11 +105,7 @@
   "cursor_shape": "bar",
   "ui_font_family": "JetBrains Mono NL",
   "buffer_font_family": "JetBrains Mono NL",
-  "icon_theme": {
-    "mode": "system",
-    "light": "Material Icon Theme",
-    "dark": "Material Icon Theme"
-  },
+  "icon_theme": "Material Icon Theme",
   "restore_on_startup": "none",
   "ui_font_size": 16,
   "buffer_font_size": 15,
@@ -107,5 +117,8 @@
   "telemetry": {
     "diagnostics": false,
     "metrics": false
+  },
+  "features": {
+    "edit_prediction_provider": "copilot"
   }
 }

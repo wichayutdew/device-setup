@@ -38,6 +38,7 @@ alias cd 'z'
 alias yz 'yazi'
 alias cfg 'nvim ~/.config/fish/config.fish'
 alias so 'source ~/.config/fish/config.fish'
+alias zz 'zed .'
 
 # ---- Agoda Specific ----
 source ~/.orbstack/shell/init2.fish 2>/dev/null || :
