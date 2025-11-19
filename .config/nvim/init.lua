@@ -436,3 +436,4 @@ vim.keymap.set("n", "<leader>lf", ":Leet list<CR>", { desc = "List all Leetcode 
 vim.keymap.set("n", "<leader>le", ":Leet desc<CR>", { desc = "Toggle question description" })
 vim.keymap.set("n", "<leader>ld", ":Leet run<CR>", { desc = "Run test" })
 vim.keymap.set("n", "<leader>lr", ":Leet Submit<CR>", { desc = "Submit" })
+vim.keymap.set("n", "<leader>lgx", ":Leet Open<CR>", { desc = "Open in browser" })
