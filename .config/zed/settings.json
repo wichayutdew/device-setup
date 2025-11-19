@@ -34,7 +34,8 @@
     "button": false
   },
   "git_panel": {
-    "button": false
+    "dock": "bottom",
+    "button": true
   },
   "outline_panel": {
     "auto_fold_dirs": true,
