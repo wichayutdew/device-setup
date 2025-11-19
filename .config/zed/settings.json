@@ -1,0 +1,111 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  "base_keymap": "JetBrains",
+  "disable_ai": true,
+  "agent": {
+    "button": false,
+    "model_parameters": []
+  },
+  "collaboration_panel": {
+    "button": false
+  },
+  "notification_panel": {
+    "button": false
+  },
+  "git_panel": {
+    "button": false
+  },
+  "outline_panel": {
+    "auto_fold_dirs": true,
+    "auto_reveal_entries": true,
+    "git_status": true,
+    "folder_icons": true,
+    "file_icons": true,
+    "button": false
+  },
+  "tabs": {
+    "file_icons": false,
+    "git_status": false
+  },
+  "tab_bar": {
+    "show": false
+  },
+  "title_bar": {
+    "show_menus": false,
+    "show_sign_in": true,
+    "show_user_picture": true,
+    "show_onboarding_banner": true,
+    "show_project_items": true,
+    "show_branch_name": true,
+    "show_branch_icon": false
+  },
+  "debugger": {
+    "button": false
+  },
+  "diagnostics": {
+    "button": false
+  },
+  "terminal": {
+    "button": false
+  },
+  "status_bar": {
+    "cursor_position_button": true,
+    "active_language_button": true
+  },
+  "project_panel": {
+    "hide_hidden": false,
+    "hide_root": false,
+    "show_diagnostics": "all",
+    "scrollbar": {
+      "show": "auto"
+    },
+    "auto_fold_dirs": true,
+    "auto_reveal_entries": true,
+    "indent_size": 21.0,
+    "git_status": true,
+    "folder_icons": true,
+    "file_icons": true,
+    "entry_spacing": "standard",
+    "default_width": 240.0,
+    "dock": "right",
+    "button": true
+  },
+  "search": {
+    "button": false,
+    "center_on_match": true,
+    "regex": true
+  },
+  "use_smartcase_search": true,
+  "prettier": {
+    "allowed": false
+  },
+  "relative_line_numbers": "enabled",
+  "vim_mode": true,
+  "cursor_shape": "bar",
+  "ui_font_family": "JetBrains Mono NL",
+  "buffer_font_family": "JetBrains Mono NL",
+  "icon_theme": {
+    "mode": "system",
+    "light": "Material Icon Theme",
+    "dark": "Material Icon Theme"
+  },
+  "restore_on_startup": "none",
+  "ui_font_size": 16,
+  "buffer_font_size": 15,
+  "theme": {
+    "mode": "system",
+    "light": "Gruvbox Light Hard",
+    "dark": "Gruvbox Dark Hard"
+  },
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false
+  }
+}
