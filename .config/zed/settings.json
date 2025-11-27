@@ -14,7 +14,7 @@
     "default_profile": "ask",
     "default_model": {
       "provider": "copilot_chat",
-      "model": "claude-sonnet-4.5"
+      "model": "gemini-3-pro-preview"
     },
     "dock": "left",
     "single_file_review": true,
