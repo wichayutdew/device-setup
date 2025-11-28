@@ -51,7 +51,8 @@
   {
     "context": "Editor && (vim_mode == normal || vim_mode == visual)",
     "bindings": {
-      "shift-y": "editor::Copy"
+      "shift-y": "editor::Copy",
+      "space a a": "agent::AddSelectionToThread"
     }
   },
   // Normal mode - LSP actions and code operations
