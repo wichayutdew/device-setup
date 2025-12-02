@@ -1289,7 +1289,7 @@
 
     **Complexity** Time: O(n) Space: O(n)
 
-### Minimun Heights Tree
+### Minimum Heights Tree
     
     _Default case_ if n == 1 return list of 0, that's the only possible answer
 
