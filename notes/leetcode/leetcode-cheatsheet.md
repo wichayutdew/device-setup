@@ -1323,12 +1323,12 @@
            frequent tasks -1)) the -1 is the last task we can put at the end.
         5. now we loop from index 24 (2nd most frequent task) down to 0 (least
            frequent task). for each iteration, we can reduce total number of
-           idle slot by filling in the tasks (do note that the 2nd/3rd/... most
-           frequent task, might have the same number of frequency) so we do
-           minOf to compare the frequency of most frequent task with other. if
-           the frequency is the same the most frequent task will have less
-           frequency cause we exclude the last task as it can always be put
-           last and it wouldn't affect the total number of tasks/idle period
+           idle slot by filling in the tasks.
+			/* in case where we have multiple tasks that have same biggest
+			 * frequency, we do the same as initial idleSlot calculation 
+			 * e.g. [A A B B] n = 1 >> A _ A >> A B A B -- can see that we only
+			 * fill 1 B and the last B were appended at the end
+			 */
         6. finally, we check if we have idle period, if yes we need total
            number of tasks + idle to finish everything. otherwise we don't
            really need any idle period
