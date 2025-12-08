@@ -33,9 +33,5 @@ item = "wichayutdew SSH"
 vault = "Personal"
 
  [[ssh-keys]]
- item = "automated-enzumeii SSH"
- vault = "Enzumeii (Dew)"
-
- [[ssh-keys]]
  item = "wphongphanpa SSH"
  vault = "Work"
