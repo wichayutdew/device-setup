@@ -26,6 +26,10 @@ end
 # ---- YAZI OPEN IN NVIM ----
 set -gx EDITOR 'nvim'
 
+# ---- RUST ----
+set -gx RUSTUP_HOME $HOME/.local/share/rustup
+set -gx CARGO_HOME $HOME/.config/cargo
+
 # ---- ALIASES ----
 alias vi 'nvim'
 alias ls 'eza --color=always --long --git --icons=always --no-time --no-user'

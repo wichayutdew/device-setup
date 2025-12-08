@@ -19,3 +19,8 @@
 !README.md
 !Brewfile
 
+# ignore RUST specific files
+.config/cargo/*
+!.config/cargo/config.toml
+!.config/cargo/.gitignore
+
