@@ -9,7 +9,7 @@
   - Starts with `cd .config`
   - run `bash setup.sh`
   - restart terminal to make Fish default sh
-  - run `fish add_brew_to_fish.fish`
+  - run `fish init.fish`
 
 # Device config
   - cmd+` = change language
