@@ -26,9 +26,14 @@ end
 # ---- YAZI OPEN IN NVIM ----
 set -gx EDITOR 'nvim'
 
-# ---- RUST ----
-set -gx RUSTUP_HOME $HOME/.local/share/rustup
-set -gx CARGO_HOME $HOME/.config/cargo
+# ---- RESHIM AFTER INSTALL, TO PREVENT MISSING $HOME PATH ---
+# Auto-reshim after cargo install
+function cargo
+    command cargo $argv
+    and if test "$argv[1]" = "install"
+        asdf reshim rust
+    end
+end
 
 # ---- ALIASES ----
 alias vi 'nvim'

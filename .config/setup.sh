@@ -41,6 +41,10 @@ asdf plugin add yarn || true
 asdf install yarn 1.22.22
 asdf set -u yarn 1.22.22
 
+asdf plugin add rust || true
+asdf install rust latest
+asdf set -u rust latest
+
 echo "========== Install Scala Metals =========="
 coursier install metals
 
