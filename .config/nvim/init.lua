@@ -54,12 +54,8 @@ vim.pack.add({
 	{ src = "https://github.com/nvim-telescope/telescope-ui-select.nvim" },
 	{ src = "https://github.com/stevearc/conform.nvim" },
 	--------------------- COMPLETION ---------------------
-	{ src = "https://github.com/L3MON4D3/LuaSnip" },
-	{ src = "https://github.com/saadparwaiz1/cmp_luasnip" },
 	{ src = "https://github.com/hrsh7th/nvim-cmp" },
 	{ src = "https://github.com/hrsh7th/cmp-nvim-lsp" },
-	{ src = "https://github.com/zbirenbaum/copilot.lua" },
-	{ src = "https://github.com/zbirenbaum/copilot-cmp" },
 	{ src = "https://github.com/MeanderingProgrammer/render-markdown.nvim" }, -- render markdown
 	--------------------- FZF ---------------------
 	{ src = "https://github.com/nvim-telescope/telescope.nvim" },
@@ -117,8 +113,6 @@ require("mason-tool-installer").setup({
 		"stylua",
 		"kotlin_lsp",
 		"ktlint",
-		"cucumber_language_server",
-		"reformat-gherkin",
 		"markdownlint",
 		"jsonls",
 		"jsonlint",
@@ -162,28 +156,14 @@ require("nvim-treesitter.configs").setup({
 	ensure_installed = { "lua", "kotlin", "html", "scala", "markdown", "yaml", "toml", "json" },
 	highlight = { enable = true },
 })
-vim.lsp.enable({ "lua_ls", "kotlin_lsp", "cucumber_language_server", "jsonls", "yamlls" })
+vim.lsp.enable({ "lua_ls", "kotlin_lsp", "jsonls", "yamlls" })
 
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
-require("luasnip.loaders.from_vscode").lazy_load()
-require("copilot").setup({
-	suggestion = { enabled = false },
-	panel = { enabled = false },
-})
-require("copilot_cmp").setup({})
 local cmp = require("cmp")
-local luasnip = require("luasnip")
 local select_opts = { behavior = cmp.SelectBehavior.Select }
 cmp.setup({
-	snippet = {
-		expand = function(args)
-			luasnip.lsp_expand(args.body)
-		end,
-	},
 	sources = {
-		{ name = "copilot", group_index = 2 },
 		{ name = "nvim_lsp", group_index = 2 },
-		{ name = "luasnip", group_index = 2 },
 	},
 	window = {
 		documentation = cmp.config.window.bordered(),
@@ -192,9 +172,7 @@ cmp.setup({
 		fields = { "menu", "abbr", "kind" },
 		format = function(entry, item)
 			local menu_icon = {
-				copilot = "",
 				nvim_lsp = "λ",
-				luasnip = "⋗",
 			}
 
 			item.menu = menu_icon[entry.source.name]
@@ -248,7 +226,6 @@ require("conform").setup({
 		lua = { "stylua" },
 		kotlin = { "ktlint", "spotless_gradle" },
 		markdown = { "markdownlint" },
-		gherkin = { "reformat-gherkin" },
 		yaml = { "yamllint" },
 		json = { "jsonlinkt" },
 	},
