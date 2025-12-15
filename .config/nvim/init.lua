@@ -45,7 +45,6 @@ vim.pack.add({
 	{ src = "https://github.com/tree-sitter/tree-sitter-html" }, -- required by leetcode nvim
 	--------------------- LSP ---------------------
 	{ src = "https://github.com/neovim/nvim-lspconfig" },
-	{ src = "https://github.com/scalameta/nvim-metals" },
 	{ src = "https://github.com/mason-org/mason.nvim" },
 	{ src = "https://github.com/mason-org/mason-lspconfig.nvim" },
 	{ src = "https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim" },
@@ -111,8 +110,6 @@ require("mason-tool-installer").setup({
 	ensure_installed = {
 		"lua_ls",
 		"stylua",
-		"kotlin_lsp",
-		"ktlint",
 		"markdownlint",
 		"jsonls",
 		"jsonlint",
@@ -131,32 +128,12 @@ vim.lsp.config("lua_ls", {
 	capabilities = lsp_capabilities,
 	filetypes = { "lua" },
 })
--- Kotlin
-vim.lsp.config("kotlin_lsp", {
-	capabilities = lsp_capabilities,
-	filetypes = { "kotlin", "kt", "kts" },
-})
--- Scala
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "scala", "sbt" },
-	callback = function()
-		local metals_config = require("metals").bare_config()
-		metals_config.capabilities = lsp_capabilities
-		metals_config.on_attach = function(_, _)
-			vim.keymap.set("n", "<leader>mc", function()
-				require("telescope").extensions.metals.commands()
-			end, { buffer = bufnr, desc = "Metals commands" })
-		end
-		require("metals").initialize_or_attach(metals_config)
-	end,
-	group = vim.api.nvim_create_augroup("nvim-metals", { clear = true }),
-})
 
 require("nvim-treesitter.configs").setup({
-	ensure_installed = { "lua", "kotlin", "html", "scala", "markdown", "yaml", "toml", "json" },
+	ensure_installed = { "lua", "markdown", "yaml", "toml", "json" },
 	highlight = { enable = true },
 })
-vim.lsp.enable({ "lua_ls", "kotlin_lsp", "jsonls", "yamlls" })
+vim.lsp.enable({ "lua_ls", "jsonls", "yamlls" })
 
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
 local cmp = require("cmp")
@@ -224,7 +201,6 @@ vim.diagnostic.config({
 require("conform").setup({
 	formatters_by_ft = {
 		lua = { "stylua" },
-		kotlin = { "ktlint", "spotless_gradle" },
 		markdown = { "markdownlint" },
 		yaml = { "yamllint" },
 		json = { "jsonlinkt" },
