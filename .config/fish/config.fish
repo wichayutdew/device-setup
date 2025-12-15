@@ -46,6 +46,7 @@ alias cdi 'zi'
 alias cd 'z'
 alias yz 'yazi'
 alias cfg 'nvim ~/.config/fish/config.fish'
+alias cl 'clear'
 alias so 'source ~/.config/fish/config.fish'
 alias ce 'zed .'
 
