@@ -49,6 +49,16 @@ alias cfg 'nvim ~/.config/fish/config.fish'
 alias so 'source ~/.config/fish/config.fish'
 alias ce 'zed .'
 
+# ---- SHORT_HAND_ALIASES ----
+alias v 'nvim'
+alias l 'eza --color=always --long --git --icons=always --no-time --no-user'
+alias g 'lazygit'
+alias d 'lazydocker'
+alias t 'tmux'
+alias ci 'zi'
+alias c 'z'
+alias y 'yazi'
+
 # ---- Agoda Specific ----
 source ~/.orbstack/shell/init2.fish 2>/dev/null || :
 alias soy-health-check 'watch -n 2 curl -m 1 -sS 127.0.0.1:2501/version'
