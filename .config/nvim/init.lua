@@ -110,12 +110,6 @@ require("mason-tool-installer").setup({
 	ensure_installed = {
 		"lua_ls",
 		"stylua",
-		"markdownlint",
-		"jsonls",
-		"jsonlint",
-		"yamlls",
-		"yamllint",
-		"marksman",
 		"rust_analyzer",
 	},
 })
@@ -131,17 +125,17 @@ vim.lsp.config("lua_ls", {
 })
 
 -- Rust
-vim.lsp.config("rust_analyzer", {
-	settings = {
-		["rust-analyzer"] = {},
-	},
+vim.lsp.config('rust_analyzer', {
+  settings = {
+    ['rust-analyzer'] = {},
+  },
 })
 
 require("nvim-treesitter.configs").setup({
-	ensure_installed = { "lua", "rust", "markdown", "yaml", "toml", "json" },
+	ensure_installed = { "lua", "rust" },
 	highlight = { enable = true },
 })
-vim.lsp.enable({ "lua_ls", "rust_analyzer", "jsonls", "yamlls" })
+vim.lsp.enable({ "lua_ls", "rust_analyzer" })
 
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
 local cmp = require("cmp")
@@ -209,10 +203,7 @@ vim.diagnostic.config({
 require("conform").setup({
 	formatters_by_ft = {
 		lua = { "stylua" },
-		markdown = { "markdownlint" },
-		yaml = { "yamllint" },
-		json = { "jsonlinkt" },
-		rust = { "rustfmt", lsp_format = "fallback" },
+		rust = { "rustfmt" },
 	},
 })
 
