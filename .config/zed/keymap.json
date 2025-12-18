@@ -63,6 +63,9 @@
       "space c f": "editor::Format",
       "space c i": "editor::OrganizeImports",
       "space c a": "editor::ToggleCodeActions",
+      "space b b": "editor::ToggleBreakpoint",
+      "space b c": "debugger::ClearAllBreakpoints",
+      "space B": "workspace::ToggleBottomDock",
       // Git operations
       "space g x": "editor::CopyPermalinkToLine",
       // Refactoring
