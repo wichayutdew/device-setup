@@ -111,6 +111,8 @@ require("mason-tool-installer").setup({
 		"lua_ls",
 		"stylua",
 		"rust_analyzer",
+		"markdownlint",
+		"marksman",
 	},
 })
 require("render-markdown").setup({
@@ -131,11 +133,17 @@ vim.lsp.config('rust_analyzer', {
   },
 })
 
+-- Markdown
+vim.lsp.config("marksman", {
+	capabilities = lsp_capabilities,
+	filetypes = { "markdown" },
+})
+
 require("nvim-treesitter.configs").setup({
-	ensure_installed = { "lua", "rust" },
+	ensure_installed = { "lua", "rust", "markdown" },
 	highlight = { enable = true },
 })
-vim.lsp.enable({ "lua_ls", "rust_analyzer" })
+vim.lsp.enable({ "lua_ls", "rust_analyzer", "marksman" })
 
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
 local cmp = require("cmp")
@@ -204,6 +212,7 @@ require("conform").setup({
 	formatters_by_ft = {
 		lua = { "stylua" },
 		rust = { "rustfmt" },
+		markdown = { "markdownlint" },
 	},
 })
 
