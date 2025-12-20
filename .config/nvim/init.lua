@@ -115,6 +115,8 @@ require("mason-tool-installer").setup({
 		"marksman",
 		"jsonls",
 		"jq",
+		"cucumber_language_server",
+		"reformat-gherkin",
 	},
 })
 require("render-markdown").setup({
@@ -147,11 +149,17 @@ vim.lsp.config("jsonls", {
 	filetypes = { "json" },
 })
 
+-- Cucumber
+vim.lsp.config("cucumber_language_server", {
+	capabilities = lsp_capabilities,
+	filetypes = { "feature" },
+})
+
 require("nvim-treesitter.configs").setup({
-	ensure_installed = { "lua", "rust", "markdown", "json" },
+	ensure_installed = { "lua", "rust", "markdown", "json", "cucumber" },
 	highlight = { enable = true },
 })
-vim.lsp.enable({ "lua_ls", "rust_analyzer", "marksman", "jsonjs" })
+vim.lsp.enable({ "lua_ls", "rust_analyzer", "marksman", "jsonjs", "cucumber_language_server" })
 
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
 local cmp = require("cmp")
@@ -221,7 +229,8 @@ require("conform").setup({
 		lua = { "stylua" },
 		rust = { "rustfmt" },
 		markdown = { "markdownlint" },
-		json = { "jq" }
+		json = { "jq" },
+		cucumber = { "reformat-gherkin" },
 	},
 })
 
