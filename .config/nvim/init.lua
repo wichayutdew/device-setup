@@ -22,18 +22,12 @@ vim.o.foldlevelstart = 99
 vim.o.foldenable = true
 
 --------------------- BASIC KEYMAPS ---------------------
-vim.keymap.set("n", "<leader>re", ":w | :so<CR>", { desc = "Resource nvim config" })
 vim.keymap.set("n", "<leader>ww", ":bd<CR>", { desc = "Close buffer" })
 vim.keymap.set({ "n", "v", "x" }, "Y", '"+y')
-vim.keymap.set("n", "n", "nzzzv")
-vim.keymap.set("n", "N", "Nzzzv")
 vim.keymap.set("n", "k", "kzz")
 vim.keymap.set("n", "j", "jzz")
-vim.keymap.set("n", "i", "zzi")
-vim.keymap.set("n", "a", "zza")
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
-vim.keymap.set("n", "<leader>qq", ":qa<CR>", { desc = "Exit Neovim" })
 vim.keymap.set("i", "jk", "<esc>")
 vim.keymap.set("n", "//", ":noh<CR>")
 
