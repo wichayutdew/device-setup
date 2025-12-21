@@ -54,20 +54,21 @@ vim.pack.add({
 	{ src = "https://github.com/nvim-lua/plenary.nvim" }, -- Required by many plugins
 	{ src = "https://github.com/MunifTanjim/nui.nvim" }, -- required by leetcode nvim and other packages
 	{ src = "https://github.com/tree-sitter/tree-sitter-html" }, -- required by leetcode nvim
+	{ src = "https://github.com/kevinhwang91/promise-async" }, -- required by nvim-ufo
 	--------------------- LSP ---------------------
 	{ src = "https://github.com/mason-org/mason.nvim" },
 	{ src = "https://github.com/mason-org/mason-lspconfig.nvim" },
 	{ src = "https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim" },
 	{ src = "https://github.com/neovim/nvim-lspconfig" },
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter" },
-	{ src = "https://github.com/gbrlsnchs/telescope-lsp-handlers.nvim" },
-	{ src = "https://github.com/nvim-telescope/telescope-ui-select.nvim" },
 	{ src = "https://github.com/stevearc/conform.nvim" },
 	--------------------- COMPLETION ---------------------
 	{ src = "https://github.com/hrsh7th/nvim-cmp" },
 	{ src = "https://github.com/hrsh7th/cmp-nvim-lsp" },
 	--------------------- TELESCOPE(FZF) ---------------------
 	{ src = "https://github.com/nvim-telescope/telescope.nvim" },
+	{ src = "https://github.com/gbrlsnchs/telescope-lsp-handlers.nvim" },
+	{ src = "https://github.com/nvim-telescope/telescope-ui-select.nvim" },
 	--------------------- MINI ---------------------
 	{ src = "https://github.com/nvim-mini/mini.icons" }, -- add icons
 	{ src = "https://github.com/nvim-mini/mini.surround" }, -- Surroundings like parentheses, quotes, etc.
@@ -86,6 +87,7 @@ vim.pack.add({
 	{ src = "https://github.com/folke/noice.nvim" }, -- Better command line and messages
 	{ src = "https://github.com/nvim-lualine/lualine.nvim" },
 	{ src = "https://github.com/lukas-reineke/indent-blankline.nvim" },
+	{ src = "https://github.com/kevinhwang91/nvim-ufo" }, -- Better folding
 	--------------------- EXTRA ---------------------
 	{ src = "https://github.com/kawre/leetcode.nvim" }, -- doing leetcode inside neovim
 })
