@@ -14,11 +14,13 @@ return function()
 			"jq",
 			"cucumber_language_server",
 			"reformat-gherkin",
+			"kotlin_lsp",
+			"ktfmt",
 		},
 	})
 
 	---------------------- LSP Server Configuration ---------------------
-	vim.lsp.enable({ "lua_ls", "rust_analyzer", "marksman", "jsonls", "cucumber_language_server" })
+	vim.lsp.enable({ "lua_ls", "rust_analyzer", "marksman", "jsonls", "cucumber_language_server", "kotlin_lsp" })
 
 	local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
 
@@ -28,6 +30,7 @@ return function()
 		marksman = { capabilities = lsp_capabilities, filetypes = { "markdown" } },
 		jsonls = { capabilities = lsp_capabilities, filetypes = { "json" } },
 		cucumber_language_server = { capabilities = lsp_capabilities, filetypes = { "feature" } },
+		kotlin_lsp = { capabilities = lsp_capabilities, filetypes = { "kotlin", "kt", "kts" } },
 	}
 
 	for server, config in pairs(servers) do
@@ -36,7 +39,7 @@ return function()
 
 	---------------------- Treesitter ---------------------
 	require("nvim-treesitter.configs").setup({
-		ensure_installed = { "lua", "rust", "markdown", "json" },
+		ensure_installed = { "lua", "rust", "markdown", "json", "kotlin" },
 		highlight = { enable = true },
 	})
 
@@ -48,6 +51,7 @@ return function()
 			markdown = { "markdownlint" },
 			json = { "jq" },
 			cucumber = { "reformat-gherkin" },
+			kotlin = { "ktfmt" },
 		},
 	})
 
