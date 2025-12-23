@@ -32,6 +32,7 @@ map j jzz
 map k kzz
 map n nzzzv
 map N Nzzzv
+nmap <leader>ww :bd<CR>
 vnoremap p "_dP
 
 
