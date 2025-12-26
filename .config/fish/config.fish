@@ -49,6 +49,7 @@ alias cfg 'nvim ~/.config/fish/config.fish'
 alias cl 'clear'
 alias so 'source ~/.config/fish/config.fish'
 alias ce 'zed .'
+alias id 'idea .'
 
 # ---- SHORT_HAND_ALIASES ----
 alias v 'nvim'
