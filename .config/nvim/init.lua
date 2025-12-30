@@ -49,6 +49,7 @@ vim.pack.add({
 	{ src = "https://github.com/MunifTanjim/nui.nvim" }, -- required by leetcode nvim and other packages
 	{ src = "https://github.com/tree-sitter/tree-sitter-html" }, -- required by leetcode nvim
 	{ src = "https://github.com/kevinhwang91/promise-async" }, -- required by nvim-ufo
+	{ src = "https://github.com/folke/snacks.nvim" }, -- required by claude code
 	--------------------- LSP ---------------------
 	{ src = "https://github.com/mason-org/mason.nvim" },
 	{ src = "https://github.com/mason-org/mason-lspconfig.nvim" },
@@ -84,6 +85,7 @@ vim.pack.add({
 	{ src = "https://github.com/kevinhwang91/nvim-ufo" }, -- Better folding
 	--------------------- EXTRA ---------------------
 	{ src = "https://github.com/kawre/leetcode.nvim" }, -- doing leetcode inside neovim
+	{ src = "https://github.com/coder/claudecode.nvim" },
 })
 
 --------------------- PLUGIN CONFIGURATIONS ---------------------
