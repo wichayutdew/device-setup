@@ -16,6 +16,7 @@ return function()
 			"reformat-gherkin",
 			"kotlin_lsp",
 			"ktfmt",
+			"kotlin-debug-adapter"
 		},
 	})
 

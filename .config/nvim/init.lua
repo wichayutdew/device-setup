@@ -50,6 +50,7 @@ vim.pack.add({
 	{ src = "https://github.com/tree-sitter/tree-sitter-html" }, -- required by leetcode nvim
 	{ src = "https://github.com/kevinhwang91/promise-async" }, -- required by nvim-ufo
 	{ src = "https://github.com/folke/snacks.nvim" }, -- required by claude code
+	{ src = "https://github.com/nvim-neotest/nvim-nio" }, -- required by nvim-dap-ui
 	--------------------- LSP ---------------------
 	{ src = "https://github.com/mason-org/mason.nvim" },
 	{ src = "https://github.com/mason-org/mason-lspconfig.nvim" },
@@ -60,10 +61,15 @@ vim.pack.add({
 	--------------------- COMPLETION ---------------------
 	{ src = "https://github.com/hrsh7th/nvim-cmp" },
 	{ src = "https://github.com/hrsh7th/cmp-nvim-lsp" },
+	--------------------- DAP ---------------------
+	{ src = "https://github.com/mfussenegger/nvim-dap" },
+	{ src = "https://github.com/rcarriga/nvim-dap-ui" },
+	{ src = "https://github.com/theHamsta/nvim-dap-virtual-text" },
 	--------------------- TELESCOPE(FZF) ---------------------
 	{ src = "https://github.com/nvim-telescope/telescope.nvim" },
 	{ src = "https://github.com/gbrlsnchs/telescope-lsp-handlers.nvim" },
 	{ src = "https://github.com/nvim-telescope/telescope-ui-select.nvim" },
+	{ src = "https://github.com/nvim-telescope/telescope-dap.nvim" },
 	--------------------- MINI ---------------------
 	{ src = "https://github.com/nvim-mini/mini.icons" }, -- add icons
 	{ src = "https://github.com/nvim-mini/mini.surround" }, -- Surroundings like parentheses, quotes, etc.
@@ -91,6 +97,7 @@ vim.pack.add({
 --------------------- PLUGIN CONFIGURATIONS ---------------------
 require("plugins.lsp")()
 require("plugins.completion")()
+require("plugins.dap")()
 require("plugins.telescope")()
 require("plugins.mini")()
 require("plugins.ui")()
