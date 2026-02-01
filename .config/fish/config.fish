@@ -1,5 +1,6 @@
 # ---- FISH ----
 set fish_greeting ''
+set --global fish_key_bindings fish_vi_key_bindings
 
 # ---- STARSHIP ----
 starship init fish | source
