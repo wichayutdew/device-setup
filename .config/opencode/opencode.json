@@ -1,0 +1,30 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "keybinds": {
+    "session_interrupt": "ctrl+c"
+  },
+  "enabled_providers": [
+    "agoda-genai"
+  ],
+  "provider": {
+    "agoda-genai": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Agoda GenAI Gateway",
+      "options": {
+        "baseURL": "https://genai-gateway.agoda.is/v1",
+        "apiKey": "{env:AGODA_GENAI_API_KEY}"
+      },
+      "models": {
+        "gpt-5.2": {
+          "name": "gpt-5.2"
+        },
+        "claude-opus-4-5": {
+          "name": "claude-opus-4-5"
+        },
+        "gemini-3-pro-preview": {
+          "name": "gemini-3-pro-preview"
+        }
+      }
+    }
+  }
+}

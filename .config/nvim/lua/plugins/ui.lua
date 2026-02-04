@@ -30,6 +30,13 @@ return function()
 		options = {
 			theme = require("gruvbox-material.lualine").theme("medium"),
 		},
+		sections = {
+			lualine_z = {
+				{
+					require("opencode").statusline,
+				},
+			},
+		},
 	})
 
 	--------------------- NOICE ---------------------

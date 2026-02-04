@@ -40,6 +40,9 @@ cask 'ghostty'
 cask 'orbstack'
 cask 'font-jetbrains-mono'
 
+# AI
+cask 'opencode'
+
 # Agoda essentials
 brew 'metalbear-co/mirrord/mirrord'
 

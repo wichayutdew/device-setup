@@ -63,15 +63,4 @@ return function()
 	vim.keymap.set("n", "<leader>ld", ":Leet run<CR>", { desc = "Run test" })
 	vim.keymap.set("n", "<leader>lr", ":Leet Submit<CR>", { desc = "Submit" })
 	vim.keymap.set("n", "<leader>lgx", ":Leet Open<CR>", { desc = "Open in browser" })
-
-
-	require("claudecode").setup({
-		terminal = {
-      split_side = "left",
-		}
-	})
-	vim.keymap.set("n", "<leader>r", ":ClaudeCodeFocus<CR>", { desc = "Open AI Chat" })
-	vim.keymap.set("v", "<leader>aa", ":ClaudeCodeSend<CR>", { desc = "Send Snippet to chat" })
-	vim.keymap.set("n", "<leader>ac", ":ClaudeCodeDiffAccept<CR>", { desc = "Accept changes" })
-	vim.keymap.set("n", "<leader>ad", ":ClaudeCodeDiffDeny<CR>", { desc = "Deny changes" })
 end

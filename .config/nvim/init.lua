@@ -91,7 +91,7 @@ vim.pack.add({
 	{ src = "https://github.com/kevinhwang91/nvim-ufo" }, -- Better folding
 	--------------------- EXTRA ---------------------
 	{ src = "https://github.com/kawre/leetcode.nvim" }, -- doing leetcode inside neovim
-	{ src = "https://github.com/coder/claudecode.nvim" },
+	{ src = "https://github.com/nickjvandyke/opencode.nvim" },
 })
 
 --------------------- PLUGIN CONFIGURATIONS ---------------------
@@ -102,3 +102,4 @@ require("plugins.telescope")()
 require("plugins.mini")()
 require("plugins.ui")()
 require("plugins.extra")()
+require("plugins.ai")()
