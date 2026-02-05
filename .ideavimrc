@@ -66,9 +66,12 @@ nmap <leader>br <Action>(Resume)
 nmap <leader>ff <Action>(GotoFile)
 nmap <leader>fs <Action>(FindInPath)
 nmap <leader>fb <Action>(RecentFiles)
+nmap fd <Action>(CollapseRegion)
+nmap fD <Action>(CollapseAllRegions)
 
 nmap <leader>ws <Action>(SplitHorizontally)
 nmap <leader>wv <Action>(SplitVertically)
 map <leader>zz <Action>(Vcs.RollbackChangedLines)
 
 nnoremap <leader>re :action IdeaVim.ReloadVimRc.reload<CR>
+
