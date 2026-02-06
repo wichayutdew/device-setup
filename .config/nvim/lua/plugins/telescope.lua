@@ -50,6 +50,9 @@ return function()
 			timeout_ms = 20000,
 		})
 	end, { desc = "Format file or range" })
+	vim.keymap.set("n", "<leader>cl", function()
+		require("lint").try_lint()
+	end, { desc = "Trigger linting for current file" })
 	vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code actions" })
 	vim.keymap.set("n", "gd", function()
 		builtin.lsp_definitions({
