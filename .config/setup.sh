@@ -8,10 +8,6 @@ echo "========== Agoda Essentials ========="
 brew tap devops/tap git@gitlab.agodadev.io:devops/homebrew.git && brew install devstack
 
 echo "========== Installing Languages Framework =========="
-asdf plugin add gradle || true
-asdf install gradle 9.0.0
-asdf set -u gradle 9.0.0
-
 asdf plugin add java || true
 asdf install java zulu-17.58.21
 asdf install java zulu-21.42.19
