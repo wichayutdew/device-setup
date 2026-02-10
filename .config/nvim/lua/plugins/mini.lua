@@ -18,6 +18,7 @@ return function()
 			reset = "<leader>zz",
 		},
 	})
+	vim.keymap.set("n", "<leader>zo", ":lua MiniDiff.toggle_overlay()<CR>", { desc = "see all diff" })
 
 	-- Mini.clue
 	require("mini.clue").setup({
