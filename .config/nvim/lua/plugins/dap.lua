@@ -67,11 +67,75 @@ return function()
 	})
 
 	---------------------- JVM Debugger Configuration ---------------------
+	-- Helper to run Gradle task with debug and attach DAP
+	local function launch_with_debug(gradle_task, extra_args)
+		extra_args = extra_args or ""
+		local project_root = vim.fn.getcwd()
+
+		-- Run Gradle task with debug JVM in background
+		local cmd = string.format("cd %s && ./gradlew %s %s --debug-jvm", project_root, gradle_task, extra_args)
+
+		-- Start Gradle in background using jobstart
+		vim.fn.jobstart(cmd, {
+			on_stdout = function(_, data)
+				if data then
+					for _, line in ipairs(data) do
+						if line ~= "" then
+							vim.notify(line, vim.log.levels.INFO)
+						end
+					end
+				end
+			end,
+			on_stderr = function(_, data)
+				if data then
+					for _, line in ipairs(data) do
+						if line ~= "" then
+							vim.notify(line, vim.log.levels.WARN)
+						end
+					end
+				end
+			end,
+			on_exit = function(_, exit_code)
+				if exit_code ~= 0 then
+					vim.notify("Gradle task exited with code: " .. exit_code, vim.log.levels.ERROR)
+				end
+			end,
+		})
+
+		-- Wait for JVM to start listening, then attach
+		vim.defer_fn(function()
+			dap.continue()
+		end, 3000) -- 3 second delay for JVM to start
+	end
+
+	-- Helper to debug a specific test class or method
+	local function debug_test_at_cursor()
+		local bufname = vim.fn.expand("%:p")
+		local project_root = vim.fn.getcwd()
+
+		-- Extract package and class name from file
+		local relative_path = bufname:gsub(project_root .. "/", "")
+		-- Convert path like app/src/test/kotlin/org/example/AppTest.kt to org.example.AppTest
+		local test_class = relative_path
+			:gsub("app/src/test/kotlin/", "")
+			:gsub("app/src/test/java/", "")
+			:gsub("/", ".")
+			:gsub("%.kt$", "")
+			:gsub("%.java$", "")
+
+		if test_class == "" then
+			vim.notify("Could not determine test class from file path", vim.log.levels.ERROR)
+			return
+		end
+
+		launch_with_debug("test", "--tests " .. test_class)
+	end
+
 	dap.configurations.kotlin = {
 		{
 			type = "kotlin",
 			request = "attach",
-			name = "Debug (Attach) - Remote JVM on port 5005",
+			name = "Attach - Remote JVM (port 5005)",
 			port = 5005,
 			args = {},
 			projectRoot = vim.fn.getcwd,
@@ -85,6 +149,7 @@ return function()
 		command = "kotlin-debug-adapter",
 		options = { auto_continue_if_many_stopped = false },
 	}
+
 	---------------------- Telescope DAP Extension ---------------------
 	require("telescope").load_extension("dap")
 
@@ -95,8 +160,17 @@ return function()
 	vim.keymap.set("n", "<leader>B", ":Telescope dap list_breakpoints<CR>", { desc = "List all breakpoints" })
 
 	-- Debug execution - streamlined for attach workflow
-	vim.keymap.set("n", "<leader>dd", dap.continue, { desc = "Attach/Continue debugging" })
 	vim.keymap.set("n", "<leader>dD", dapui.toggle, { desc = "Toggle DAP UI" })
+	vim.keymap.set("n", "<leader>da", dap.continue, { desc = "Attach/Continue debugging" })
+	vim.keymap.set("n", "<leader>dd", function()
+		launch_with_debug("run")
+	end, { desc = "Debug: Launch app (gradle run)" })
+	vim.keymap.set("n", "<leader>dT", function()
+		launch_with_debug("test")
+	end, { desc = "Debug: Run all tests" })
+	vim.keymap.set("n", "<leader>df", function()
+		debug_test_at_cursor()
+	end, { desc = "Debug: Test current file" })
 
 	-- Additional debug controls
 	vim.keymap.set("n", "<leader>dj", dap.step_over, { desc = "Step over" })
