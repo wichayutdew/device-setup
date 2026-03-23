@@ -1,6 +1,6 @@
 {
   "active_pack": "peon",
-  "volume": 0.5,
+  "volume": 0.3,
   "enabled": true,
   "categories": {
     "session.start": true,
@@ -16,5 +16,12 @@
   "spam_threshold": 3,
   "spam_window_seconds": 10,
   "pack_rotation": [],
-  "debounce_ms": 500
+  "debounce_ms": 500,
+  "mobile_notify": {
+    "enabled": true,
+    "service": "ntfy",
+    "topic": "cWBSckfUPjeVMGjD",
+    "server": "https://ntfy.sh",
+    "token": ""
+  }
 }
